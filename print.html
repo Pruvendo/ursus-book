@@ -1,0 +1,870 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>URSUS language Documentation</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Introduction</a></li><li class="chapter-item expanded "><a href="install/index.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="install/opam.html"><strong aria-hidden="true">1.1.</strong> opam package manager</a></li><li class="chapter-item expanded "><a href="install/coq.html"><strong aria-hidden="true">1.2.</strong> Install Coq and 3rd parties' dependencies</a></li><li class="chapter-item expanded "><a href="install/pruvendo.html"><strong aria-hidden="true">1.3.</strong> Install Pruvendo libraries</a></li></ol></li><li class="chapter-item expanded "><a href="quick/index.html"><strong aria-hidden="true">2.</strong> Quick start</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="quick/simple.html"><strong aria-hidden="true">2.1.</strong> Write simple contract</a></li><li class="chapter-item expanded "><a href="quick/compile_ursus.html"><strong aria-hidden="true">2.2.</strong> Compile and extract solidity sources</a></li><li class="chapter-item expanded "><a href="quick/compile_sol.html"><strong aria-hidden="true">2.3.</strong> Compile extracted contract and deploy</a></li></ol></li><li class="chapter-item expanded "><a href="eDSL/index.html"><strong aria-hidden="true">3.</strong> Coq embedded DSL</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="eDSL/custom_grammar.html"><strong aria-hidden="true">3.1.</strong> Coq custom grammar</a></li><li class="chapter-item expanded "><a href="eDSL/ursus_embedding.html"><strong aria-hidden="true">3.2.</strong> Ursus embedding</a></li><li class="chapter-item expanded "><a href="eDSL/notations.html"><strong aria-hidden="true">3.3.</strong> Notational mechanism</a></li></ol></li><li class="chapter-item expanded "><a href="ulang/index.html"><strong aria-hidden="true">4.</strong> Ursus as a language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ulang/contract_file_structure.html"><strong aria-hidden="true">4.1.</strong> Contract file structure</a></li><li class="chapter-item expanded "><a href="ulang/file_header.html"><strong aria-hidden="true">4.2.</strong> Contract file headers</a></li><li class="chapter-item expanded "><a href="ulang/contact_file_interfaces.html"><strong aria-hidden="true">4.3.</strong> Contract file interfaces</a></li><li class="chapter-item expanded "><a href="ulang/contact_record.html"><strong aria-hidden="true">4.4.</strong> Contract record</a></li><li class="chapter-item expanded "><a href="ulang/primitives.html"><strong aria-hidden="true">4.5.</strong> Types, primitives, and literals</a></li><li class="chapter-item expanded "><a href="ulang/constants.html"><strong aria-hidden="true">4.6.</strong> Global constants</a></li><li class="chapter-item expanded "><a href="ulang/structures.html"><strong aria-hidden="true">4.7.</strong> Complex Structures</a></li><li class="chapter-item expanded "><a href="ulang/functions.html"><strong aria-hidden="true">4.8.</strong> Functions and modifiers</a></li><li class="chapter-item expanded "><a href="ulang/function_operators.html"><strong aria-hidden="true">4.9.</strong> Function operators</a></li><li class="chapter-item expanded "><a href="ulang/messages.html"><strong aria-hidden="true">4.10.</strong> Interfaces and messages</a></li><li class="chapter-item expanded "><a href="ulang/attributes.html"><strong aria-hidden="true">4.11.</strong> Function attributes</a></li><li class="chapter-item expanded "><a href="ulang/local.html"><strong aria-hidden="true">4.12.</strong> Local state and variables</a></li><li class="chapter-item expanded "><a href="ulang/multi.html"><strong aria-hidden="true">4.13.</strong> Multi-contract system</a></li><li class="chapter-item expanded "><a href="ulang/inheritance.html"><strong aria-hidden="true">4.14.</strong> Contract inheritance</a></li></ol></li><li class="chapter-item expanded "><a href="programming/index.html"><strong aria-hidden="true">5.</strong> Ursus programming style</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming/repl.html"><strong aria-hidden="true">5.1.</strong> REPL</a></li><li class="chapter-item expanded "><a href="programming/context.html"><strong aria-hidden="true">5.2.</strong> Goal and context</a></li><li class="chapter-item expanded "><a href="programming/tactics.html"><strong aria-hidden="true">5.3.</strong> Tactics and tacticals</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming/control.html"><strong aria-hidden="true">5.3.1.</strong> Ursus control sub-languange</a></li></ol></li><li class="chapter-item expanded "><a href="programming/holes.html"><strong aria-hidden="true">5.4.</strong> Holes</a></li><li class="chapter-item expanded "><a href="programming/prepost.html"><strong aria-hidden="true">5.5.</strong> Default prefix and postfix operations</a></li></ol></li><li class="chapter-item expanded "><a href="stdlib/index.html"><strong aria-hidden="true">6.</strong> Ursus standard library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="stdlib/primitives.html"><strong aria-hidden="true">6.1.</strong> Primitives operations</a></li><li class="chapter-item expanded "><a href="stdlib/functions.html"><strong aria-hidden="true">6.2.</strong> Standart functions</a></li><li class="chapter-item expanded "><a href="stdlib/operators.html"><strong aria-hidden="true">6.3.</strong> Basic operators</a></li><li class="chapter-item expanded "><a href="stdlib/TVM.html"><strong aria-hidden="true">6.4.</strong> TVM functions</a></li></ol></li><li class="chapter-item expanded "><a href="verification/index.html"><strong aria-hidden="true">7.</strong> Ursus verification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="verification/principles.html"><strong aria-hidden="true">7.1.</strong> Common principles</a></li><li class="chapter-item expanded "><a href="verification/stdlib.html"><strong aria-hidden="true">7.2.</strong> StdLib verification</a></li><li class="chapter-item expanded "><a href="verification/qc.html"><strong aria-hidden="true">7.3.</strong> QuickChick</a></li></ol></li><li class="chapter-item expanded "><a href="long/index.html"><strong aria-hidden="true">8.</strong> Long start</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="long/design.html"><strong aria-hidden="true">8.1.</strong> Designing contract</a></li><li class="chapter-item expanded "><a href="long/impl.html"><strong aria-hidden="true">8.2.</strong> Implementation</a></li><li class="chapter-item expanded "><a href="long/deploy.html"><strong aria-hidden="true">8.3.</strong> Extracting, compiling and deploy</a></li><li class="chapter-item expanded "><a href="long/spec.html"><strong aria-hidden="true">8.4.</strong> Specification</a></li><li class="chapter-item expanded "><a href="long/ts4.html"><strong aria-hidden="true">8.5.</strong> TS4 integration</a></li><li class="chapter-item expanded "><a href="long/qc.html"><strong aria-hidden="true">8.6.</strong> Quickchicks</a></li><li class="chapter-item expanded "><a href="long/execs.html"><strong aria-hidden="true">8.7.</strong> Evals and execs</a></li><li class="chapter-item expanded "><a href="long/direct_proofs.html"><strong aria-hidden="true">8.8.</strong> Direct proofs</a></li><li class="chapter-item expanded "><a href="long/scenarios.html"><strong aria-hidden="true">8.9.</strong> Scenarios</a></li><li class="chapter-item expanded "><a href="long/multi.html"><strong aria-hidden="true">8.10.</strong> Multi-contract verification</a></li></ol></li><li class="chapter-item expanded "><a href="translation/index.html"><strong aria-hidden="true">9.</strong> Translation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="translation/sol-ursus.html"><strong aria-hidden="true">9.1.</strong> sol-&gt;ursus translation</a></li><li class="chapter-item expanded "><a href="translation/cpp-ursus.html"><strong aria-hidden="true">9.2.</strong> cpp-&gt;ursus translation</a></li><li class="chapter-item expanded "><a href="translation/ursus-sol.html"><strong aria-hidden="true">9.3.</strong> ursus-&gt;sol translation</a></li></ol></li><li class="chapter-item expanded "><a href="advanced/index.html"><strong aria-hidden="true">10.</strong> Advanced topics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced/ledger.html"><strong aria-hidden="true">10.1.</strong> Ledger and Superledger</a></li><li class="chapter-item expanded "><a href="advanced/spec.html"><strong aria-hidden="true">10.2.</strong> Specification</a></li><li class="chapter-item expanded "><a href="advanced/proof_kinds.html"><strong aria-hidden="true">10.3.</strong> Proof kinds</a></li><li class="chapter-item expanded "><a href="advanced/generator.html"><strong aria-hidden="true">10.4.</strong> Evals and execs generator</a></li><li class="chapter-item expanded "><a href="advanced/elpi.html"><strong aria-hidden="true">10.5.</strong> Elpi automation</a></li></ol></li><li class="chapter-item expanded "><a href="uncategorized.html"><strong aria-hidden="true">11.</strong> More and uncategorized</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Here is describing Ursus. Ursus is language which is embeded to Coq. This language was created for describing solidity smart contracts. It has some key features such as: easy descirbing and understanding logic of programs, translators (from, to solidity).</p>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><p>Contract file structure</p>
+<p>Contract file consist of five parts:</p>
+<ol>
+<li>
+<p>Headers.</p>
+<p>Headers contains required libraries, required work files (for ex. files with interfaces) and other (i.e. scopes)</p>
+</li>
+<li>
+<p>Interfaces. </p>
+<p>Some interfaces are more convenient to write not in separate files, but in the contract file itself</p>
+</li>
+<li>
+<p>Contract.</p>
+<p>Here the elements of the contract are described: records, constants and fields of the contract.</p>
+</li>
+<li>
+<p>List of used types.</p>
+</li>
+<li>
+<p>Contract functions.</p>
+<p>Here the function realization are describes.</p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><p>The required contract file headers look like this:</p>
+<ol>
+<li>Block of standard libraries of the coq system:</li>
+</ol>
+<p>Require Import Coq.Program.Basics. </p>
+<p>Require Import Coq.Strings.String.</p>
+<p>Require Import Setoid. </p>
+<p>Require Import ZArith.</p>
+<p>Require Import QArith.</p>
+<p>Require Import Coq.Program.Equality.</p>
+<p>Require Import Lia.</p>
+<ol start="2">
+<li>Block of ursus-specific libraries:</li>
+</ol>
+<p>Require Import FinProof.All.</p>
+<p>Require Import UMLang.All.</p>
+<p>Require Import UrsusStdLib.Solidity.All.</p>
+<p>Require Import UrsusStdLib.Solidity.unitsNotations.</p>
+<p>Require Import UrsusTVM.Solidity.All.</p>
+<p>Require Import UrsusTVM.Solidity.UrsusDefinitions.</p>
+<p>Require Import UrsusTVM.Solidity.ReverseTranslatorConstructions.</p>
+<p>Require Import UMLang.UrsusLib.</p>
+<p>Require Import UMLang.GlobalClassGenerator.ClassGenerator.</p>
+<p>Require Import UMLang.LocalClassGenerator.ClassGenerator.</p>
+<p>Import UrsusNotations.</p>
+<ol start="3">
+<li>Scope connection block:</li>
+</ol>
+<p>Local Open Scope xlist_scope.</p>
+<p>Local Open Scope record.</p>
+<p>Local Open Scope program_scope.</p>
+<p>Local Open Scope glist_scope.</p>
+<p>Local Open Scope ursus_scope.</p>
+<p>Local Open Scope usolidity_scope.</p>
+<p>Local Open Scope struct_scope.</p>
+<p>Local Open Scope N_scope.</p>
+<p>Local Open Scope string_scope.</p>
+<p>Local Open Scope list_scope.</p>
+<ol start="4">
+<li>Connecting the elpi system:</li>
+</ol>
+<p>From elpi Require Import elpi.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>The interfaces in the contract file itself have the same structure as in a separate file:</p>
+<p>Key word 'Interfaces.'</p>
+<p>Key word 'MakeInterface' key word 'Class' IntefaceName ':='
+'{'</p>
+<p>Function1Name ':' Carryed List of Arguments Types '-&gt;' AccessRights ReturnType ['true', 'false'] ';'
+Function2Name ':' Carryed List of Arguments Types '-&gt;' AccessRights ReturType ['true', 'false'] ';'
+...
+}</p>
+<p>Key word 'EndInterfaces.'</p>
+<p>For example:</p>
+<p>Let the Solidity interface look like this:</p>
+<p>interface IVestingPool {</p>
+<pre><code>function claim(uint poolId, address addr) external;
+
+function get() external view returns(uint poolId, address poolCreator);
+</code></pre>
+<p>}</p>
+<p>Then on Ursus it is written like this:</p>
+<p>Interfaces.</p>
+<p>MakeInterface Class IVestingPool :=</p>
+<p>{</p>
+<pre><code>claim : uint -&gt; address -&gt; external PhantomType true ;
+
+get : external (uint ** address) false ;
+</code></pre>
+<p>}.</p>
+<p>EndInterfaces.</p>
+<p>The modificators 'true' and 'false' see in functions file.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>The structure of the contract as a record is as follows:</p>
+<p>Key word 'Contract' ContractName ';'</p>
+<p>Key words 'Send To' InterfacesNames ';'</p>
+<p>Key word 'Types'</p>
+<p>Key word 'Record' Name1Record ':= {'</p>
+<p>Name1RecordMemberName ':' Type1 ';'</p>
+<p>Name1RecordMemberName ':' Type2 ';'</p>
+<p>...</p>
+<p>Name1RecordMemberName ':' TypeN </p>
+<p>}</p>
+<p>Key word 'Record' Name2Record ':= {'</p>
+<p>...
+} </p>
+<p>...</p>
+<p>Key word 'Record' NameLastRecord ':= {'</p>
+<p>...
+} ';'</p>
+<p>Key word 'Constants'</p>
+<p>Key word 'Definition' Constant1Name ':' Type1 ':=' Key word 'Build_XUBInteger' value1</p>
+<p>Key word 'Definition' Constant2Name ':' Type2 ':=' Key word 'Build_XUBInteger' value2</p>
+<p>...</p>
+<p>Key word 'Definition' ConstantLastName ':' TypeLast ':=' Key word 'Build_XUBInteger' valueLast ';'</p>
+<p>Key words 'Record Contract' ':= {'</p>
+<p>'#[' AccessRights ']' Name1ContractMember ':' Type1 ';'
+'#[' AccessRights ']' Name2ContractMember ':' Type2 ';'
+...
+NameNContractMember ':' TypeN ';'
+...
+NameLastContractMember ':' TypeLast</p>
+<p>'}.'</p>
+<p>For example:</p>
+<p>Contract MultisigWallet ;</p>
+<p>Sends To  Itmp ; </p>
+<p>Types 
+Record Transaction := {
+Transaction_ι_id : uint64;
+Transaction_ι_confirmationsMask : uint32;
+}
+Record UpdateRequest := {
+UpdateRequest_ι_id : uint64;
+UpdateRequest_ι_index : uint8;
+UpdateRequest_ι_signs : uint8;
+};</p>
+<p>Constants </p>
+<p>Definition FLAG_SEND_ALL_REMAINING : uint8 := Build_XUBInteger (128)</p>
+<p>Definition FLAG_IGNORE_ERRORS : uint8 := Build_XUBInteger (2)</p>
+<p>Record Contract := {</p>
+<p>#[static] _pubkey : uint256;</p>
+<p>#[static] _foo : uint256;</p>
+<p>m_requiredVotes :  uint8;</p>
+<p>m_defaultRequiredConfirmations :  uint8</p>
+<p>}.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="types-primitives-and-literals"><a class="header" href="#types-primitives-and-literals">Types, primitives and literals</a></h1>
+<p>Ursus types are listed in the following table:</p>
+<hr />
+<h2 id="a-easy-types"><a class="header" href="#a-easy-types">A easy types:</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">type</th><th style="text-align: right">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left">int</td><td style="text-align: right">signed int</td></tr>
+<tr><td style="text-align: left">int8</td><td style="text-align: right">signed int for 1 byte</td></tr>
+<tr><td style="text-align: left">int16</td><td style="text-align: right">signed int for 2 bytes</td></tr>
+<tr><td style="text-align: left">int32</td><td style="text-align: right">signed int for 4 bytes</td></tr>
+<tr><td style="text-align: left">int64</td><td style="text-align: right">signed int for 8 bytes</td></tr>
+<tr><td style="text-align: left">int128</td><td style="text-align: right">signed int for 16 bytes</td></tr>
+<tr><td style="text-align: left">int256</td><td style="text-align: right">signed int for 32 bytes</td></tr>
+<tr><td style="text-align: left">uint</td><td style="text-align: right">unsigned int</td></tr>
+<tr><td style="text-align: left">uuint8</td><td style="text-align: right">unsigned int for 1 byte</td></tr>
+<tr><td style="text-align: left">uint16</td><td style="text-align: right">unsigned int for 2 bytes</td></tr>
+<tr><td style="text-align: left">uint32</td><td style="text-align: right">unsigned int for 4 bytes</td></tr>
+<tr><td style="text-align: left">uint64</td><td style="text-align: right">unsigned int for 8 bytes</td></tr>
+<tr><td style="text-align: left">uint128</td><td style="text-align: right">unsigned int for 16 bytes</td></tr>
+<tr><td style="text-align: left">uint256</td><td style="text-align: right">unsigned int for 32 bytes</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="a-difficult-types"><a class="header" href="#a-difficult-types">A difficult types:</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>type</th><th>Description</th></tr></thead><tbody>
+<tr><td>boolean</td><td>logical type for (<em><strong>true</strong></em> and <em><strong>false</strong></em>)</td></tr>
+<tr><td>address</td><td>address type consist of two parts:</td></tr>
+<tr><td></td><td><em>analogue of Solidity <strong>address</strong> type</em></td></tr>
+<tr><td>mapping typeA typeB</td><td>hash-map type:</td></tr>
+<tr><td></td><td><em>analogue of Solidity <strong>mapping</strong> type</em></td></tr>
+<tr><td>PhantomType</td><td>empty type: for functions that do</td></tr>
+<tr><td></td><td>not return a value</td></tr>
+<tr><td></td><td><em>analogue of <strong>void</strong> C type</em></td></tr>
+</tbody></table>
+</div>
+<pre><code>                 ______________________________
+</code></pre>
+<h2 id="user-types"><a class="header" href="#user-types">User types</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><p>Constants</p>
+<p>There are two types of constants. First is 'global', i.e. constants are outside the contract; and
+other ('local') are inside the contract.</p>
+<p>Global constants</p>
+<p>Local constants</p>
+<p>Local constants are inside the contract. Inside the contract constants definition looks like that:</p>
+<p>Key word 'Constants'</p>
+<p>Key word 'Definition' Constan1tName ':' Type1 ':=' Key word 'Build_XUBInteger' Value1</p>
+<p>Key word 'Definition' Constan2tName ':' Type2 ':=' Key word 'Build_XUBInteger' Value2</p>
+<p>Key word 'Definition' Constan3tName ':' Type3 ':=' Key word 'Build_XUBInteger' Value3 ;</p>
+<p>Attention: Semicolon (;) should be after last constant definition.</p>
+<p>For example:</p>
+<p>Definition ERR_ADDR_ZERO : uint16  := Build_XUBInteger 104</p>
+<p>Definition ERR_LOW_AMOUNT : uint16  := Build_XUBInteger 105</p>
+<p>Definition ERR_LOW_BALANCE : uint16  := Build_XUBInteger 106</p>
+<p>Definition ERR_NOT_SELF : uint16  := Build_XUBInteger 107 ;</p>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><p>For each function, its structure is as follows:</p>
+<p>AccessRights</p>
+<p>Key words 'Ursus Definition' FunctionName ArgumentsList ':' Key word 'UExpression' ReturnType [true', 'false'] '.'</p>
+<p>FuctionBody </p>
+<p>Key word 'Defined' '.'</p>
+<ol>
+<li>
+<p>AccessRight :  #[ar1] or # [ar1 , ar2]</p>
+<p>ar may be: external, public, private, pure, nonpayable</p>
+</li>
+<li>
+<p>FunctionName : One word without spaces, starts with either a letter or an underscore. May contain numbers.</p>
+</li>
+<li>
+<p>ArgumentsList : for function without arguments - easy,</p>
+<p>For one argument : (ArgumentName ':' ArgumentType)</p>
+<p>For multiple arguments : (Argumen1tName ':' Argument1Type) ... (ArgumentNName ':' ArgumentNType)</p>
+<p>ArgumentName : One word without spaces, starts with either a letter or an underscore. May contain numbers</p>
+<p>Argument1Type : see <a href="ulang/./primitives.html">&quot;Types, primitives and literals&quot;</a>.</p>
+</li>
+<li>
+<p>For a function that does not return a value : ReturnType is 'PhantomType'</p>
+<p>Type of return value : see <a href="ulang/./primitives.html">&quot;Types, primitives and literals&quot;</a>.</p>
+</li>
+<li>
+<p>['true', 'false'] : </p>
+</li>
+</ol>
+<p>'true' for function:</p>
+<ul>
+<li>
+<p>or function contains 'require' operator(s);</p>
+</li>
+<li>
+<p>or function calls function(s) with 'true';</p>
+</li>
+<li>
+<p>or function contains an intermediate exit from the function (most often this is an 'return' by the if operator)</p>
+</li>
+</ul>
+<p>'false' - in other cases</p>
+<ol start="6">
+<li>FunctionBody - set of operators that make up the function</li>
+</ol>
+<p>see <a href="ulang/./function_operators.html">&quot;Function operators&quot;</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>Function operators </p>
+<p>Each line must start with a character '<strong>::</strong>' or character '<strong>:</strong>' . </p>
+<p>If the character is '<strong>::</strong>' then no reverse translation is performed. If the character is '<strong>:</strong>' the 
+reverse translation will be performed.</p>
+<p>Followed by the symbol '<strong>//</strong>'.</p>
+<p>Exception to this - see below.</p>
+<p>Unlike other programming languages, in Ursus any constructs can be replaced with a &quot;<em>hole</em>&quot; that can be filled in later. In some cases (which are discussed below), these &quot;<em>holes</em>&quot; need to be forced to be typed.</p>
+<p>The method of using &quot;<em>holes</em>&quot; allows you to decompose the most complex structures into components, which can greatly simplify the programming process.</p>
+<ol>
+<li>Creating a new variable</li>
+</ol>
+<p>There are six kinds of operators for creating new variables:</p>
+<ul>
+<li>::// new 'varname : vartype @ &quot;varname&quot; ; _ | .</li>
+<li>?::// new 'varname : vartype ; _ | .</li>
+<li>:// new 'varname : vartype @ &quot;varname&quot; ; _ | .</li>
+<li>?:// new 'varname : vartype ; _ | .</li>
+<li>::// new 'varname : vartype @ &quot;varname&quot; := ... ; _ | .</li>
+<li>?::// new 'varname : vartype := ... ; _ | .</li>
+<li>:// new 'varname : vartype @ &quot;varname&quot; := ... ; _ | .</li>
+<li>?:// new 'varname : vartype := ... ; _ | .</li>
+<li>::// new ('var1name : var1type , .. , 'varNname : varNtype) @ (&quot;var1name&quot; , .. , &quot;varNname&quot;) ; _ |.</li>
+<li>?::// new ('var1name : var1type , .. , 'varNname : varNtype) ; _ |.</li>
+<li>::// new ('var1name : var1type , .. , 'varNname : varNtype) @ (&quot;var1name&quot; , .. , &quot;varNname&quot;) := ... ; _ |.</li>
+<li>?::// new ('var1name : var1type , .. , 'varNname : varNtype) := ... ; _ |.</li>
+<li>:// new ('var1name : var1type , .. , 'varNname : varNtype) @ (&quot;var1name&quot; , .. , &quot;varNname&quot;) ; _ |.</li>
+<li>?:// new ('var1name : var1type , .. , 'varNname : varNtype) ; _ |.</li>
+<li>:// new ('var1name : var1type , .. , 'varNname : varNtype) @ (&quot;var1name&quot; , .. , &quot;varNname&quot;) := ... ; _ |.</li>
+<li>?:// new ('var1name : var1type , .. , 'varNname : varNtype) := ... ; _ |.</li>
+</ul>
+<p>where '::', '?::' - no reverse broadcast</p>
+<pre><code>  ':', '?:' - reverse translation
+
+  '//' - Ursus interpreter
+
+  ';' - binding
+
+  '_' - &quot;hole&quot;, i.e. there must be a continuation after the operator 'new' 
+
+  ... - an expression that returns the value(s) assigned to the new variable(s)
+</code></pre>
+<p>For examples:</p>
+<p><em>::// new 'sender : (  uint256 ) @ &quot;sender&quot;  := msg-&gt;pubkey() ; _ | .</em></p>
+<p><em>?://  new ( 'unlocked : uint128 , 'unlockedPeriod : uint32 ) ; _ |.</em></p>
+<p>To read the value of an argument in the function body, use the sign '#':</p>
+<p><em>:// a := #b .</em> - here b is argument of function</p>
+<p>To read the value of a local variable in the function body, use the sign '!':</p>
+<p><em>:// a := !b .</em> - here b is local variable, a is local variable too</p>
+<ol start="2">
+<li>
+<p>Assignment</p>
+<ul>
+<li>Regular assignment operator ':=' : left expression ':=' right expression '.'</li>
+<li>For record members ... - TODO</li>
+</ul>
+</li>
+</ol>
+<p>For examples:</p>
+<p><em>:://valueL := (β #{0})  .</em></p>
+<p><em>://needCleanup := (!updateId &lt;= !marker) .</em></p>
+<ol>
+<li>
+<p>Numeric constants</p>
+<p>To use unnamed (numerical) constants in the program text, special characters are used:</p>
+<p>For '<em>require_</em>' operator: <strong>%</strong> ...</p>
+<p>For all other cases: <em>(β #{ ... })</em></p>
+<p>For examples:</p>
+<p><em>://valueL := (β #{0})  .</em></p>
+<p><em>://require_(m_custodians-&gt;exists(msg-&gt;pubkey()), %100) .</em></p>
+</li>
+<li>
+<p>Arithmetic operators</p>
+<p>'<strong>+</strong>', '<strong>-</strong>', '*', '<strong>/</strong>', '<strong>++</strong>', '<strong>--</strong>', '<strong>&amp;</strong>', '<strong>|</strong>', '&lt;&lt;' '&gt;&gt;'</p>
+<p>For examples:</p>
+<p><em>:// i ++ .</em></p>
+<p><em>:://return_ (#mask - (!onee &lt;&lt; (!eight * #index ))) |.</em></p>
+</li>
+<li>
+<p>Comparison Operators</p>
+<p>'&gt;', '&lt;', '&gt;=', '&lt;=', '=='</p>
+<p>For examples:</p>
+<p><em>!i &lt; MAX_CLEANUP_TXNS</em></p>
+<p><em>:</em>://needCleanup := (!trId &lt;= !marker)  |.*</p>
+</li>
+<li>
+<p>Logical operators</p>
+<p>'<strong>||</strong>', '<strong>&amp;&amp;</strong>'</p>
+<p>For example:</p>
+<p><em>(!{i} &lt; !{len}) &amp;&amp; (!{ownerCount} &lt; MAX_CUSTODIAN_COUNT)</em></p>
+</li>
+<li>
+<p>Combined assignment</p>
+<p>'<strong>+=</strong>', '<strong>-=</strong>', '*=', '<strong>/=</strong>', '<strong>&amp;=</strong>', '<strong>|=</strong>'</p>
+<p>For example:</p>
+<p><em>::// maskL |= (!{onee} &lt;&lt; #custodianIndex ) .</em> </p>
+</li>
+<li>
+<p>Function call</p>
+</li>
+<li>
+<p>Conditional operator</p>
+<p>Two kinds of conditional statement:</p>
+<p>'if' (condition) 'then' { statement } .</p>
+<p>'if' (condition) 'then' { statement1 } 'else' { statement2 } .</p>
+<p>It is convenient to use &quot;<em>holes</em>&quot; for the conditional operator.</p>
+<p>For example:</p>
+<p><em>::// if ( m_updateRequests-&gt;empty() ) then { {_:UExpression _ true} } .</em><br />
+<em>:://exit_ {} |.</em></p>
+<p>The construction '<em>{_:UExpression _ true}</em>' means that a &quot;<em>hole</em>&quot; is specified and its type is specified - coinciding with the type of the expression that is written later. In this case, this is <em>exit {} |.</em></p>
+<p>The vertical line '<strong>|</strong>' indicates that the decoding of the &quot;<em>hole</em>&quot; is completed. </p>
+</li>
+<li>
+<p>Loop operators</p>
+</li>
+</ol>
+<p>There are two kinds of loop statements: '<strong>while</strong>' and '<strong>for</strong>'.</p>
+<p>An unindexed loop looks like this:</p>
+<p>'while' condition 'do' statement.</p>
+<p>The cycle <em>for</em> looks like this:</p>
+<p>'for' condition do ststement .</p>
+<p>For example:</p>
+<p><em>://while ((!{needCleanup} &amp;&amp; (!{i} &lt; MAX_CLEANUP_TXNS))) do { {_:UExpression _ true} }  |.</em></p>
+<p><em>::// for ( 'pubkey : #{claimers} ) do { {_:UExpression _ false} } .</em></p>
+<ol start="9">
+<li>
+<p>Record initialization</p>
+<p>The following construction is used to initialize records:</p>
+<p>'[$'</p>
+<pre><code>    statement1 '⇒' {Member1OfRecord};
+
+    ...
+
+    statement2 '⇒' {Member2OfRecord}
+</code></pre>
+<p>'$]'</p>
+<p>The order in which the members are listed is arbitrary. If some members are not listed, they will be initialized by default.</p>
+<p>For example:
+<i>
+::// new 'tmp : MultisigWallet_ι_UpdateRequestLRecord @ &quot;tmp&quot; :=</p>
+<pre><code>         [$
+
+          !updateId ⇒ {MultisigWallet_ι_UpdateRequest_ι_id};
+
+          !index ⇒ {MultisigWallet_ι_UpdateRequest_ι_index};
+
+          (β #{0}) ⇒ {MultisigWallet_ι_UpdateRequest_ι_signs};
+
+          (β #{0}) ⇒ {MultisigWallet_ι_UpdateRequest_ι_confirmationsMask};
+
+          !sender ⇒ {MultisigWallet_ι_UpdateRequest_ι_creator};
+
+          codeHash ⇒ {MultisigWallet_ι_UpdateRequest_ι_codeHash};
+
+          #owners ⇒ {MultisigWallet_ι_UpdateRequest_ι_custodians};
+
+          #reqConfirms ⇒ {MultisigWallet_ι_UpdateRequest_ι_reqConfirms}
+
+         $] ; _|.
+</code></pre>
+</li>
+</ol>
+</i>
+<pre><code>Here a local variable 'tmp' of type 'MultisigWallet_ι_UpdateRequestLRecord' is created and an initialized record is assigned to it.
+</code></pre>
+<ol start="10">
+<li>
+<p>Message</p>
+</li>
+<li>
+<p>Library Functions</p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="basic-solidity-and-ursus-functions-respectively"><a class="header" href="#basic-solidity-and-ursus-functions-respectively">Basic solidity and ursus functions, respectively</a></h1>
+<p>Here is a mapping of functions from solidity and a phased construction of functions in ursus. Every notation has level 55.</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Soldity</th><th style="text-align: left">stdFunc</th><th style="text-align: left">stdNotations</th><th style="text-align: left">returns</th><th style="text-align: left">stdUFunc</th><th style="text-align: left">stdFuncNotations</th><th style="text-align: left">returns</th></tr></thead><tbody>
+<tr><td style="text-align: left">&lt;HasEmpty&gt;.empty()</td><td style="text-align: left">is_empty_</td><td style="text-align: left">x -&gt;empty()</td><td style="text-align: left">URValue boolean b</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;optional(Type)&gt;.get()</td><td style="text-align: left">umaybe_get_default</td><td style="text-align: left">x -&gt;get_default()</td><td style="text-align: left">URValue Type false</td><td style="text-align: left">get</td><td style="text-align: left">x -&gt;get ()</td><td style="text-align: left">URValue Type true</td></tr>
+<tr><td style="text-align: left">&lt;optional(Type)&gt;.hasValue()</td><td style="text-align: left">umaybe_has_value</td><td style="text-align: left">x -&gt;hasValue()</td><td style="text-align: left">URValue boolean false</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">returns</td></tr>
+<tr><td style="text-align: left">&lt;optional(Type)&gt;.set(Type value)??</td><td style="text-align: left">umaybe_set</td><td style="text-align: left">x -&gt;set()</td><td style="text-align: left">URValue (optional Type) b1</td><td style="text-align: left">set</td><td style="text-align: left">x -&gt;set (a)</td><td style="text-align: left">UExpression R (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;optional(Type)&gt;.reset();</td><td style="text-align: left">stdFunc</td><td style="text-align: left">stdNotations</td><td style="text-align: left">returns</td><td style="text-align: left">reset</td><td style="text-align: left">x -&gt;reset ()</td><td style="text-align: left">UExpression R false</td></tr>
+<tr><td style="text-align: left"><strong>vector(Type)</strong></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;vector(Type)&gt;.push(Type)</td><td style="text-align: left">vector_push__</td><td style="text-align: left">x -&gt; vector_push_(y)</td><td style="text-align: left">URValue (listVector Type) (orb b1 b2)</td><td style="text-align: left">vector_push_</td><td style="text-align: left">x -&gt; push (y)</td><td style="text-align: left">UExpression R (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;vector(Type)&gt;.pop()</td><td style="text-align: left">vector_pop__</td><td style="text-align: left">x -&gt; vector_pop_()</td><td style="text-align: left">URValue (listVector Type) (orb b1 b2)</td><td style="text-align: left">vector_pop_</td><td style="text-align: left">x -&gt; pop ()</td><td style="text-align: left">UExpression R (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;vector(Type)&gt;.length()</td><td style="text-align: left">length</td><td style="text-align: left">x -&gt; length ()</td><td style="text-align: left">URValue uint b</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">returns</td></tr>
+<tr><td style="text-align: left">&lt;vector(Type)&gt;.empty()</td><td style="text-align: left">is_empty_</td><td style="text-align: left">x -&gt;empty()</td><td style="text-align: left">URValue boolean b</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>extensions in Solidity types</strong></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">bitSize(int (uint256) x)</td><td style="text-align: left">ubitsize</td><td style="text-align: left">bitSize ( x )</td><td style="text-align: left">URValue XUInteger16 b1</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>struct</strong></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;struct&gt;.unpack()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">uBitSize(uint (uint256) x)</td><td style="text-align: left">uubitsize</td><td style="text-align: left">uBitSize ( x )</td><td style="text-align: left">URValue XUInteger16 b1</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>Arrays</strong></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;array&gt;.empty()</td><td style="text-align: left">is_empty_</td><td style="text-align: left">x -&gt;empty()</td><td style="text-align: left">URValue boolean b</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>bytes</strong></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.empty()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.operator[]</td><td style="text-align: left">xbytes_get</td><td style="text-align: left">x -&gt;bytes_get (n)</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.slice</td><td style="text-align: left">xbytes_slice</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.length</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.toSlice</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.dataSize()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.dataSizeQ()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;bytes&gt;.append()</td><td style="text-align: left">xbytes_app</td><td style="text-align: left">bytes_app x y</td><td style="text-align: left">URValue bytes (orb b1 b2)</td><td style="text-align: left">bytes_app_left</td><td style="text-align: left">x -&gt;appendBytes (y)</td><td style="text-align: left">UExpression R false</td></tr>
+<tr><td style="text-align: left"><strong>string</strong></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;string&gt;.empty()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;string&gt;.byteLength()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;string&gt;.substr()</td><td style="text-align: left">xstring_substr</td><td style="text-align: left">x -&gt;substr(n, m)</td><td style="text-align: left">URValue string (orb b1 (orb b2 b3))</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;string&gt;.append()</td><td style="text-align: left">xstring_app</td><td style="text-align: left">str_app' x y</td><td style="text-align: left">URValue XString (orb b1 b2)</td><td style="text-align: left">str_app_</td><td style="text-align: left">x -&gt;appendString ( y )</td><td style="text-align: left">UExpression R (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;string&gt;.operator+</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;string&gt;.find()</td><td style="text-align: left">xstring_find</td><td style="text-align: left">x -&gt;find (y)</td><td style="text-align: left">URValue (optional XUInteger) (orb b1 b2)</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;string&gt;.findLast()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">format()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">stoi()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">bytesN()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">xstring_prefix</td><td style="text-align: left">x is_prefix y</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>mapping</strong></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">emptyMap</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.operator[]</td><td style="text-align: left">uhmap_find_with_default</td><td style="text-align: left">m [ k ]</td><td style="text-align: left">URValue (&lt;ValueType&gt;) b1</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.at()</td><td style="text-align: left">uhmap_fetch</td><td style="text-align: left">m -&gt;fetch ( k )</td><td style="text-align: left">URValue (optional &lt;ValueType&gt;) (orb b1 b2)</td><td style="text-align: left">ats</td><td style="text-align: left">m -&gt;at ( k )</td><td style="text-align: left">URValue &lt;ValueType&gt; true</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.min()</td><td style="text-align: left">uhmap_min</td><td style="text-align: left">m -&gt;min()</td><td style="text-align: left">URValue (optional (tuple &lt;KeyType&gt; &lt;ValueType&gt;)) b1</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.max()</td><td style="text-align: left">uhmap_max</td><td style="text-align: left">m -&gt;max ()</td><td style="text-align: left">URValue (optional (tuple &lt;KeyType&gt; &lt;ValueType&gt;)) b1</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.next()</td><td style="text-align: left">uhmap_next</td><td style="text-align: left">m -&gt;next ( k )</td><td style="text-align: left">URValue (optional (tuple &lt;KeyType&gt; &lt;ValueType&gt;)) b1</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.prev()</td><td style="text-align: left">uhmap_prev</td><td style="text-align: left">m -&gt;prev ( k )</td><td style="text-align: left">URValue (optional (tuple K V)) (orb b1 b2)</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.nextOrEq()</td><td style="text-align: left">uhmap_next_or_eq</td><td style="text-align: left">m -&gt; nextOrEq ( k )</td><td style="text-align: left">URValue  (optional (uintN ** &lt;ValueType&gt;)) (b1</td><td style="text-align: left"></td><td style="text-align: left">b2)</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">❕&lt;mapping&gt;.prevOrEq()</td><td style="text-align: left">uhmap_prev_or_eq</td><td style="text-align: left">m -&gt; prevOrEq ( k )</td><td style="text-align: left">URValue  (optional (uintN ** &lt;ValueType&gt;)) (b1</td><td style="text-align: left"></td><td style="text-align: left">b2)</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.delMin()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">delMin</td><td style="text-align: left">m -&gt;delMin ()</td><td style="text-align: left">URValue (optional ( &lt;KeyType&gt; ** &lt;ValueType&gt;)) false</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.delMin()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">delMin</td><td style="text-align: left">m -&gt;delMin ()</td><td style="text-align: left">UExpression R false</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.delMax()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">delMax</td><td style="text-align: left">m -&gt;delMax ()</td><td style="text-align: left">URValue (optional ( &lt;KeyType&gt; ** &lt;ValueType&gt;)) false</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.delMax()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">delMax</td><td style="text-align: left">m -&gt;delMax ()</td><td style="text-align: left">UExpression R false</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.fetch()</td><td style="text-align: left">uhmap_fetch</td><td style="text-align: left">m -&gt;fetch ( k )</td><td style="text-align: left">URValue (optional &lt;ValueType&gt;) (b1</td><td style="text-align: left"></td><td style="text-align: left">b2)</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.exists()</td><td style="text-align: left">uhmap_exists</td><td style="text-align: left">m -&gt;exists (' k ')' &quot;</td><td style="text-align: left">URValue boolean (b1</td><td style="text-align: left"></td><td style="text-align: left">b2)</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.empty()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.replace()</td><td style="text-align: left">uhmap_replace</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">replace_right</td><td style="text-align: left">m -&gt; replace ( k , v )</td><td style="text-align: left">URValue boolean (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.replace()</td><td style="text-align: left">uhmap_replace</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">replace_left</td><td style="text-align: left">m -&gt; replace ( k , v )</td><td style="text-align: left">UExpression R (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.add()</td><td style="text-align: left">uhmap_add</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">add_right</td><td style="text-align: left">m -&gt; add ( k , v )</td><td style="text-align: left">URValue boolean (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.add()</td><td style="text-align: left">uhmap_add</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">add_left</td><td style="text-align: left">m -&gt; add ( k , v )</td><td style="text-align: left">UExpression R (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.getSet()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.getAdd()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">m -&gt; getAdd ( k , v )</td><td style="text-align: left">URValue (optional  &lt;ValueType&gt;) (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.getAdd()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">m -&gt; getAdd ( k , v )</td><td style="text-align: left">UExpression R (orb b2 b1)</td></tr>
+<tr><td style="text-align: left">&lt;mapping&gt;.getReplace()</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">m -&gt; getReplace ( k , v )</td><td style="text-align: left">URValue (optional  &lt;ValueType&gt;) (orb b2 b1)</td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">set_hmap</td><td style="text-align: left">m -&gt;set_at (k, v)</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">uhmap_insert</td><td style="text-align: left">m -&gt;set (k, v)</td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left">uhmap_delete</td><td style="text-align: left">m '-&gt;delete' '(' k ')' &quot;</td><td style="text-align: left">r</td><td style="text-align: left">m -&gt;delete (k)</td><td style="text-align: left">m -&gt;erase(k)</td><td style="text-align: left">r</td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">extract_hmap</td><td style="text-align: left">m -&gt;extract (k)</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left"></td><td style="text-align: left">insert_hmap</td><td style="text-align: left">m -&gt;insert(kv)</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="basic-solidity-and-ursus-operators-respectively"><a class="header" href="#basic-solidity-and-ursus-operators-respectively">Basic solidity and ursus operators, respectively</a></h1>
+<p>Here is a mapping of operators from solidity and the phased construction of operators in ursus </p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Precedence</th><th style="text-align: left">Soldity</th><th style="text-align: left">stdFunc</th><th style="text-align: center">stdNotations(notations to use)</th><th style="text-align: left">level $1, $2, whole notations</th><th style="text-align: left">Comments</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>1</strong></td><td style="text-align: left">x++</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">55, _, 55</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>1</strong></td><td style="text-align: left">x--</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">55, _, 55</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>1</strong></td><td style="text-align: left">&lt;array&gt;[&lt;index&gt;]</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _,  55</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>1</strong></td><td style="text-align: left">&lt;object&gt;.&lt;member&gt;</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _,  55</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>1</strong></td><td style="text-align: left">&lt;func&gt;(&lt;args&gt;)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _,  _</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>2</strong></td><td style="text-align: left">++x</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _,  60</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>2</strong></td><td style="text-align: left">--x</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _,  60</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>2</strong></td><td style="text-align: left">delete operation</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, 60, 60</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>2</strong></td><td style="text-align: left">! x</td><td style="text-align: left">uneg</td><td style="text-align: center">&quot; '!' x &quot;</td><td style="text-align: left">_, _,  60</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>2</strong></td><td style="text-align: left">~ x</td><td style="text-align: left">unot</td><td style="text-align: center">&quot; '~' x &quot;</td><td style="text-align: left">_, _,  60</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>3</strong></td><td style="text-align: left">a**b</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, _</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>4</strong></td><td style="text-align: left">x * y</td><td style="text-align: left">un_mult'</td><td style="text-align: center">&quot; x '*' y &quot;</td><td style="text-align: left">_, _, 70</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>4</strong></td><td style="text-align: left">x / y</td><td style="text-align: left">un_div'</td><td style="text-align: center">&quot; x '/' y &quot;</td><td style="text-align: left">_, _, 70</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>4</strong></td><td style="text-align: left">x % y</td><td style="text-align: left">un_mod'</td><td style="text-align: center">&quot; x '%' y &quot;</td><td style="text-align: left">_, 70, 70</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>5</strong></td><td style="text-align: left">x + y</td><td style="text-align: left">un_plus'</td><td style="text-align: center">&quot; x '+' y &quot;</td><td style="text-align: left">_, _, 75</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>5</strong></td><td style="text-align: left">x - y</td><td style="text-align: left">un_minus'</td><td style="text-align: center">&quot; x '-' y &quot;</td><td style="text-align: left">_, _, 75</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>6</strong></td><td style="text-align: left">x &gt;&gt; y</td><td style="text-align: left">un_right'</td><td style="text-align: center">&quot; x '&gt;&gt;' y &quot;</td><td style="text-align: left">_, 80, 80</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>6</strong></td><td style="text-align: left">x &lt;&lt; y</td><td style="text-align: left">un_left'</td><td style="text-align: center">&quot; x '&lt;&lt;' y &quot;</td><td style="text-align: left">_, 80, 80</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>7</strong></td><td style="text-align: left">x &amp; y</td><td style="text-align: left">un_and'</td><td style="text-align: center">&quot; x '&amp;' y &quot;</td><td style="text-align: left">_, 85, 85</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>8</strong></td><td style="text-align: left">x ^ y</td><td style="text-align: left">un_xor'</td><td style="text-align: center">&quot; x '^' y &quot;</td><td style="text-align: left">_, 90, 90</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>9</strong></td><td style="text-align: left">x | y</td><td style="text-align: left">un_or'</td><td style="text-align: center">&quot; x '\' y &quot;</td><td style="text-align: left">_, 95, 95</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>10</strong></td><td style="text-align: left">x &lt; y</td><td style="text-align: left">un_ltb</td><td style="text-align: center">&quot; x '&lt;' y &quot;</td><td style="text-align: left">_, 100, 100</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>10</strong></td><td style="text-align: left">x &lt;= y</td><td style="text-align: left">un_leb</td><td style="text-align: center">&quot; x '&lt;=' y &quot;</td><td style="text-align: left">_, 100, 100</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>10</strong></td><td style="text-align: left">x &gt; y</td><td style="text-align: left">un_gtb</td><td style="text-align: center">&quot; x '&gt;' y &quot;</td><td style="text-align: left">_, 100, 100</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>10</strong></td><td style="text-align: left">x &gt;= y</td><td style="text-align: left">un_geb</td><td style="text-align: center">&quot; x '&gt;=' y &quot;</td><td style="text-align: left">_, 100, 100</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>11</strong></td><td style="text-align: left">x == y</td><td style="text-align: left">un_eqb</td><td style="text-align: center">&quot; x '==' y &quot;</td><td style="text-align: left">_, 105, 105</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>11</strong></td><td style="text-align: left">x != y</td><td style="text-align: left">un_uneqb</td><td style="text-align: center">&quot; x '!=' y &quot;</td><td style="text-align: left">_, 105, 105</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>12</strong></td><td style="text-align: left">x &amp;&amp; y</td><td style="text-align: left">uband</td><td style="text-align: center">&quot; x '&amp;&amp;' y &quot;</td><td style="text-align: left">_, 110, 110</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>13</strong></td><td style="text-align: left">x || y</td><td style="text-align: left">ubor</td><td style="text-align: center">&quot; x '\\' y &quot;</td><td style="text-align: left">_, 115, 115</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">&lt;conditional&gt; ? &lt;if-true&gt; : &lt;if-false&gt;</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, 125</td><td style="text-align: left">// belongs UMLang library</td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">:=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, 125</td><td style="text-align: left">// belongs UMLang library</td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">|=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, 125</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">^=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, _</td><td style="text-align: left">//doesn't exist</td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">&amp;=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, 125</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">&lt;&lt;=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, _</td><td style="text-align: left">//doesn't exists</td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">&gt;&gt;=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, _</td><td style="text-align: left">//doesn't exists</td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">+=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, 125</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">-=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, 125</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">*=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, _</td><td style="text-align: left">//doesn't exist</td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">/=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, _</td><td style="text-align: left">//doesn't exist</td></tr>
+<tr><td style="text-align: left"><strong>14</strong></td><td style="text-align: left">%=</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: left">_, _, _</td><td style="text-align: left">//doesn't exist</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="basic-special-only-solidity-and-ursus-functions-respectively"><a class="header" href="#basic-special-only-solidity-and-ursus-functions-respectively">Basic special only solidity and ursus functions, respectively</a></h1>
+<p>Here is a mapping of functions from solidity and a phased construction of functions in ursus, where</p>
+<h2 id="msg"><a class="header" href="#msg">msg</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">msg.sender</td><td style="text-align: center">tvm_msg_sender</td><td style="text-align: center">&quot; 'msg-&gt;sender' &quot;</td></tr>
+<tr><td style="text-align: center">msg.value</td><td style="text-align: center">tvm_msg_value</td><td style="text-align: center">&quot; 'msg-&gt;value' &quot;</td></tr>
+<tr><td style="text-align: center">msg.currencies</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">msg.pubkey</td><td style="text-align: center">tvm_msg_pubkey</td><td style="text-align: center">&quot; 'msg-&gt;pubkey' '()' &quot;</td></tr>
+<tr><td style="text-align: center">msg.isInternal</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">msg.isExternal</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">msg.isTickTock</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">msg.createdAt</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">msg.data</td><td style="text-align: center">tvm_msg_data</td><td style="text-align: center">&quot; 'msg-&gt;data' &quot;</td></tr>
+<tr><td style="text-align: center">msg.hasStateInit</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+</tbody></table>
+</div>
+<h2 id="address"><a class="header" href="#address">address</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th><th style="text-align: center"></th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">Object creating</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">constructor()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❕ &lt;address&gt;.makeAddrStd()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.makeAddrNone()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.makeAddrExtern()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">Members</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.wid</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.value</td><td style="text-align: center">addr_std_ι_address_right</td><td style="text-align: center">&quot; a '-&gt;value' &quot;</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.balance</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.currencies</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">Functions</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.getType()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❗&lt;address&gt;.isStdZero()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.isStdAddrWithoutAnyCast()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.isExternZero()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.isNone()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.unpack()</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;address&gt;.transfer()</td><td style="text-align: center">tvm_transfer_left</td><td style="text-align: center">&quot;  'tvm-&gt;transfer' '(' x ',' y ',' z ',' t ')'&quot;</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+</tbody></table>
+</div>
+<h2 id="tvm"><a class="header" href="#tvm">tvm</a></h2>
+<h3 id="tvm-instructions"><a class="header" href="#tvm-instructions">TVM instructions</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">tvm.accept()</td><td style="text-align: center">tvm_accept_left</td><td style="text-align: center">&quot; 'tvm-&gt;accept' '()' &quot;</td></tr>
+<tr><td style="text-align: center">tvm.setGasLimit()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.commit()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.rawCommit()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.getData()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.setData()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.log()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.hexdump() and tvm.bindump()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.setcode()</td><td style="text-align: center">tvm_setCode_left</td><td style="text-align: center">&quot; 'tvm-&gt;setcode' '(' x ')' &quot;</td></tr>
+<tr><td style="text-align: center">tvm.configParam()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.rawConfigParam()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.rawReserve()</td><td style="text-align: center">tvm_rawReserve_left</td><td style="text-align: center">&quot; 'tvm-&gt;rawReserve' '(' x , f ')' &quot;</td></tr>
+</tbody></table>
+</div>
+<h3 id="hashing-and-cryptography"><a class="header" href="#hashing-and-cryptography">Hashing and cryptography</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">tvm.hash()</td><td style="text-align: center">tvm_hash_right</td><td style="text-align: center">&quot; 'tvm' '-&gt;hash' '(' x ')' &quot;</td></tr>
+<tr><td style="text-align: center">tvm.checkSign()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+</tbody></table>
+</div>
+<h3 id="deploy-contract-from-contract"><a class="header" href="#deploy-contract-from-contract">Deploy contract from contract</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">❕tvm.insertPubkey()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.buildStateInit()</td><td style="text-align: center">tvm_buildStateInit_right</td><td style="text-align: center">&quot; 'tvm-&gt;buildStateInit' '(' x ',' y ',' z ')' &quot;</td></tr>
+<tr><td style="text-align: center">tvm.buildDataInit()</td><td style="text-align: center">tvm_buildDataInit_right</td><td style="text-align: center">&quot; 'tvm-&gt;buildDataInit' '(' x ')' &quot;</td></tr>
+<tr><td style="text-align: center">tvm.stateInitHash()</td><td style="text-align: center">tvm_stateInitHash_right</td><td style="text-align: center">&quot; 'tvm-&gt;stateInitHash' '(' x ',' y ',' z ',' u ')' &quot;</td></tr>
+</tbody></table>
+</div>
+<h3 id="misc-functions-from-tvm"><a class="header" href="#misc-functions-from-tvm">Misc functions from tvm</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">tvm.code()</td><td style="text-align: center">tvm_code</td><td style="text-align: center">&quot; 'tvm-&gt;code' '()' &quot;</td></tr>
+<tr><td style="text-align: center">tvm.codeSalt()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.setCodeSalt()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.pubkey()</td><td style="text-align: center">tvm_pubkey</td><td style="text-align: center">&quot; 'tvm-&gt;pubkey' '()' &quot;</td></tr>
+<tr><td style="text-align: center">❗tvm.setPubkey()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.setCurrentCode()</td><td style="text-align: center">tvm_setCurrentCode_left</td><td style="text-align: center">&quot; 'tvm-&gt;setCurrentCode' '(' x ')' &quot;</td></tr>
+<tr><td style="text-align: center">tvm.resetStorage()</td><td style="text-align: center">tvm_resetStorage_left</td><td style="text-align: center">&quot; 'tvm-&gt;resetStorage' '()' &quot;</td></tr>
+<tr><td style="text-align: center">❕tvm.functionId(), например tvm.functionId(AnotherContract.someFunction)</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.encodeBody()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.exit() and tvm.exit1()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.buildExtMsg()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.buildIntMsg()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">tvm.sendrawmsg()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+</tbody></table>
+</div>
+<h2 id="tvmcell"><a class="header" href="#tvmcell">TvmCell</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">&lt;TvmCell&gt;.depth()</td><td style="text-align: center">cell_depth</td><td style="text-align: center">&quot; x '-&gt;cellDepth' '()' &quot;</td></tr>
+<tr><td style="text-align: center">&lt;TvmCell&gt;.dataSize()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmCell&gt;.dataSizeQ()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmCell&gt;.toSlice()</td><td style="text-align: center">cell_to_slice</td><td style="text-align: center">&quot; c '-&gt;toSlice' '()' &quot;</td></tr>
+<tr><td style="text-align: center">==</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">!=</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+</tbody></table>
+</div>
+<h2 id="tvmslice"><a class="header" href="#tvmslice">TvmSlice</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.empty()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❕&lt;TvmSlice&gt;.size()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❕&lt;TvmSlice&gt;.bits()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.refs()</td><td style="text-align: center">slice_refs</td><td style="text-align: center">&quot; x '-&gt;refs' '()' &quot;</td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.dataSize()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.dataSizeQ()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.depth()</td><td style="text-align: center">slice_depth</td><td style="text-align: center">&quot; x '-&gt;sliceDepth' '()' &quot;</td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.hasNBits()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.hasNRefs()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.hasNBitsAndRefs()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.compare()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❗❕ &lt;TvmSlice&gt;.decode()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.loadRef()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❗❕&lt;TvmSlice&gt;.loadRefAsSlice()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.loadSigned()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❕&lt;TvmSlice&gt;.loadUnsigned()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.loadTons()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.loadSlice()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❕&lt;TvmSlice&gt;.decodeFunctionParams()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmSlice&gt;.skip()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+</tbody></table>
+</div>
+<h2 id="tvmbuilder"><a class="header" href="#tvmbuilder">TvmBuilder</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.toSlice()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.toCell()</td><td style="text-align: center">builder_to_cell</td><td style="text-align: center">&quot; b '-&gt;toCell' '()' &quot;</td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.size()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.bits()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.refs()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.remBits()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.remRefs()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.remBitsAndRefs()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.depth()</td><td style="text-align: center">builder_depth</td><td style="text-align: center">&quot; x '-&gt;builderDepth' '()' &quot;</td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.store()</td><td style="text-align: center">builder_store</td><td style="text-align: center">&quot; x -&gt; 'store' '(' y ')' &quot;</td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.storeOnes()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.storeZeroes()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.storeSigned()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">❕&lt;TvmBuilder&gt;.storeUnsigned()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.storeRef()</td><td style="text-align: center">builder_stref</td><td style="text-align: center">&quot; x '-&gt;storeRef' '(' y ')' &quot;</td></tr>
+<tr><td style="text-align: center">&lt;TvmBuilder&gt;.storeTons()</td><td style="text-align: center"></td><td style="text-align: center"></td></tr>
+<tr><td style="text-align: center"></td><td style="text-align: center">builder_stslice</td><td style="text-align: center">&quot; x '-&gt;stslice' '(' y ')' &quot;</td></tr>
+</tbody></table>
+</div>
+<h2 id="others"><a class="header" href="#others">OTHERS</a></h2>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Soldity</th><th style="text-align: center">tvmNotations</th><th style="text-align: center"></th></tr></thead><tbody>
+<tr><td style="text-align: center">selfdestruct</td><td style="text-align: center">suicide_left</td><td style="text-align: center">&quot; 'selfdestruct' '(' x ')' &quot;</td></tr>
+<tr><td style="text-align: center">now</td><td style="text-align: center">tvm_now</td><td style="text-align: center">&quot; 'now' &quot;</td></tr>
+<tr><td style="text-align: center">address(this)</td><td style="text-align: center">tvm_address</td><td style="text-align: center">&quot; 'address(this)' &quot;</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>
