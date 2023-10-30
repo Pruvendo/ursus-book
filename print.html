@@ -1,0 +1,1705 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ursus language documentation</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./theme/highlight.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Introduction</a></li><li class="chapter-item expanded "><a href="install/index.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="install/opam.html"><strong aria-hidden="true">1.1.</strong> opam package manager</a></li><li class="chapter-item expanded "><a href="install/coq.html"><strong aria-hidden="true">1.2.</strong> Install Coq</a></li><li class="chapter-item expanded "><a href="install/pruvendo.html"><strong aria-hidden="true">1.3.</strong> Install Pruvendo libraries</a></li><li class="chapter-item expanded "><a href="install/docker.html"><strong aria-hidden="true">1.4.</strong> Install via Docker image</a></li></ol></li><li class="chapter-item expanded "><a href="quick/index.html"><strong aria-hidden="true">2.</strong> Quick start</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="quick/simple.html"><strong aria-hidden="true">2.1.</strong> Write simple contract</a></li><li class="chapter-item expanded "><a href="quick/compile_ursus.html"><strong aria-hidden="true">2.2.</strong> Compile and extract solidity sources</a></li><li class="chapter-item expanded "><a href="quick/compile_sol.html"><strong aria-hidden="true">2.3.</strong> Compile extracted contract and deploy</a></li></ol></li><li class="chapter-item expanded "><a href="eDSL/index.html"><strong aria-hidden="true">3.</strong> Coq embedded DSL</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="eDSL/custom_grammar.html"><strong aria-hidden="true">3.1.</strong> Coq custom grammar</a></li><li class="chapter-item expanded "><a href="eDSL/ursus_embedding.html"><strong aria-hidden="true">3.2.</strong> Ursus embedding</a></li><li class="chapter-item expanded "><a href="eDSL/notations.html"><strong aria-hidden="true">3.3.</strong> Notational mechanism</a></li></ol></li><li class="chapter-item expanded "><a href="ulang/index.html"><strong aria-hidden="true">4.</strong> Ursus as a language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ulang/file_interface.html"><strong aria-hidden="true">4.1.</strong> Interface structure</a></li><li class="chapter-item expanded "><a href="ulang/contract_structure.html"><strong aria-hidden="true">4.2.</strong> Contract structure</a></li><li class="chapter-item expanded "><a href="ulang/primitives.html"><strong aria-hidden="true">4.3.</strong> Types, primitives, and literals</a></li><li class="chapter-item expanded "><a href="ulang/structures.html"><strong aria-hidden="true">4.4.</strong> Complex Structures</a></li><li class="chapter-item expanded "><a href="ulang/writing_function.html"><strong aria-hidden="true">4.5.</strong> How to write Ursus functions</a></li><li class="chapter-item expanded "><a href="ulang/messages.html"><strong aria-hidden="true">4.6.</strong> Interfaces and messages</a></li><li class="chapter-item expanded "><a href="ulang/local.html"><strong aria-hidden="true">4.7.</strong> Local state and variables</a></li><li class="chapter-item expanded "><a href="ulang/multi.html"><strong aria-hidden="true">4.8.</strong> Multi-contract system</a></li><li class="chapter-item expanded "><a href="ulang/inheritance.html"><strong aria-hidden="true">4.9.</strong> Contract inheritance</a></li></ol></li><li class="chapter-item expanded "><a href="stdlib/index.html"><strong aria-hidden="true">5.</strong> Ursus standard library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="stdlib/functions.html"><strong aria-hidden="true">5.1.</strong> Standard functions</a></li><li class="chapter-item expanded "><a href="stdlib/operators.html"><strong aria-hidden="true">5.2.</strong> Basic operators</a></li><li class="chapter-item expanded "><a href="stdlib/TVM.html"><strong aria-hidden="true">5.3.</strong> TVM functions</a></li></ol></li><li class="chapter-item expanded "><a href="verification/index.html"><strong aria-hidden="true">6.</strong> Ursus verification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="verification/principles.html"><strong aria-hidden="true">6.1.</strong> Common principles</a></li><li class="chapter-item expanded "><a href="verification/stdlib.html"><strong aria-hidden="true">6.2.</strong> StdLib verification</a></li><li class="chapter-item expanded "><a href="verification/qc.html"><strong aria-hidden="true">6.3.</strong> QuickChick</a></li></ol></li><li class="chapter-item expanded "><a href="programming/index.html"><strong aria-hidden="true">7.</strong> Ursus programming style</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming/repl.html"><strong aria-hidden="true">7.1.</strong> REPL</a></li><li class="chapter-item expanded "><a href="programming/context.html"><strong aria-hidden="true">7.2.</strong> Goal and context</a></li><li class="chapter-item expanded "><a href="programming/tactics.html"><strong aria-hidden="true">7.3.</strong> Tactics and tacticals</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="programming/control.html"><strong aria-hidden="true">7.3.1.</strong> Ursus control sub-languange</a></li></ol></li><li class="chapter-item expanded "><a href="programming/holes.html"><strong aria-hidden="true">7.4.</strong> Holes</a></li><li class="chapter-item expanded "><a href="programming/prepost.html"><strong aria-hidden="true">7.5.</strong> Default prefix and postfix operations</a></li></ol></li><li class="chapter-item expanded "><a href="long/index.html"><strong aria-hidden="true">8.</strong> Long start</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="long/design.html"><strong aria-hidden="true">8.1.</strong> Designing contract</a></li><li class="chapter-item expanded "><a href="long/impl.html"><strong aria-hidden="true">8.2.</strong> Implementation</a></li><li class="chapter-item expanded "><a href="long/deploy.html"><strong aria-hidden="true">8.3.</strong> Extracting, compiling and deploy</a></li><li class="chapter-item expanded "><a href="long/spec.html"><strong aria-hidden="true">8.4.</strong> Specification</a></li><li class="chapter-item expanded "><a href="long/ts4.html"><strong aria-hidden="true">8.5.</strong> TS4 integration</a></li><li class="chapter-item expanded "><a href="long/qc.html"><strong aria-hidden="true">8.6.</strong> Quickchicks</a></li><li class="chapter-item expanded "><a href="long/execs.html"><strong aria-hidden="true">8.7.</strong> Evals and execs</a></li><li class="chapter-item expanded "><a href="long/direct_proofs.html"><strong aria-hidden="true">8.8.</strong> Direct proofs</a></li><li class="chapter-item expanded "><a href="long/scenarios.html"><strong aria-hidden="true">8.9.</strong> Scenarios</a></li><li class="chapter-item expanded "><a href="long/multi.html"><strong aria-hidden="true">8.10.</strong> Multi-contract verification</a></li></ol></li><li class="chapter-item expanded "><a href="translation/index.html"><strong aria-hidden="true">9.</strong> Translation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="translation/sol-ursus.html"><strong aria-hidden="true">9.1.</strong> sol-&gt;ursus translation</a></li><li class="chapter-item expanded "><a href="translation/cpp-ursus.html"><strong aria-hidden="true">9.2.</strong> cpp-&gt;ursus translation</a></li><li class="chapter-item expanded "><a href="translation/ursus-sol.html"><strong aria-hidden="true">9.3.</strong> ursus-&gt;sol translation</a></li></ol></li><li class="chapter-item expanded "><a href="advanced/index.html"><strong aria-hidden="true">10.</strong> Advanced topics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced/ledger.html"><strong aria-hidden="true">10.1.</strong> Ledger and Superledger</a></li><li class="chapter-item expanded "><a href="advanced/spec.html"><strong aria-hidden="true">10.2.</strong> Specification</a></li><li class="chapter-item expanded "><a href="advanced/proof_kinds.html"><strong aria-hidden="true">10.3.</strong> Proof kinds</a></li><li class="chapter-item expanded "><a href="advanced/generator.html"><strong aria-hidden="true">10.4.</strong> Evals and execs generator</a></li><li class="chapter-item expanded "><a href="advanced/elpi.html"><strong aria-hidden="true">10.5.</strong> Elpi automation</a></li></ol></li><li class="chapter-item expanded "><a href="uncategorized.html"><strong aria-hidden="true">11.</strong> More and uncategorized</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ursus language documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Here is describing Ursus. 
+Ursus is language which is embeded to Coq. 
+This language was created for describing solidity smart contracts. 
+It has some key features such as: easy descirbing and understanding logic of programs, translators (from/to solidity).
+Ursus is interesting as lanaguage because it allows you to write smart contracts <em>verification driven development</em>
+(for example, ursus code -&gt; verification -&gt; translation to solidity -&gt; deploy).</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Here is 2 way to install needed lib for using Ursus.</p>
+<ol>
+<li>Manual way with installing Coq, each <a href="install/./pruvendo.html">Pruvendo libs</a> and <a href="install/./coq.html">3rd parties</a> via <a href="install/./opam.html">opam</a> <a href="https://opam.ocaml.org">[1]</a>.</li>
+<li><a href="install/./docker.html">Docker way</a>, which consist using docker image with already installed Coq, Pruvendo libs and so on.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="opam"><a class="header" href="#opam">Opam</a></h1>
+<p>Opam is &quot;<em>a source-based package manager for OCaml. It supports multiple simultaneous compiler installations, flexible package constraints, and a Git-friendly development workflow</em>&quot; <a href="https://opam.ocaml.org">[1]</a>. </p>
+<p><a href="https://opam.ocaml.org/doc/Install.html">Installation for different OS</a></p>
+<p>Here is some usefull commands:</p>
+<ol>
+<li>Opam allows you to manage several version of ocaml compiler version. 
+<ol>
+<li>For creating new &quot;<em>switch</em>&quot; (your branch of several compiler versions) with certaing version use 
+<pre><code class="language-bash">&gt; opam switch create ocaml.your_version
+</code></pre>
+</li>
+<li>For checking all of your &quot;<em>switches</em>&quot; try 
+<pre><code class="language-bash">&gt; opam switch list
+#   switch           compiler                description
+    awesome_name    ocaml-base-compiler.num description
+→   default         ocaml.4.11.2            default
+</code></pre>
+</li>
+</ol>
+</li>
+<li>Other key features of opam package manager are installing and managing ocaml/coq package (coq is lib too):
+<ol>
+<li>
+<p>If you want install,uninstall published package try respectively:</p>
+<pre><code class="language-bash">&gt; opam install awesome_package.version
+</code></pre>
+<pre><code class="language-bash">&gt; opam uninstall awesome_package.version
+</code></pre>
+</li>
+<li>
+<p>If you want install,uninstall unpublished/local package try respectively:</p>
+<pre><code class="language-bash">&gt; cd awesome/package/folder
+</code></pre>
+<pre><code class="language-bash">&gt; opam install .
+</code></pre>
+<pre><code class="language-bash">&gt; opam uninstall .
+</code></pre>
+</li>
+<li>
+<p>For watching already installed packages try:</p>
+<pre><code class="language-bash">&gt; opam list
+# Name                 # Installed     # Synopsis
+atd                    2.10.0          Parser for ...
+...
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="coq"><a class="header" href="#coq">Coq</a></h1>
+<p>Coq is &quot;<em>a formal proof management system. It provides a formal language to write mathematical definitions, executable algorithms and theorems together with an environment for semi-interactive development of machine-checked proofs.</em>&quot; <a href="https://coq.inria.fr">[1]</a></p>
+<p>Coq can be considered as ocaml package (actually it is), which can be installed via opam:</p>
+<pre><code class="language-bash">&gt; opam pin add coq 8.17.1
+</code></pre>
+<p>Full guide is <a href="https://coq.inria.fr/opam-using.html">here</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pruvendo-libraries"><a class="header" href="#pruvendo-libraries">Pruvendo libraries</a></h1>
+<p>Using Ursus requires installing numerous Pruvendo packages. Such as:</p>
+<ol>
+<li>coq-finproof-base</li>
+<li>pruvendo-base-lib</li>
+<li>coq-elpi-mod (<em>modified by Pruvendo version of coq-elpi package</em>)</li>
+<li>solidity-monadic-language</li>
+<li>ursus-standard-library</li>
+<li>pruvendo-ursus-tvm</li>
+<li>ursus-contract-creator</li>
+<li>ursus-environment</li>
+<li>ursus-quickhick</li>
+</ol>
+<p>These packages requires several others packages:</p>
+<ol>
+<li>coq-mathcomp-zify</li>
+<li>coq-quickchick.1.6.4</li>
+</ol>
+<p>Main script for installing whole environment (<em>all package folders need to be in the same folder</em>):</p>
+<pre><code class="language-bash">opam pin add coq 8.16.0 -y
+
+cd coq-elpi-mod &amp;&amp; opam install .
+
+cd ../coq-finproof-base &amp;&amp; opam install .
+
+cd ../pruvendo-base-lib &amp;&amp; opam install . -y 
+
+cd ../coq-elpi-mod &amp;&amp; opam install . --ignore-pin-depends
+
+cd ../solidity-monadic-language &amp;&amp; opam install . -y --ignore-pin-depends
+
+opam repo add coq-released https://coq.inria.fr/opam/released &amp;&amp; opam install coq-mathcomp-zify
+
+cd ../ursus-standard-library &amp;&amp; opam install . -y --ignore-pin-depends
+
+cd ../pruvendo-ursus-tvm &amp;&amp; opam install . -y --ignore-pin-depends
+
+cd ../ursus-contract-creator &amp;&amp; opam install . -y --ignore-pin-depends
+
+cd ../ursus-environment &amp;&amp; opam install . -y --ignore-pin-depends
+
+opam install coq-quickchick.1.6.4 -y
+
+cd ../ursus-quickchick &amp;&amp; opam install . -y --ignore-pin-depends
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ursus-docker-image"><a class="header" href="#ursus-docker-image">Ursus Docker Image</a></h1>
+<p>Docker is <em>a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers.</em><a href="https://en.wikipedia.org/wiki/Docker_(software)">[1]</a></p>
+<p>Before before interaction you <em>probablly</em> have got tar (let call it <em>pruvendo.tar</em>) file with needed lib packaging into Docker image.</p>
+<p>Therefore first step for working in the container is</p>
+<pre><code class="language-bash">&gt; docker load &lt; pruvendo.tar
+</code></pre>
+<p>And we can see it using</p>
+<pre><code class="language-bash">&gt; docker images
+REPOSITORY TAG    IMAGE ID CREATED SIZE
+pruvendo   latest bdd...   ...     3.59GB
+</code></pre>
+<p>Ok, let's run it :) where</p>
+<pre><code class="language-bash">docker run -p 81 -it --entrypoint=/bin/bash pruvendo
+</code></pre>
+<ol>
+<li>-p remote port</li>
+<li>-it interactive mode</li>
+</ol>
+<p>As said before pruvendo images consist of built coq libs and some example project (which called now <em>preuvendo-erc20</em>) </p>
+<p>Of cource we can use container as dev area for our manipulation. For example, we could use
+VS Code for this goal.</p>
+<ol>
+<li>Install Docker extension</li>
+<li>do <code>docker run -p 81 -it --entrypoint=/bin/bash pruvendo</code></li>
+<li>Attach Visual Studio Code
+<img src="install/docker1.png" alt="alt text" title="Title" /></li>
+<li>After that new window with this project appear which allow you to do something</li>
+</ol>
+<h2 id="usefull-tips"><a class="header" href="#usefull-tips">Usefull tips:</a></h2>
+<ol>
+<li>Allow write/read in the container</li>
+</ol>
+<pre><code class="language-bash">sudo chown -R username /path/to/working/directory
+</code></pre>
+<p>where username is <em>coq</em></p>
+<ol>
+<li>VS Code allows to install VSCoq into the container and use it, but it doesn't it will ask you path which contains Coq bin default is 
+<code>/home/coq/.opam/4.13.1+flambda/bin/</code> or you can ask</li>
+</ol>
+<pre><code class="language-bash">&gt; which coqc
+/home/coq/.opam/4.13.1+flambda/bin/coqc
+</code></pre>
+<p>If <em>which coqc</em> doesn't work, so you probably need set env variables via</p>
+<pre><code class="language-bash">&gt; source ~/.profile
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
+<p>This part of documentations requires to install Coq, Preuvendo libs and so on <a href="quick/../install/readme.html">[1]</a>.
+Here is a describing how to write a simple contract via Ursus lang.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="writing-simple-contract"><a class="header" href="#writing-simple-contract">Writing simple contract</a></h1>
+<p>Let's look to the simple contract erc20, which were written via Ursus.</p>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+Require Import UrsusEnvironment.Solidity.current.LocalGenerator.
+
+Require Import UrsusContractCreator.UrsusFieldUtils.
+Require Import IERC20.
+Module ERC20.
+#[translation = on]
+#[language = solidity]
+#[Contract = ERC20Contract]
+Contract ERC20 ;
+Sends To IERC20; 
+Types ;
+Constants ;
+Record Contract := {
+    totalSupply: uint256;
+    balanceOf: mapping  ( address )( uint256 );
+    allowance: mapping  ( address )( mapping  ( address )( uint256 ) )
+}.
+SetUrsusOptions.
+UseLocal Definition _ := [
+     boolean;
+     address;
+     uint256;
+
+    (* added *)
+     (mapping address uint256)
+].
+#[override, external, nonpayable,  returns=_result]
+Ursus Definition transfer (recipient :  address) (amount :  uint256): UExpression ( boolean) false .
+{
+    :://  balanceOf[msg-&gt;sender] := balanceOf[msg-&gt;sender] - amount .
+    :://  balanceOf[recipient]   := balanceOf[recipient] + amount .
+    :://  send  IERC20.Transfer(msg-&gt;sender, recipient, amount) 
+                =&gt; msg-&gt;sender 
+                with {InternalMessageParamsLRecord} [$ {2} ⇒ {Message_ι_flag} $] .
+    :://  _result := @true |.
+}
+return.
+Defined.
+Sync.
+
+(*...*)
+
+EndContract Implements.
+End ERC20.
+</code></pre>
+<p>First part of describing contract is require needed Pruvendo libs.</p>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+Require Import UrsusEnvironment.Solidity.current.LocalGenerator.
+
+Require Import UrsusContractCreator.UrsusFieldUtils.
+</code></pre>
+<p>Next is importing file with describing Interface IERC20.</p>
+<pre><code class="language-Coq">Require Import IERC20.
+</code></pre>
+<p>Next command is Contract, which should be in the module with the same name.</p>
+<pre><code class="language-Coq">#[translation = on]
+#[language = solidity]
+#[Contract = ERC20Contract]
+Contract ERC20 ;
+Sends To IERC20; 
+Types ;
+Constants ;
+Record Contract := {
+    totalSupply: uint256;
+    balanceOf: mapping  ( address )( uint256 );
+    allowance: mapping  ( address )( mapping  ( address )( uint256 ) );
+}.
+</code></pre>
+<p>Attributes tells information about Contract: is needed tranlsation to Solidity, what is translating lang, name of raw term in Coq</p>
+<pre><code class="language-Coq">#[translation = on]
+#[language = solidity]
+#[Contract = ERC20Contract]
+</code></pre>
+<p>Next one is command itself, which requires such as inforamation as:</p>
+<ol>
+<li>Block 
+<pre><code class="language-Coq">Send to InterfaceName1 Interface2 ... ;
+</code></pre>
+describes information what interfaces are used in the contract.</li>
+<li>Block 
+<pre><code class="language-Coq"> Types 
+ Record StructName1 := 
+     StructName1 { 
+         fieldName : type;
+         ... 
+     }
+ Record StructName2 := 
+ StructName2 { 
+     fieldName : type;
+     ... 
+ }
+  ...;
+</code></pre>
+declares new structures which are used in the contract.</li>
+<li>Block 
+<pre><code class="language-Coq">    Constants 
+        Definition constName1: constType1 := constValue1
+        Definition constName2: constType2 := constValue2
+        ...
+        Definition constNameN: constTypeN := constValueN        
+    ;
+</code></pre>
+declares constants which are used in the contract.</li>
+<li>Block
+<pre><code class="language-Coq"> Record Contract := {
+     totalSupply: uint256;
+     balanceOf: mapping  ( address )( uint256 );
+     allowance: mapping  ( address )
+                         ( mapping  ( address )( uint256 ) );
+ }.
+</code></pre>
+describes fields of current contract.</li>
+</ol>
+<p>Then tecknical command <code>SetUrsusOptions.</code> comes.</p>
+<p>Important here is command <code>UseLocal</code>, more precisely</p>
+<pre><code class="language-Coq">UseLocal Definition _ := [
+     boolean;
+     address;
+     uint256;
+     (mapping address uint256)
+].
+</code></pre>
+<p>it declares local variables types, which will be used in functions below. 
+<em><strong>(Important !)</strong></em> Arguments type, return type, type of declaring variables must be in <code>UseLocal</code> list!</p>
+<p>Now let's look how we can describe function here. Example is</p>
+<pre><code class="language-Coq">#[override, external, nonpayable,  returns=_result]
+Ursus Definition transfer (recipient :  address) (amount :  uint256): UExpression ( boolean) false .
+{
+    :://  balanceOf[[msg-&gt;sender]] := balanceOf[[msg-&gt;sender]] - amount .
+    :://  balanceOf[[recipient]]   := balanceOf[[recipient]] + amount .
+    :://  send  IERC20.Transfer(msg-&gt;sender, recipient, amount) 
+                =&gt; msg-&gt;sender 
+                with {InternalMessageParamsLRecord} [$ {2} ⇒ {Message_ι_flag} $] .
+    :://  _result := @true |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<p>Main command is <code>Ursus</code>, which inputs some <code>Definition</code>. Attributes <code>#[override, external, nonpayable,  returns=_result]</code> are the same as solidity has. </p>
+<p><em><strong>(Important !)</strong></em> Arguments type, and return type <em>MUST BE</em> in the <code>UseLocal</code> list!
+<a name="FunctionGoals"> After switching </a> <a href="quick/simple.html#foo">Custom foo description</a>
+to <em>Proof mode</em> 2 goals is here:</p>
+<ol>
+<li><code>UExpression ( boolean) false</code>
+It's main body of function, description of it is <a href="quick/">there oops <em>TODO</em></a></li>
+<li><code>IReturnExpression</code> goal solves via tactic <code>return.</code> or <code>return some_term.</code> . It has ususal semanthic like in some imperative languages.</li>
+<li><code>Defined.</code> is standart Coq command.</li>
+<li><code>Sync.</code> is needed for fast interpreting.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="compiling-ursus-and-extraction-to-solidity"><a class="header" href="#compiling-ursus-and-extraction-to-solidity">Compiling Ursus and extraction to Solidity.</a></h1>
+<h2 id="todo"><a class="header" href="#todo">TODO</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="compiling-and-deplying-solidity"><a class="header" href="#compiling-and-deplying-solidity">Compiling and deplying Solidity</a></h1>
+<h2 id="todo-1"><a class="header" href="#todo-1">TODO</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><p>Before reading it would be useful to check <a href="ulang/../quick/simple.html">Quick Start</a>.</p>
+<p>The interfaces in the contract file itself have the same structure as in a separate file:</p>
+<pre><code class="language-coq">Key word 'Interfaces.'
+Key word 'MakeInterface' key word 'Class' IntefaceName ':='
+'{'
+    Function1Name ':' Carryed List of Arguments Types '-&gt;' AccessRights ReturnType ['true', 'false'] ';'
+    Function2Name ':' Carryed List of Arguments Types '-&gt;' AccessRights ReturType ['true', 'false'] ';'
+    ...
+'}'
+Key word 'EndInterfaces.'
+</code></pre>
+<p>For example:</p>
+<p>Let the Solidity interface look like this (Ursus can model this language):</p>
+<pre><code class="language-solidity">interface IVestingPool {
+    function claim(uint poolId, address addr) external;
+    function get() external view returns(uint poolId, address poolCreator);
+}
+</code></pre>
+<p>Then on Ursus it is written like this:</p>
+<pre><code class="language-coq">Interfaces.
+MakeInterface Class IVestingPool :=
+{     
+    claim : uint -&gt; address -&gt; external PhantomType true ;
+    get : external (uint ** address) false ;
+ }.
+EndInterfaces.
+</code></pre>
+<p>The modificators '<em>true</em>' and '<em>false</em>' see in functions file. These marks (true and false in the return types) show possibility of calling require in this function or in calling here function. Using of interface you can see <a href="ulang/../quick/simple.html">there</a> and <a href="ulang/./contract_structure.html">there</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>As said in <a href="ulang/../quick/simple.html">Quick Start</a> (<em>please check, if you don't know what is going on here</em>), <code>Contract</code> command looks like:</p>
+<h2 id="contract-command"><a class="header" href="#contract-command">'Contract' command</a></h2>
+<p>Let's consider syntax of basic 'Contract' command, which allows introducing contract description on Ursus lang.</p>
+<!-- The structure of the contract as a record is as follows: -->
+<pre><code class="language-coq">'Contract' ContractName ';'
+'Send To' InterfaceName1 InterfaceName2 ';'
+'Types'
+   'Record' Name1Record ':= {'
+      Name1RecordMemberName ':' Type1 ';'
+      Name1RecordMemberName ':' Type2 ';'
+      ... 
+      NameNRecordMemberName ':' TypeN 
+   }
+   'Record' Name2Record ':= {'
+      ...
+   } 
+   ...
+   'Record' NameLastRecord ':= {'
+      ...
+   } 
+';'
+'Constants'
+   'Definition' Constant1Name ':' Type1 ':=' value1
+   'Definition' Constant2Name ':' Type2 ':=' value2
+   ...
+   'Definition' ConstantLastName ':' TypeLast ':=' valueLast 
+';'
+'Record Contract' ':= {'
+   '#[' AccessRights ']' Name1ContractMember ':' Type1 ';'
+   '#[' AccessRights ']' Name2ContractMember ':' Type2 ';'
+   ...
+   NameNContractMember ':' TypeN
+'}.'
+</code></pre>
+<p>For example:</p>
+<pre><code class="language-coq">Contract MultisigWallet ;
+Sends To  Itmp ; 
+Types 
+  Record Transaction := {
+    Transaction_ι_id : uint64;
+    Transaction_ι_confirmationsMask : uint32;
+   }
+   Record UpdateRequest := {
+      UpdateRequest_ι_id : uint64;
+      UpdateRequest_ι_index : uint8;
+      UpdateRequest_ι_signs : uint8;
+      trans : (_ResolveName &quot;Transaction&quot;);
+   };
+Constants 
+   Definition FLAG_SEND_ALL_REMAINING : uint8 := 128
+   Definition FLAG_IGNORE_ERRORS : uint8 := 2
+;
+Record Contract := {
+   #[static] _pubkey : uint256;
+   #[static] _foo : uint256;
+   m_requiredVotes :  uint8;
+   m_defaultRequiredConfirmations :  uint8;
+   last_transaction : (_ResolveName &quot;Transaction&quot;)
+}.
+</code></pre>
+<p>Let's consider more precisely this command with each section:</p>
+<ol>
+<li>After keyword <code>Contract</code> here is name of the described contract</li>
+<li>Keyword <code>Sends To</code> is used to declare which interfaces are used for sending messages.</li>
+<li>Keyword <code>Types</code> is used to declare new strutures that will be used below.</li>
+<li>Keyword <code>Constant</code> is used to declare constants, which will be used in the contract. <strong>Important</strong> to mention that value, which will be assignment here must be <em>literal</em>.</li>
+<li>Record <code>Contract</code> contains fields of the contract, which can have attribute <code>#[public]</code>,<code>#[static]</code> or nothing.
+It's important(!) to use custom type/structures here with wrapper <code>_ResolveName</code> because <code>Contract</code> command doesn't know such types before creating all notations.</li>
+</ol>
+<p>This part was expressed in <a href="ulang/../quick/simple.html">Quick Start</a> too.</p>
+<p>After command  <code>Contract</code> it needs to use command <code>SetUrsusOptions.</code> and <code>UseLocal ...</code> . In the <em>UseLocal list</em> important to notice that customtypes must be used with special name. For example, if you have structure name <em>Foo</em>, you need to use <em>Foo<strong>LRecord</strong></em> name.</p>
+<p>Next is going to describe function and modifier declaration, but <a href="ulang/./functions.html">there</a>.</p>
+<p>End of declaring contract comes with two command <code>EndContract Implements Interface1 Interface2 ... .</code> and <code>End ContactName.</code>  where:</p>
+<ol>
+<li><em>ContractName</em> is module name, which this contract located;</li>
+<li><em>Interface1</em> and <em>Interface2</em> are implemented interfaces, which means that signatures and function names from these interfaces are the same as in folowing interfaces.</li>
+</ol>
+<p>In the last version is possible to create interface using signatures of declared contract via command <code>EndContract ImplementsAuto.</code></p>
+<h2 id="read-there-for-getting-information-about-built-in-types-in-ursus"><a class="header" href="#read-there-for-getting-information-about-built-in-types-in-ursus">Read <a href="ulang/./primitives.html">there</a> for getting information about built-in types in Ursus.</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="types-primitives-and-literals"><a class="header" href="#types-primitives-and-literals">Types, primitives and literals</a></h1>
+<p>Ursus types are listed in the following table:</p>
+<h4 id="built-in-types"><a class="header" href="#built-in-types">Built-in types:</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">type</th><th style="text-align: left">Description</th><th style="text-align: left">Literals</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>int</code></td><td style="text-align: left">signed int</td><td style="text-align: left">{0}, {-1}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>int8</code></td><td style="text-align: left">signed int for 1 byte</td><td style="text-align: left">{0}, {-1}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>int16</code></td><td style="text-align: left">signed int for 2 bytes</td><td style="text-align: left">{0}, {-1}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>int32</code></td><td style="text-align: left">signed int for 4 bytes</td><td style="text-align: left">{0}, {-1}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>int64</code></td><td style="text-align: left">signed int for 8 bytes</td><td style="text-align: left">{0}, {-1}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>int128</code></td><td style="text-align: left">signed int for 16 bytes</td><td style="text-align: left">{0}, {-1}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>int256</code></td><td style="text-align: left">signed int for 32 bytes</td><td style="text-align: left">{0}, {-1}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>uint</code></td><td style="text-align: left">unsigned int</td><td style="text-align: left">{0}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>uuint8</code></td><td style="text-align: left">unsigned int for 1 byte</td><td style="text-align: left">{0}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>uint16</code></td><td style="text-align: left">unsigned int for 2 bytes</td><td style="text-align: left">{0}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>uint32</code></td><td style="text-align: left">unsigned int for 4 bytes</td><td style="text-align: left">{0}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>uint64</code></td><td style="text-align: left">unsigned int for 8 bytes</td><td style="text-align: left">{0}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>uint128</code></td><td style="text-align: left">unsigned int for 16 bytes</td><td style="text-align: left">{0}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>uint256</code></td><td style="text-align: left">unsigned int for 32 bytes</td><td style="text-align: left">{0}, {1}, ...</td></tr>
+<tr><td style="text-align: left"><code>listArray a</code> or <code>a[]</code></td><td style="text-align: left">array of <code>a</code> type element</td><td style="text-align: left">array ( x ; y ; ... ; z)</td></tr>
+<tr><td style="text-align: left"><code>listVector a</code></td><td style="text-align: left">vector of <code>a</code> type element</td><td style="text-align: left">TODO</td></tr>
+<tr><td style="text-align: left"><code>string</code></td><td style="text-align: left">basic string type</td><td style="text-align: left">{&quot;something&quot;}</td></tr>
+<tr><td style="text-align: left"><code>boolean</code></td><td style="text-align: left">bool type</td><td style="text-align: left">TRUE</td></tr>
+<tr><td style="text-align: left"><code>optional a</code></td><td style="text-align: left">option type (see <a href="https://coq.inria.fr/library/Coq.Init.Datatypes.html#option">there</a>)</td><td style="text-align: left">some(x)</td></tr>
+<tr><td style="text-align: left"><code>bytes</code></td><td style="text-align: left">the same as string</td><td style="text-align: left">{&quot;something&quot;}</td></tr>
+<tr><td style="text-align: left"><code>mapping a b</code></td><td style="text-align: left">hash-map type</td><td style="text-align: left">TODO</td></tr>
+<tr><td style="text-align: left"><code>queue</code></td><td style="text-align: left">queue of uint elements</td><td style="text-align: left">TODO</td></tr>
+<tr><td style="text-align: left"><code>tuple a b</code> or <code>a**b</code> or <code>a*b</code></td><td style="text-align: left">type of pair</td><td style="text-align: left">[ x , y ] or [ x , y , z ]</td></tr>
+<tr><td style="text-align: left"><code>TvmCell</code></td><td style="text-align: left">for Everscale (see <a href="https://test.ton.org/tvm.pdf">there 1.1.3</a>)</td><td style="text-align: left">TODO</td></tr>
+<tr><td style="text-align: left"><code>TvmSlice</code></td><td style="text-align: left">for Everscale (see <a href="https://test.ton.org/tvm.pdf">there 1.1.3</a>)</td><td style="text-align: left">TODO</td></tr>
+<tr><td style="text-align: left"><code>TvmBuilder</code></td><td style="text-align: left">for Everscale (see <a href="https://test.ton.org/tvm.pdf">there 1.1.3</a>)</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><code>address</code></td><td style="text-align: left">TODO</td><td style="text-align: left">[ x , y ]</td></tr>
+</tbody></table>
+</div><!-- | | |
+| | |
+| | | -->
+<div style="break-before: page; page-break-before: always;"></div><h2 id="user-types"><a class="header" href="#user-types">User types</a></h2>
+<p>Here is explained how to create your own structure via using Pruvendo tools.
+For example you want to create structures, which can be describe like:</p>
+<pre><code class="language-sol">struct Person {
+    string name;
+    string surName;
+    uint age;
+}
+</code></pre>
+<p>Ok, now we can create the folowing structure in Ursus:</p>
+<pre><code class="language-coq">Inductive PersonFields := 
+| Person_ι_name 
+| Person_ι_surName 
+| Person_ι_age
+.
+Definition PersonL := [string : Type ; string : Type ; uint : Type]%glist.
+GlobalGeneratePruvendoRecord PersonL PersonFields.
+</code></pre>
+<p>And using command <code>GlobalGeneratePruvendoRecord</code> we can create new type, which will be called in this example as <code>PersonLRecord</code>. Literal can be expressed like <code>[{&quot;John&quot;}, {&quot;Smith&quot;}, {42}]</code>.</p>
+<p>Finally, let's sat that way of expressing structures is not recomended, so it is better to use <code>Contract</code> command which expressed <a href="ulang/../quick/simple.html">here</a></p>
+<div style="break-before: page; page-break-before: always;"></div><!-- 
+Function operators 
+
+Each line must start with a character '**::**' or character '**:**' . 
+
+If the character is '**::**' then no reverse translation is performed. If the character is '**:**' the 
+reverse translation will be performed.
+
+Followed by the symbol '**//**'.
+
+Exception to this - see below.
+
+Unlike other programming languages, in Ursus any constructs can be replaced with a "*hole*" that can be filled in later. In some cases (which are discussed below), these "*holes*" need to be forced to be typed.
+
+The method of using "*holes*" allows you to decompose the most complex structures into components, which can greatly simplify the programming process.
+
+1. Creating a new variable
+   
+There are six kinds of operators for creating new variables:
+
+- ::// new 'varname : vartype @ "varname" ; _ | .
+- ?::// new 'varname : vartype ; _ | .
+- :// new 'varname : vartype @ "varname" ; _ | .
+- ?:// new 'varname : vartype ; _ | .
+- ::// new 'varname : vartype @ "varname" := ... ; _ | .
+- ?::// new 'varname : vartype := ... ; _ | .
+- :// new 'varname : vartype @ "varname" := ... ; _ | .
+- ?:// new 'varname : vartype := ... ; _ | .
+- ::// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") ; _ |.
+- ?::// new ('var1name : var1type , .. , 'varNname : varNtype) ; _ |.
+- ::// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") := ... ; _ |.
+- ?::// new ('var1name : var1type , .. , 'varNname : varNtype) := ... ; _ |.
+- :// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") ; _ |.
+- ?:// new ('var1name : var1type , .. , 'varNname : varNtype) ; _ |.
+- :// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") := ... ; _ |.
+- ?:// new ('var1name : var1type , .. , 'varNname : varNtype) := ... ; _ |.
+
+where '::', '?::' - no reverse broadcast
+
+      ':', '?:' - reverse translation
+
+      '//' - Ursus interpreter
+
+      ';' - binding
+
+      '_' - "hole", i.e. there must be a continuation after the operator 'new' 
+
+      ... - an expression that returns the value(s) assigned to the new variable(s)
+
+
+For examples:
+
+*::// new 'sender : (  uint256 ) @ "sender"  := msg->pubkey() ; _ | .*
+
+*?://  new ( 'unlocked : uint128 , 'unlockedPeriod : uint32 ) ; _ |.*
+
+To read the value of an argument in the function body, use the sign '#':
+
+*:// a := #b .* - here b is argument of function
+
+To read the value of a local variable in the function body, use the sign '!':
+
+*:// a := !b .* - here b is local variable, a is local variable too
+
+2. Assignment
+   
+   - Regular assignment operator ':=' : left expression ':=' right expression '.'
+   - For record members ... - TODO
+
+For examples:
+
+*:://valueL := (β #{0})  .*
+
+*://needCleanup := (!updateId <= !marker) .*
+
+
+1. Numeric constants
+   
+   To use unnamed (numerical) constants in the program text, special characters are used:
+
+   For '*require_*' operator: **%** ...
+
+   For all other cases: *(β #{ ... })*
+
+   For examples:
+
+   *://valueL := (β #{0})  .*
+
+   *://require_(m_custodians->exists(msg->pubkey()), %100) .*
+
+
+2. Arithmetic operators
+
+    '**+**', '**-**', '*', '**/**', '**++**', '**--**', '**&**', '**|**', '<<' '>>'
+   
+    For examples:
+
+    *:// i ++ .*
+
+    *:://return_ (#mask - (!onee << (!eight * #index ))) |.*
+
+3. Comparison Operators
+   
+   '>', '<', '>=', '<=', '=='
+
+    For examples:
+
+    *!i < MAX_CLEANUP_TXNS*
+
+    *:*://needCleanup := (!trId <= !marker)  |.*
+
+4. Logical operators
+   
+    '**||**', '**&&**'
+
+    For example:
+
+    *(!{i} < !{len}) && (!{ownerCount} < MAX_CUSTODIAN_COUNT)*
+
+5. Combined assignment
+   
+    '**+=**', '**-=**', '*=', '**/=**', '**&=**', '**|=**'
+
+    For example:
+
+    *::// maskL |= (!{onee} << #custodianIndex ) .* 
+
+6. Function call
+7. Conditional operator
+   
+   Two kinds of conditional statement:
+
+   'if' (condition) 'then' { statement } .
+
+   'if' (condition) 'then' { statement1 } 'else' { statement2 } .
+
+   It is convenient to use "*holes*" for the conditional operator.
+
+   For example:
+
+   *::// if ( m_updateRequests->empty() ) then { {_:UExpression _ true} } .*  
+   *:://exit_ {} |.*
+  
+    The construction '*{_:UExpression _ true}*' means that a "*hole*" is specified and its type is specified - coinciding with the type of the expression that is written later. In this case, this is *exit {} |.*
+
+    The vertical line '**|**' indicates that the decoding of the "*hole*" is completed. 
+
+8.  Loop operators
+   
+There are two kinds of loop statements: '**while**' and '**for**'.
+
+An unindexed loop looks like this:
+
+'while' condition 'do' statement.
+
+The cycle *for* looks like this:
+
+'for' condition do ststement .
+
+For example:
+
+*://while ((!{needCleanup} && (!{i} < MAX_CLEANUP_TXNS))) do { {_:UExpression _ true} }  |.*
+
+*::// for ( 'pubkey : #{claimers} ) do { {_:UExpression _ false} } .*
+
+9.  Record initialization
+    
+    The following construction is used to initialize records:
+
+    '[$'
+
+            statement1 '⇒' {Member1OfRecord};
+
+            ...
+
+            statement2 '⇒' {Member2OfRecord}
+
+    '$]'
+
+    The order in which the members are listed is arbitrary. If some members are not listed, they will be initialized by default.
+
+    For example:
+<i>
+      ::// new 'tmp : MultisigWallet_ι_UpdateRequestLRecord @ "tmp" :=
+
+                 [$
+
+                  !updateId ⇒ {MultisigWallet_ι_UpdateRequest_ι_id};
+
+                  !index ⇒ {MultisigWallet_ι_UpdateRequest_ι_index};
+
+                  (β #{0}) ⇒ {MultisigWallet_ι_UpdateRequest_ι_signs};
+
+                  (β #{0}) ⇒ {MultisigWallet_ι_UpdateRequest_ι_confirmationsMask};
+
+                  !sender ⇒ {MultisigWallet_ι_UpdateRequest_ι_creator};
+
+                  codeHash ⇒ {MultisigWallet_ι_UpdateRequest_ι_codeHash};
+
+                  #owners ⇒ {MultisigWallet_ι_UpdateRequest_ι_custodians};
+
+                  #reqConfirms ⇒ {MultisigWallet_ι_UpdateRequest_ι_reqConfirms}
+
+                 $] ; _|.
+</i>
+
+    Here a local variable 'tmp' of type 'MultisigWallet_ι_UpdateRequestLRecord' is created and an initialized record is assigned to it.
+
+10. Message
+
+
+
+
+11. Library Functions -->
+<h2 id="function-declaration"><a class="header" href="#function-declaration">Function declaration</a></h2>
+<p>Every function mostly is declared via using <em>proof mode</em> in Coq and command <code>Ursus</code>. Let's see how to declare function.</p>
+<pre><code class="language-coq">#[attribute1, attribute2..., returns=returnName]
+Ursus Definition functionName (arg1:type1) ... (argN:typeN): UExpression returnType ErrorMark.
+</code></pre>
+<p>Where:</p>
+<ol>
+<li><code>Ursus</code> is already mentioned command which inputs <code>Definition</code>.</li>
+<li><code>functionName</code> is name of declaring function.</li>
+<li><code>(arg1:type1) ... (argN:typeN)</code> are arguments, where <code>argI</code> and <code>typeI</code> are argument name and argument type of ith argument.</li>
+<li>returnName and returnType are &quot;<em>variable name</em>&quot; and <em>type of returning term/object</em> respectively.</li>
+<li><code>attributeI</code> is attribute with the same semanthic as solidity has. Moreover, not only the attributes of solidity functions are available here. Also here is attribute <code>no_body</code>, which means following statement: term of type <code>UExpression...</code> doesn't exist. So, as mentioned in <a href="ulang/src/quick/simple.html">QuickStart</a> here is 2 goals in proof mode in declaring Ursus function, but with attribute <code>no_body</code> only one goal (<em>IReturnExpression</em>) needs to be declared (&quot;<em>solve</em>&quot;).</li>
+<li>Finally, <code>ErrorMark</code> is actually either <em>true</em> or <em>false</em> term, which expresses if it contains calling require, revert and others &quot;<em>bad</em>&quot; functions here.</li>
+</ol>
+<p>After swithing to <em>proof mode</em> two goals are here: <code>UExpression returnType ErrorMark</code> and <code>IReturnExpression</code>.</p>
+<h3 id="conception-of-ulvalue-and-urvalue"><a class="header" href="#conception-of-ulvalue-and-urvalue">Conception of ULValue and URValue</a></h3>
+<p><code>ULValue</code> and <code>URValue</code> types of terms that are used in describing function bodies: function callings, assignment and so on. Simply, we can consider <code>ULValue</code> as &quot;<em>reference type</em>&quot; or things that can be assigned a value. We can consider <code>URValue</code> as usual type or  things that can't be assigned a value. <code>ULValue</code> can automatically cast to <code>URValue</code> via <a href="https://coq.inria.fr/refman/addendum/implicit-coercions.html">Coq coercion mechanism</a>. In Ursus we can't use literal itself, we need to wrap it into <code>URValue</code>, so for this goal we can use brackets <code>{...}</code>. For example, &quot;str&quot; of Coq type <code>string</code> now is → <code>{&quot;string&quot;}</code> of type <code>URValue string false</code>. <code>ULValue</code> has type <code>Type -&gt; Type</code> and <code>URValue</code> has type <code>Type -&gt; bool -&gt; Type</code>. Term of type <code>bool</code> has similar semanthic as <code>UExpression...</code> has.</p>
+<p>Example is <a href="ulang/writing_function.html#ulvalue-urvalue">below</a>.</p>
+<h3 id="create-term-with-hole-approach"><a class="header" href="#create-term-with-hole-approach">Create term with <em>hole</em> approach</a></h3>
+<p>Let's look at basic scenario of describing function (without loops and if statements)</p>
+<p>Basic syntax of function body can be introduced via next <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form">BNF</a>:</p>
+<p><code>UExpression ::=  // simpleUExpression // | // (UExpression ; UExpression) //</code></p>
+<p>i.e function body can be expressed this way:</p>
+<pre><code class="language-coq">// simpleUExpression ;
+(simpleUExpression ;
+(simpleUExpression ;
+simpleUExpression)) //
+</code></pre>
+<p>And main idea is using standart tactic <code>refine</code>, so the description will take the following form:</p>
+<pre><code class="language-coq">refine // simpleUExpression ; _ // .
+refine // simpleUExpression ; _ // .
+refine // simpleUExpression ; _ // .
+refine // simpleUExpression // .
+</code></pre>
+<p>Where:</p>
+<ol>
+<li>'<code>_</code>' symbol means, that rest of term is needed to construct.</li>
+<li><code>// ... //</code> &quot;brackets&quot; means only some special construction might be here</li>
+</ol>
+<p>Firstly, consider next <code>simpleUExpression</code>:</p>
+<ol>
+<li>
+<p>declaring &quot;variable&quot; <code>new 'name : typeName @ &quot;name&quot; := value</code></p>
+<p>Where:</p>
+<ol>
+<li><code>name</code> is variable name (notice! <code>name</code> and &quot;<code>name</code>&quot; must be the same)</li>
+<li><code>typeName</code> is type of this variable</li>
+<li><code>value</code> is term of type <code>typeName</code></li>
+</ol>
+</li>
+<li>
+<p>function <code>a + b</code>, which has usual semanthic, (<code>a</code> and <code>b</code> are num with the same type, for example <code>uint</code>)</p>
+</li>
+<li>
+<p>assignment <code>variable := term</code></p>
+<p>Where:</p>
+<ol>
+<li>variable is &quot;variable&quot;, which was declared before asignment</li>
+<li>term is variable or function</li>
+</ol>
+</li>
+</ol>
+<p>For example, consider our first <em>Ursus</em> function:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+refine // new 'x  : uint @ &quot;x&quot;  := {1} ; _  //.
+refine // y := y + x ; _  //.
+refine // _result := y // .
+return.
+Defined.
+Sync.
+</code></pre>
+<p>it will be prettier to rewrite in such way via using goal separator <code>{...}</code>:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+{ 
+   refine // new 'x  : uint @ &quot;x&quot;  := {1} ; _  //.
+   refine // y := y + x ; _  //.
+   refine // _result := y // .
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<p>Nice!
+Consider custom tactic <code>::</code>, it works like <code>refine</code>, but here is some features to reduce code. Now we can declare variable with the same semantic, but with new syntax <code>var name : typeName := value</code>
+And consider new way of declaring statements via using next notations:</p>
+<ol>
+<li><code>'//' e ';' _ '//'</code> → <code>'//' e </code></li>
+<li><code>'//' e '//'</code> → <code>'//' e '|'</code></li>
+</ol>
+<p>Where <code>'e'</code> is term of <code>UExpression...</code> type.</p>
+<p>And our code become look like this:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+{ 
+   ::// var 'x  : uint := {1} .
+   ::// y := y + x .
+   ::// _result := y |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<p>Why should we still use construction <code>new ...</code>, there is one reason <code>var ...</code> doesn't allow to write code in one &quot;piece&quot;:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+refine // new 'x  : uint @ &quot;x&quot;  := {1} ; y := y + x ; _result := y  //.
+return.
+Defined.
+Sync.
+</code></pre>
+<h4 id="how-we-can-use-ursus-function-below"><a class="header" href="#how-we-can-use-ursus-function-below">How we can use Ursus function below?</a></h4>
+<p>Let's consider use case of <code>addOne</code> function.
+For example:
+<code>::// var new_y: uint := addOne(y);_|.</code></p>
+<p>Where <code>y</code> is <code>URValue uint ...</code> or <code>ULValue uint</code>, which was casted to <code>URValue uint false</code>.</p>
+<h3 id="ulvalue-urvalue"><a class="header" href="#ulvalue-urvalue">ULValue-URValue</a></h3>
+<p>In example above, consider type of each term are used here (or what would say coq proof mode):</p>
+<ol>
+<li><code>y: ULValue uint</code></li>
+<li><code>x: ULValue uint</code></li>
+<li><code>{1}: URValue uint false</code></li>
+<li><code>_result: ULValue uint</code> (coq get this type from <code>UExpression uint false</code> return type)</li>
+</ol>
+<h3 id="basic-construction"><a class="header" href="#basic-construction">Basic construction</a></h3>
+<p>Let's look to full simpleUExpression list:</p>
+<ol>
+<li>
+<p>assignment <code>// a := b </code>, where <code>a</code> and <code>b</code> have the same type, but <code>a</code> is <code>ULValue</code> and <code>b</code> is <code>URValue</code>:</p>
+<ol>
+<li><code>a</code> is variable or field of contract or structure</li>
+<li><code>b</code> is variable or result of function or field of contract or structure</li>
+<li>Operations with assignment. Here is list of available operations with assignment with standart semantic:
+<code>x += y</code>, <code>x -= y</code>, <code>x &amp;= y</code>, <code>x |= y</code>, <code>x /= y</code>, <code>x *= y</code>, <code>++ x</code>, <code>x ++</code>, <code>x --</code>, <code>-- x</code>, </li>
+</ol>
+<p>Where: <code>x</code> is <code>ULValue</code> and <code>y</code> is <code>URValue</code></p>
+</li>
+<li>
+<p>declaring new varibale <code>// new 'x : ty @ b := r ; _ |</code> (deprecated), </p>
+<p>Where:</p>
+<ol>
+<li><code>x</code> is name of variable (important! to use symbol &quot;<code>'</code>&quot;)</li>
+<li><code>ty</code> is type of variable <code>r</code></li>
+<li><code>r</code> is value with type <code>URValue...</code></li>
+<li><code>_</code> is rest of <code>UExpression</code> which needs to construct
+Notice, This way of declaring variable allows to create UExpression without <code>refine</code> or <code>::</code> tactic.
+After this statement, <code>x</code> will have type <code>ULValue ty</code>.</li>
+</ol>
+</li>
+<li>
+<p>declaring variables as tuple <code>// new ( x1 : ty1 , x2 : ty2 ) @ ( xb1 , xb2 ) := r ; _ |&quot;</code> </p>
+<p>Where:</p>
+<ol>
+<li><code>x1</code> and <code>x2</code> are name of variable</li>
+<li><code>ty1</code> is <code>ty2</code> are type of variable</li>
+<li><code>xb1</code> , <code>xb2</code> are strings of name <code>x1</code> and <code>x2</code> respectively</li>
+<li><code>r</code> is value with type <code>ty1 ** ty2</code></li>
+</ol>
+</li>
+<li>
+<p>declaring variable (works only with <code>::</code>) as tuple <code>// var ( x1 : ty1 , x2 : ty2 ) := r ; _ |</code> </p>
+<p>Where:</p>
+<ol>
+<li><code>x1</code> and <code>x2</code> are name of variable</li>
+<li><code>ty1</code> is <code>ty2</code> are type of variable</li>
+<li><code>r</code> is value with type <code>ty1 ** ty2</code></li>
+</ol>
+</li>
+<li>
+<p>declaring variable (works only with <code>::</code>) as tuple <code>// var x1 : ty1 , x2 : ty2  ; _ |</code>
+(the same as previous bullet point, but value us default for each type)</p>
+</li>
+</ol>
+<p>After these (<strong>point 3,4,5</strong>) statement, <code>x1</code> and <code>x2</code> will have type <code>ULValue ty1</code> and <code>ULValue ty2</code> respectively. </p>
+<ol start="6">
+<li>
+<p>calling Ursus function <code>// function (arg1,...,argN)</code>, </p>
+<p>Where </p>
+<ol>
+<li><code>function</code> is Ursus function or Ursus Defintion, which was declared above.</li>
+<li>arguments <code>arg1,...,argN</code>, where
+<ol>
+<li><code>argI</code> is result of some function or variable (has type <code>URValue...</code>)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="complex-construction"><a class="header" href="#complex-construction">Complex construction</a></h3>
+<p>Consider contruction, which has &quot;body&quot;, i.e. consist of another UExpression. We have already worked with it via using <code>// _ ; _ //</code>.</p>
+<ol>
+<li>
+<p>First will be if-statement <code>if x then { y } else { z }</code></p>
+<ol>
+<li><code>x</code> is term with type boolean (<code>URValue boolean mark</code>). <code>mark</code> is false or true.</li>
+<li><code>y</code> and <code>z</code> have type the same as type of term, whose part is this if-statement;</li>
+</ol>
+<p>For example consider, our old function</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+{ 
+   ::// var 'x  : uint := {1} .
+   ::// if (x &lt; y) then { -&gt;\&gt; } else { -&gt;\&gt; }.
+   {
+      ::// y := y + x |.
+   }
+   {
+      ::// y := x + y |.
+   }
+   ::// _result := y |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<p>Let's consider line <code>::// if (x &lt; y) then { -&gt;\&gt; } else { -&gt;\&gt; }.</code> before interpreting this line we have one goal <code>UExpression ...</code>, after that we give to this goal expression <code>if x &lt; y then { -&gt;\&gt; } else { -&gt;\&gt; }</code> and for defining this expression we need to give 2 part of if-statement: true-body and false-body. Notation <code>-&gt;\&gt;</code> means <code>{ _ : UExpression ...}</code> (placeholer basicaly, which means that we need define this term below). So after interpretting this constructions we have three goals: true-body, false-body, rest of function. And in the example these &quot;bodies&quot; are:
+3. true-body is <code>::// y := y + x |.</code>
+4. false-body is <code>::// y := x + y |.</code>
+5. rest of function is <code>::// _result := y |.</code></p>
+</li>
+<li>
+<p>Consider <code>if x then { y }</code>  if-statement. It is the same as the previous point, but here we don't need to define false-body (false-body is void actually here).</p>
+</li>
+<li>
+<p>Consider <code>while b do { f } </code> while-statement with usual semanthic from imperative language, </p>
+<p>Where </p>
+<ol>
+<li><code>b</code> is term with type boolean (<code>URValue boolean mark</code>). <code>mark</code> is false or true.</li>
+<li><code>f</code> is <code>UExpression</code> (let's call it <em>while-body</em>)</li>
+</ol>
+</li>
+<li>
+<p>Consider <code>doWhile b { f }</code> do-while-statement or do-repeat-statement with usual semanthic from imperative language, 
+Where </p>
+<ol>
+<li><code>b</code> is term with type boolean (<code>URValue boolean mark</code>). <code>mark</code> is false or true.</li>
+<li><code>f</code> is <code>UExpression</code> (let's call it <em>do-while-body</em>)</li>
+</ol>
+</li>
+<li>
+<p>Consider <code>for (var x : ty := r , b , after ) do { f }</code> for-statement is syntax sugar of this expression: <code>// var x : ty := r ; while ( b ) do { f ; after }</code></p>
+<ol>
+<li>So, we can do something with <code>x</code> in body <code>f</code></li>
+</ol>
+</li>
+<li>
+<p>Consider <code>for ( [ k , v ] in m ) do { f }</code> for-each-expression, which has next semanthic in case of type <code>m</code>:</p>
+<ol>
+<li>Let <code>m</code> of type <code>mapping keyType valueType</code>, so on body expression variable <code>k</code> and <code>v</code> are aviable in <code>f</code> body, </li>
+</ol>
+<p>Where <code>k</code> and <code>v</code> are <code>key</code> and <code>value</code> type, respectively. It iterates for each key and value of this mapping
+2. Let <code>m</code> of type <code>A[]</code>, </p>
+<p>Where <code>k</code> and <code>v</code> are <code>uint</code> and <code>A</code> type, respectively. It iterates for each index and value of array <code>A[]</code>
+3. So, we can do something with <code>k</code> and <code>v</code>, they have types <code>ULValue key</code> and <code>ULValue value</code> respectively in body <code>f</code>.</p>
+</li>
+<li>
+<p>Consider <code>for ( [ k , v ] in m ; cond ) do { f }</code> for-each-expression with condition has the same semantic as the previus one, but iteration can break if conidtion <code>cond</code> isn't satisfied.</p>
+<ol>
+<li>So, we can do something with <code>k</code> and <code>v</code>, they have types <code>ULValue key</code> and <code>ULValue value</code> respectively in body <code>f</code>.</li>
+</ol>
+</li>
+<li>
+<p>Consider <code>for ( v in m ) do { f }</code> yet another version of for-each-expression, which has next semanthic in case of type <code>m</code>:</p>
+</li>
+<li>
+<p>Let <code>m</code> of type <code>mapping keyType valueType</code>, so on body expression variable <code>v</code> is aviable in <code>f</code> body, </p>
+</li>
+</ol>
+<p>Where <code>v</code> has <code>value</code> type. It iterates for each value of this mapping
+2. Let <code>m</code> of type <code>A[]</code>, </p>
+<pre><code>Where ```v``` has ```A``` type. It iterates for each value of array ```A[]```
+</code></pre>
+<ol start="3">
+<li>So, we can do something with <code>v</code>, it has type <code>ULValue value</code> respectively in body <code>f</code>.</li>
+<li>Consider <code>for ( v in m ; cond ) do { f }</code> for-each-expression with condition has the same semantic as the previus one, but iteration can break if conidtion <code>cond</code> isn't satisfied.
+<ol>
+<li>So, we can do something with <code>v</code>, it has type <code>ULValue value</code> respectively in body <code>f</code>.</li>
+</ol>
+</li>
+</ol>
+<h2 id="how-to-model-modifiers"><a class="header" href="#how-to-model-modifiers">How to model modifiers?</a></h2>
+<p>Ursus can model modifiers as simple void function (let's call it as <code>modifier_example</code>), i.e. term with the next type: <code>type1 -&gt; ... -&gt; typeN -&gt; UExpression PhantomType false</code> or <code>type1 -&gt; ...-&gt; typeN -&gt; UExpression PhantomType true</code>.
+And modifier invocation will use like this in Ursus function:</p>
+<pre><code class="language-coq">Ursus Definition some_function:UExpression PhantomType false.
+::// modifier_example() ;_|.
+{
+    ...
+}
+return.
+Defined.
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h2 id="localstate-or-state-of-local-variables-which-are-used-in-ursus-functions-in-contract"><a class="header" href="#localstate-or-state-of-local-variables-which-are-used-in-ursus-functions-in-contract">Localstate (or state of local variables, which are used in Ursus functions in contract)</a></h2>
+<p>It would be useful to read <a href="ulang/./src/quick/simple.html">Quick Start</a> before. In <a href="ulang/./src/quick/simple.html">Quick Start</a> we mentioned command <code>UseLocal</code>, which input is <code>Definition</code>  of list of <em>types</em>. So LocalState is special container of term with these <em>types</em>. </p>
+<p>We can operate with LocalState only via using command <code>UseLocal</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="superledger"><a class="header" href="#superledger">SuperLedger</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="basic-ursus-functions"><a class="header" href="#basic-ursus-functions">Basic ursus functions</a></h1>
+<h4 id="operations-with-mapping"><a class="header" href="#operations-with-mapping">Operations with mapping</a></h4>
+<p>Consider terms with name and type such as:</p>
+<pre><code class="language-coq">m: URValue (mapping keyType valueType)
+k: URValue (keyType)
+</code></pre>
+<h4 id="mapping-functions"><a class="header" href="#mapping-functions">Mapping functions:</a></h4>
+<hr />
+<p><code>fetch</code> returns value of key <code>k</code> in mapping <code>m</code>.</p>
+<pre><code class="language-coq">\\ m-&gt;fetch(k) \\ : URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var val: optional uint := uint_to_uint_dict-&gt;fetch({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>exists</code> returns whether key <code>k</code> exists in the mapping.</p>
+<pre><code class="language-coq">\\ m-&gt;exists(k) \\: URValue boolean
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var val: boolean := uint_to_uint_dict-&gt;exists({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>set</code> sets the value associated with key and returns update mapping</p>
+<pre><code class="language-coq">\\ m-&gt;set(k, v) \\: URValue (mapping keyType valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var new_map: mapping uint uint := old_map-&gt;set({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>delete</code> deletes the value associated with key and returns update mapping</p>
+<pre><code class="language-coq">\\ m-&gt;delete(k) \\: URValue (mapping keyType valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var new_map: mapping uint uint := old_map-&gt;delete({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>min</code> returns mininum in the list of keys (<code>&lt;</code> must be defined for <code>keyType</code>)</p>
+<pre><code class="language-coq">\\ m-&gt;min() \\: URValue (optional keyType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var minimum: optional uint := uint_to_uint_dict-&gt;min() ;_|.
+</code></pre>
+<hr />
+<p><code>max</code> returns maximum in the list of keys (<code>&lt;</code> must be defined for <code>keyType</code>)</p>
+<pre><code class="language-coq">\\ m-&gt;max() \\: URValue (optional keyType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var maximum: optional uint := uint_to_uint_dict-&gt;max() ;_|.
+</code></pre>
+<hr />
+<p><code>next</code> returns next or greater of key <code>k</code> in keys order and associated value in pair</p>
+<pre><code class="language-coq">\\ m-&gt;next(k) \\: URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var next_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;next({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>prev</code> returns previous or lesser of key <code>k</code> in keys order and associated value in pair</p>
+<pre><code class="language-coq">\\ m-&gt;prev(k) \\ : URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var prev_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;prev({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>nextOrEq</code> computes the maximal key in the mapping that is lexicographically less than or equal to key and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">\\ m-&gt;nextOrEq(k) \\ : URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var prev_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;nextOrEq({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>prevOrEq</code> computes the minimal key in the mapping that is lexicographically greater than or equal to key and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">\\ m-&gt;prevOrEq(k) \\ : URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var prev_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;prevOrEq({3}) ;_|.
+</code></pre>
+<!-- ```m->nextOrEq(k)``` and ```m->prevOrEq(k)``` return term of type ```optional (keyType ** valueType)```, which means maximal and minimal key of lex order with the associated value, respectively -->
+<hr />
+<p><code>replace</code> sets the value <code>v</code> associated with key <code>k</code> only if key exists in the mapping and returns the success flag.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;replace(k, v) \\: URValue boolean
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag: boolean := uint_to_uint_dict-&gt;replace({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>getReplace</code> sets the value associated with key, but only if key exists in the mapping. On success, returns an optional with the old value associated with the key. Otherwise, returns an empty optional.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;getReplace(k, v) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var old_value: optional valueType := uint_to_uint_dict-&gt;getReplace({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>erase</code> removes assotiated value for key <code>k</code></p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;erase(k) //: UExpression ?R ?b
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;erase({3}) .
+</code></pre>
+<hr />
+<p>If mapping is not empty, then this <code>delMin</code> computes the minimal key of the mapping, deletes that key and the associated value from the mapping and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;delMin() //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;delMin() \\: URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;delMin() .
+::// var old_value: optional valueType := uint_to_uint_dict-&gt;delMin() ;_|.
+</code></pre>
+<hr />
+<p>If mapping is not empty, then this <code>delMax</code> computes the maximal key of the mapping, deletes that key and the associated value from the mapping and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;delMax() //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;delMax() \\: URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;delMax() .
+::// var old_value: optional valueType := uint_to_uint_dict-&gt;delMax() ;_|.
+</code></pre>
+<hr />
+<p><code>getSet</code> sets the value associated with key, but also returns an optional with the previous value associated with the key, if any. Otherwise, returns an empty optional.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;getSet(k, v) //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;getSet(k, v) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;getSet(k, v) .
+::// var old_value: optional valueType := uint_to_uint_dict-&gt;getSet({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>add</code> sets the value associated with key and returns whether key <code>k</code> was in the mapping before.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;add(k, v) //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;add(k, v) \\: URValue boolean
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;add(k, v) .
+::// var flag: boolean := uint_to_uint_dict-&gt;add({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>getAdd</code> sets the value associated with key and returns previous associated value (if it doesn't exist then returns None).</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;getAdd(k, v) //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;getAdd(k, v) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;getAdd(k, v) .
+::// var flag: optional valueType  := uint_to_uint_dict-&gt;getAdd({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>set_at</code> sets the associated value <code>v</code> with key <code>k</code>.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;set_at(k, v) //: UExpression ?R ?b
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;set_at(k, v) .
+</code></pre>
+<hr />
+<p><code>extract</code> sets the value associated with key and returns previous associated value (if it doesn't exist then returns None).</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;extract(k) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var old_value: optional valueType  := uint_to_uint_dict-&gt;extract({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>insert</code> sets the value associated with key.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;insert((k, v)) //: UExpression ?R ?b
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;insert(({3}, {3})) .
+</code></pre>
+<hr />
+<p><code>at</code> returns the value associated with key (if it doesn't exist then throw error).</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;at(k) \\: URValue valueType true
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var old_value: valueType  := uint_to_uint_dict-&gt;at({3}) ;_|.
+</code></pre>
+<p><code>at</code> <strong>is a true-function</strong></p>
+<hr />
+<h4 id="string-operations"><a class="header" href="#string-operations">String operations</a></h4>
+<p>Consider terms with name and type such as:</p>
+<pre><code class="language-coq">\\ x \\: URValue string _
+\\ y \\: URValue string _
+</code></pre>
+<hr />
+<p><code>is_prefix</code> returns whether <code>x</code> prefix of <code>y</code>.</p>
+<pre><code class="language-coq">\\ x is_prefix y \\: URValue boolean _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag: boolean := ({&quot;abs&quot;} is_prefix {&quot;absc&quot;}) ;_|.
+</code></pre>
+<hr />
+<p><code>substr</code> returns substring of string <code>x</code> from n-th to m-th position (m &gt; n)</p>
+<pre><code class="language-coq">n: URValue uint _
+m: URValue uint _
+\\ x-&gt;substr(n, m) \\: URValue string _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var sub: boolean := {&quot;abs&quot;}-&gt;substr({2},{4}) ;_|.
+</code></pre>
+<hr />
+<p><code>find</code> does something</p>
+<pre><code class="language-coq">x: URValue string _
+y: URValue uint _
+\\ x-&gt;find(y) \\: URValue (optional uint) _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var num: optional uint := {&quot;abs&quot;}-&gt;find({&quot;abs&quot;}) ;_|.
+</code></pre>
+<hr />
+<p><code>appendString</code>, <code>appendBytes</code> returns concatenation of strings <code>x</code> and <code>y</code>.</p>
+<pre><code class="language-coq">\\ x-&gt;appendString(y) \\: URValue string _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var xy: string := {&quot;x&quot;}-&gt;appendString({&quot;y&quot;}) ;_|.
+</code></pre>
+<h4 id="optional-operations"><a class="header" href="#optional-operations">Optional operations</a></h4>
+<p>Consider terms with name and type such as:</p>
+<pre><code class="language-coq">\\ v \\: URValue valueType _
+\\ x \\: URValue (optional valueType) _
+</code></pre>
+<hr />
+<p><code>hasValue</code> returns whether <code>x</code> has value</p>
+<pre><code class="language-coq">\\ x-&gt;hasValue() \\ : URValue boolean _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag: boolean := x-&gt;hasValue()  ;_|.
+</code></pre>
+<hr />
+<p><code>set</code>, <code>some</code> wrapped value in optional <code>v</code></p>
+<pre><code class="language-coq">\\ v-&gt;set() \\: URValue (optional valueType) _
+\\ some(v) \\: URValue (optional valueType) _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag1: optional boolean := some(@false)  ;_|.
+::// var flag2: optional boolean := (@false)-&gt;set()  ;_|.
+</code></pre>
+<hr />
+<h2><code>reset</code> put none in optional <code>v</code>
+\ x-&gt;reset() \: URValue (optional valueType) _</h2>
+<p><code>get</code> returns value from optional, or if it doesn't exist then throw error.</p>
+<pre><code class="language-coq">\\ x-&gt;get() \\: URValue valueType true
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var value: valueType := x-&gt;get() ;_|.
+</code></pre>
+<h2><code>get</code> <strong>is a true-function</strong>
+<code>get_default</code> is 'false' version of <code>get</code> function</h2>
+<ol>
+<li><code>x-&gt;reset()</code> put <code>Null/None/xMaybeNone</code> into <code>x</code></li>
+<li><code>x-&gt;set(a)</code> put value <code>a</code> into <code>x</code></li>
+</ol>
+<h4 id="function-length"><a class="header" href="#function-length">Function length</a></h4>
+<ol>
+<li><code>x-&gt;length</code> returns term of type <code>uint</code>, which simply means lenght of term <code>x</code></li>
+</ol>
+<h4 id="function-empty"><a class="header" href="#function-empty">Function empty</a></h4>
+<ol>
+<li><code>x-&gt;empty()</code> returns term of type <code>boolean</code>, which means is <code>x</code> empty</li>
+</ol>
+<h4 id="operations-with-queue"><a class="header" href="#operations-with-queue">Operations with queue</a></h4>
+<ol>
+<li><code>x-&gt;queue_pop()</code> </li>
+<li><code>x-&gt;begin()</code></li>
+<li><code>x-&gt;end()</code></li>
+<li><code>x-&gt;queue_push()</code> </li>
+<li><code>x-&gt;front_with_idx_opt()</code>
+&quot; x '-&gt;' 'front_with_idx' '()'&quot; := (queue_begin_right x)
+&quot; x '-&gt;' 'back_with_idx' '()'  &quot; :=  (queue_end_right x)</li>
+</ol>
+<h4 id="operations-with-bytes"><a class="header" href="#operations-with-bytes">Operations with bytes</a></h4>
+<ol>
+<li><code>bytes_app x y</code> </li>
+<li><code>x-&gt;bytes_get(n)</code></li>
+</ol>
+<h4 id="operations-with-vector"><a class="header" href="#operations-with-vector">Operations with vector</a></h4>
+<ol>
+<li>function <code>x-&gt;push(y)</code> which adds to the end of vector <code>x</code> element <code>y</code></li>
+<li>function <code>x-&gt;pop()</code> which removes last element of vector <code>x</code> and returns it</li>
+</ol>
+<h4 id="unpack"><a class="header" href="#unpack">Unpack</a></h4>
+<ol>
+<li><code>x-&gt;unpack()</code></li>
+</ol>
+<h4 id="casting-functions"><a class="header" href="#casting-functions">Casting functions</a></h4>
+<p>Here is list of available casting operations for nums:</p>
+<ol>
+<li><code>int(num)</code></li>
+<li><code>uint8!(num)</code></li>
+<li><code>uint8(num)</code></li>
+<li><code>uint16!(num)</code></li>
+<li><code>uint16'(num)</code></li>
+<li><code>uint32!(num)</code></li>
+<li><code>uint32(num)</code></li>
+<li><code>uint64!(num)</code></li>
+<li><code>uint64(num)</code></li>
+<li><code>varUint16!(num)</code></li>
+<li><code>uint128!(num)</code></li>
+<li><code>uint128(num)</code></li>
+<li><code>uint256!(num)</code></li>
+<li><code>uint256(num)</code></li>
+</ol>
+<p>where </p>
+<ol>
+<li><code>uintN(num)</code> cast any <code>num</code> with type <code>uintM</code> (M ≤ N) to <code>uintN</code></li>
+<li><code>uintN!(num)</code> cast any <code>num</code> to <code>uintN</code> (even if M ≥ N). These functions are <a href="stdlib/">true TODO LINK</a></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-solidity-and-ursus-operators-respectively"><a class="header" href="#basic-solidity-and-ursus-operators-respectively">Basic solidity and ursus operators, respectively</a></h1>
+<p>Here is a mapping of operators from solidity and the phased construction of operators in ursus </p>
+<!-- 
+|Precedence| Soldity | Func | Notations to use  | level $1, $2, whole notations| Comments|
+| :-----| :----- | :----- | :-----: |:----- |:----- |
+| **1** | ```x++```                   |   ```incr_post_left (*0 1*) ```   |     ```x++```       | 55, _, 55     | |
+| **1** | ```x++```                   |   ```incr_post_right (*0 1*) ``` |     ```x++```     | 55, _, 55     | |
+| **1** | ```x--```                   |    ``` decr_post_left (*0 1*)```       |      ```x--```          | 55, _, 55     | |
+| **1** | ```x--```                   |     ``` decr_post_right (*0 1*)```      |     ```x--```       | 55, _, 55     | |
+| **1** | ```\<array\>[\<index\>]```  |   ```lookup (*0 2*)```        |                   | _, _,  55     | |
+| **1** | ```\<object\>.\<member\>``` |           |                   | _, _,  55     | |
+| **1** | ```\<func\>(\<args\>)```    |           |                   | _, _,  _      | |
+| **2** | ```++x```                   |  ```incr_pre_left(*0 1*)```         |    ```++x```           | _, _,  60     | |
+| **2** | ```++x```                   |  ```incr_pre_right(*0 1*)```         |    ```++x```          | _, _,  60     | |
+| **2** | ```--x```                   |   ```decr_pre_right (*0 1*)```        |     ```--x```          | _, _,  60     | |
+| **2** | ```--x```                   |   ```decr_pre_left (*0 1*)```  |    ```--x```          | _, _,  60     | |
+| **2** | ```delete operation```      |           |                   | _, 60, 60     | |
+| **2** | ```! x```                   | ```uneg (*0 1*)```     | ``` '!' x ```         | _, _,  60     | |
+| **2** | ```~ x```                   | ```unot  (*0 1*)```    | ``` '~' x ```         | _, _,  60     | |
+| **3** | ```a**b```                  |           |                   | _, _, _       | |
+| **4** | ```x * y```                 | ```un_mult' (*0 2*)```  | ``` x '*' y ```       | _, _, 70      | |
+| **4** | ```x / y```                 | ```un_div' (*0 2*)```   | ``` x '/' y ```       | _, _, 70      | |
+| **4** | ```x % y```                 | ```un_mod' (*0 2*)```   | ``` x '%' y ```       | _, 70, 70     | |
+| **5** | ```x + y```                 | ```un_plus' (*0 2*)```  | ``` x '+' y ```       | _, _, 75      | |
+| **5** | ```x - y```                 | ```un_minus' (*0 2*)``` | ``` x '-' y ```       | _, _, 75      | |
+| **6** | ```x \>\> y```              | ```un_right' (*0 2*)``` | ``` x '>>' y ```    | _, 80, 80     | |
+| **6** | ```x \<\< y```              | ```un_left' (*0 2*)```  | ``` x '<<' y ```      | _, 80, 80     | |
+| **7** | ```x & y```                 | ```un_and' (*0 2*)```  | ``` x '&' y ```       | _, 85, 85     | |
+| **8** | ```x ^ y```                 | ```un_xor' (*0 2*)```   | ``` x '^' y ```       | _, 90, 90     | |
+| **9** | ```x \| y```                | ```un_or' (*0 2*)```   | ``` x '\' y ```      | _, 95, 95     | |
+| **10** | ```x \< y```               | ```un_ltb (*0 2*)```   | ``` x '<' y ```      | _, 100, 100   | |
+| **10** | ```x \<= y```              | ```un_leb  (*0 2*)```  | ``` x '<=' y ```     | _, 100, 100   | |
+| **10** | ```x \> y```               | ```un_gtb (*0 2*)```   | ``` x '\>' y ```      | _, 100, 100   | |
+| **10** | ```x \>= y```              | ```un_geb (*0 2*)```   | ``` x '\>=' y ```     | _, 100, 100   | |
+| **11** | ```x == y```               | ```un_eqb (*0 2*)```   | ``` x '==' y ```      | _, 105, 105   | |
+| **11** | ```x != y```               | ```un_uneqb (*0 2*)```  | ``` x '!=' y ```      | _, 105, 105   | |
+| **12** | ```x && y```               | ```uband (*0 2*)```    | ``` x '&&' y ```      | _, 110, 110   | |
+| **13** | ```x \|\| y```             | ```ubor (*0 2*)```     | ``` x '\|\|' y ```    | _, 115, 115   | |
+| **14** | ```\<conditional\> ? \<if-true\> : \<if-false\>```  | ```UR3arn (*0 3*)``` |    | _, _, 125     | // belongs UMLang library|
+| **14** | ```:=```                   |           |                   | _, _, 125     | // belongs UMLang library |
+| **14** | ```\|=```                  |           |                   | _, _, 125     | |
+| **14** | ```^=```                   |           |                   | _, _, _       | //doesn't exist |
+| **14** | ```&=```                   |           |                   | _, _, 125     | |
+| **14** | ```\<\<=```                |           |                   | _, _, _       | //doesn't exists |
+| **14** | ```\>\>=```                |           |                   | _, _, _       | //doesn't exists |
+| **14** | ```+=```                   |           |                   | _, _, 125     | |
+| **14** | ```-=```                   |           |                   | _, _, 125     | |
+| **14** | ```*=```                   |           |                   | _, _, _       | //doesn't exist |
+| **14** | ```/=```                   |           |                   | _, _, _       | //doesn't exist |
+| **14** | ```%=```                   |           |                   | _, _, _       | //doesn't exist | -->
+<h2 id="built-in-operation-for-basic-types"><a class="header" href="#built-in-operation-for-basic-types">Built-in operation for basic types</a></h2>
+<h4 id="arifmetic-operations"><a class="header" href="#arifmetic-operations">Arifmetic operations:</a></h4>
+<ol>
+<li><code>x + y</code> standart sum with number overflow:
+<ol>
+<li><code>x</code> and <code>y</code> has uint or int type</li>
+<li>if one of the term has type uint and another has int, result will be int</li>
+<li>if one of the term has type uintN and another has uintM (N &gt;= M), result will be uintN</li>
+</ol>
+</li>
+<li>functions <code>x - y</code>, <code>x * y</code> have the as same logic as the previous ones</li>
+</ol>
+<h1 id="todo-comparing-addresses"><a class="header" href="#todo-comparing-addresses">TODO comparing addresses</a></h1>
+<ol start="3">
+<li>functions <code>x == y</code>, <code>x != y</code> work with boleans and nums, functions <code>x &lt; y</code>, <code>x &lt;= y</code>, <code>x &gt; y</code>, <code>x &gt;= y</code> works with nums. All of these functions have standart semanthic. </li>
+<li><code>x / y</code> standart division operation, but if at least one of the term is zero the result will be zero too</li>
+<li><code>x % y</code> standart modulo operation, but if <code>x</code> is zero then result will be zero too</li>
+</ol>
+<hr />
+<h4 id="bitwise-operations"><a class="header" href="#bitwise-operations">Bitwise operations:</a></h4>
+<ol>
+<li><code>x ^ y</code> is bitwise xor</li>
+<li><code>x &gt;&gt; y</code> is bitwise right</li>
+<li><code>x &lt;&lt; y</code> is bitwise left</li>
+<li><code>x &amp; y</code> is bitwise and</li>
+<li><code>x \ y</code> is bitwise or</li>
+<li><code>~ x</code> is bitwise not</li>
+<li><code>bitSize(x)</code> (Everscale only) computes the smallest c ≥ 0 such that x fits into a c-bit signed integer (−2<sup>c−1</sup> ≤ x &lt; 2<sup>c−1</sup>).</li>
+<li><code>uBitSize(x)</code> (Everscale only)
+uBitSize computes the smallest c ≥ 0 such that x fits into a c-bit unsigned integer (0 ≤ x &lt; 2<sup>c</sup>).</li>
+</ol>
+<hr />
+<h4 id="booleanean-operations-x--y-x--y-and-x-have-standart-semantic"><a class="header" href="#booleanean-operations-x--y-x--y-and-x-have-standart-semantic">booleanean operations <code>x || y</code>, <code>x &amp;&amp; y</code> and <code>!x</code> have standart semantic</a></h4>
+<h4 id="math-operations"><a class="header" href="#math-operations">Math operations:</a></h4>
+<ol>
+<li><code>math-&gt;muldiv(x, y, z)</code> is syntax sugar for  <code>(x * y) / z</code> expression</li>
+<li><code>math-&gt;muldivmod(x, y, z)</code> is syntax sugar for <code>[ (x * y) / z, (x * y) % z ]</code></li>
+<li><code>min(x, y)</code> or <code>math-&gt;min(x, y)</code> is standart math minimum function with standart semantic</li>
+<li><code>max(x, y)</code> or <code>math-&gt;max(x, y)</code> is standart math max function with standart semantic</li>
+<li><code>math-&gt;abs(x)</code> is absolute function, which returns result with the same type as <code>x</code></li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-special-only-solidity-and-ursus-functions-respectively"><a class="header" href="#basic-special-only-solidity-and-ursus-functions-respectively">Basic special only solidity and ursus functions, respectively</a></h1>
+<p>Here is a mapping of functions from solidity and a phased construction of functions in ursus, where</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Soldity</th><th style="text-align: left">Function</th><th style="text-align: left">Notation to use</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>msg.sender </code></td><td style="text-align: left"><code>msg_sender (*0 0*)</code></td><td style="text-align: left"><code>msg-&gt;sender</code></td></tr>
+<tr><td style="text-align: left"><code>msg.value </code></td><td style="text-align: left"><code>msg_value (*0 0*)</code></td><td style="text-align: left"><code>msg-&gt;value</code></td></tr>
+<tr><td style="text-align: left"><code>msg.currencies </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>msg.pubkey</code></td><td style="text-align: left"><code>msg_pubkey (*0 0*)</code></td><td style="text-align: left"><code>msg-&gt;pubkey ()</code></td></tr>
+<tr><td style="text-align: left"><code>msg.isInternal  </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>msg.isExternal </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>msg.isTickTock </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>msg.createdAt </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>msg.data </code></td><td style="text-align: left"><code>msg_data (*0 0*)</code></td><td style="text-align: left"><code>msg-&gt;data</code></td></tr>
+<tr><td style="text-align: left"><code>msg.hasStateInit </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.makeAddrStd() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.makeAddrNone() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.makeAddrExtern() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.wid </code></td><td style="text-align: left"><code>addr_std_ι_workchain_id_right (*0 1*)</code></td><td style="text-align: left"><code>a -&gt;wid</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.wid </code></td><td style="text-align: left"><code> addr_std_ι_workchain_id_left (*0 1*)</code></td><td style="text-align: left"><code>a -&gt;wid</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.value </code></td><td style="text-align: left"><code>value (*0 1*)</code></td><td style="text-align: left"><code>a -&gt;value</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.value </code></td><td style="text-align: left"><code>addr_std_ι_address_left (*1 0*)</code></td><td style="text-align: left"><code>a -&gt;value</code></td></tr>
+<tr><td style="text-align: left"><code>address(this).balance</code></td><td style="text-align: left"><code>balance (*0 0*)</code></td><td style="text-align: left"><code>address(this)</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.balance </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.currencies </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.getType() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.isStdZero() </code></td><td style="text-align: left"><code>address_isStdZero (*0 1*)</code></td><td style="text-align: left"><code>x -&gt; isStdZero ()  </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.isStdAddrWithoutAnyCast() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.isExternZero() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.isNone() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.unpack() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;address&gt;.transfer() </code></td><td style="text-align: left"><code>tvm_transfer_left (*0 6*)</code></td><td style="text-align: left"><code> tvm-&gt;transfer( x , y , z , t , d , s )</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.accept() </code></td><td style="text-align: left"><code>tvm_accept_left (* 0 0*)</code></td><td style="text-align: left"><code>tvm-&gt;accept()</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.setGasLimit() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.commit() </code></td><td style="text-align: left"><code>tvm_commit_left (*0 0*)</code></td><td style="text-align: left"><code>tvm-&gt;commit() </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.rawCommit() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.getData() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.setData() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.log() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.hexdump() and tvm.bindump() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.setcode() </code></td><td style="text-align: left"><code>tvm_setCode_left (*0 1*)</code></td><td style="text-align: left"><code>tvm-&gt;setcode( x )</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.configParam() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.rawConfigParam() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.rawReserve() </code></td><td style="text-align: left"><code>tvm_rawReserve_left (*0 2*)</code></td><td style="text-align: left"><code> tvm-&gt;rawReserve( x , f )</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.hash() </code></td><td style="text-align: left"><code>tvm_hash (*0 1*)</code></td><td style="text-align: left"><code>tvm -&gt;hash( x ) </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.checkSign() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.insertPubkey() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.buildStateInit() </code></td><td style="text-align: left"><code>tvm_buildStateInit_right (*0 3*)</code></td><td style="text-align: left"><code> tvm-&gt;buildStateInit ( x , y , z )</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.buildStateInit() </code></td><td style="text-align: left"><code>tvm_buildStateInit'_right (*0 2*)</code></td><td style="text-align: left"><code>tvm-&gt;buildStateInit ( x , y ) </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.buildDataInit() </code></td><td style="text-align: left"><code>tvm_buildDataInit_right (*0 1*)</code></td><td style="text-align: left"><code> tvm-&gt;buildDataInit( x )</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.stateInitHash() </code></td><td style="text-align: left"><code>tvm_stateInitHash (*0 4*)</code></td><td style="text-align: left"><code>tvm-&gt;stateInitHash( x , y , z , u )</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.code() </code></td><td style="text-align: left"><code>tvm_code (*0 0*)</code></td><td style="text-align: left"><code>tvm-&gt;code()</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.codeSalt() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.setCodeSalt() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.pubkey() </code></td><td style="text-align: left"><code>tvm_pubkey (*0 0*)</code></td><td style="text-align: left"><code>tvm-&gt;pubkey ()</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.setPubkey() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.setCurrentCode() </code></td><td style="text-align: left"><code>tvm_setCurrentCode_left (*0 1*)</code></td><td style="text-align: left"><code>tvm-&gt;setCurrentCode ( x )</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.resetStorage() </code></td><td style="text-align: left"><code>tvm_resetStorage_left (*0 0*)</code></td><td style="text-align: left"><code>tvm-&gt;resetStorage ()</code></td></tr>
+<tr><td style="text-align: left"><code>tvm.functionId()</code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.encodeBody() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.exit() and tvm.exit1() </code></td><td style="text-align: left"><code> tvm_exit_left (*0 0*)</code></td><td style="text-align: left"><code>tvm-&gt;exit() </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.buildExtMsg() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.buildIntMsg() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>tvm.sendrawmsg() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmCell&gt;.depth() </code></td><td style="text-align: left"><code>depth_right (*cell_depth*) (*0 1*)</code></td><td style="text-align: left"><code> x -&gt;depth()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmCell&gt;.dataSize() </code></td><td style="text-align: left"><code>  </code></td><td style="text-align: left"><code>  </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmCell&gt;.dataSizeQ() </code></td><td style="text-align: left"><code>dataSizeQ_right (*0 2*)  </code></td><td style="text-align: left"><code>c-&gt;dataSizeQ( n )</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmCell&gt;.toSlice() </code></td><td style="text-align: left"><code>to_slice_right (*0 1*)</code></td><td style="text-align: left"><code>  c -&gt;toSlice()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.empty() </code></td><td style="text-align: left"><code> slice_empty_right (*0 1*)</code></td><td style="text-align: left"><code>c -&gt;empty(n) </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.size() </code></td><td style="text-align: left"><code>size_right (*0 1*)</code></td><td style="text-align: left"><code>c-&gt;size()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.bits() </code></td><td style="text-align: left"><code> bits_right (*0 0*)</code></td><td style="text-align: left"><code>c -&gt;bits() </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.refs() </code></td><td style="text-align: left"><code>slice_refs</code></td><td style="text-align: left"><code>x -&gt;refs ()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.dataSize() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.dataSizeQ() </code></td><td style="text-align: left"><code>dataSizeQ_right (*0 2*)  </code></td><td style="text-align: left"><code>c-&gt;dataSizeQ( n )</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.depth() </code></td><td style="text-align: left"><code>slice_depth</code></td><td style="text-align: left"><code>x -&gt;sliceDepth ()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.hasNBits()  </code></td><td style="text-align: left"><code>slice_hasNBits_right (*0 2*) </code></td><td style="text-align: left"><code>c -&gt;hasNBits(n)</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.hasNRefs() </code></td><td style="text-align: left"><code>slice_hasNRefs_right (*0 2*) </code></td><td style="text-align: left"><code>c -&gt;hasNRefs(n)</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.hasNBitsAndRefs() </code></td><td style="text-align: left"><code>slice_hasNBitsAndRefs_right(*0 3*) </code></td><td style="text-align: left"><code>c-&gt;hasNBitsAndRefs(b, r) </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.compare() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.decode() </code></td><td style="text-align: left"><code>slice_decode_right (prod A .. (prod B C) ..) (*1 0*) (*many args is one tuple*) </code></td><td style="text-align: left"><code>c-&gt;decode( A , .. , B , C )</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadRef() </code></td><td style="text-align: left"><code>slice_loadRef_left (*1 0*)</code></td><td style="text-align: left"><code>c -&gt;loadRef()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadRef() </code></td><td style="text-align: left"><code> slice_loadRef_right (*0 1*)</code></td><td style="text-align: left"><code>c -&gt;loadRef()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadRefAsSlice() </code></td><td style="text-align: left"><code>slice_loadRefAsSlice_right (*1 0*) </code></td><td style="text-align: left"><code>c -&gt; loadRefAsSlice() </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadRefAsSlice() </code></td><td style="text-align: left"><code>slice_loadRefAsSlice_left (*0 1*) </code></td><td style="text-align: left"><code>c -&gt; loadRefAsSlice() </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadSigned() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadUnsigned() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadTons() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.loadSlice() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.decodeFunctionParams() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.skip() </code></td><td style="text-align: left"><code>slice_skip_left (*1 2*)</code></td><td style="text-align: left"><code>c -&gt;skip( l , r )</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmSlice&gt;.skip() </code></td><td style="text-align: left"><code>slice_skip'_left (*1 1*)</code></td><td style="text-align: left"><code>c -&gt;skip(l )</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.toSlice() </code></td><td style="text-align: left"><code> to_slice_right (*0 1*)</code></td><td style="text-align: left"><code>c -&gt;toSlice() </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.toCell() </code></td><td style="text-align: left"><code>builder_toCell_right (*0 1*)</code></td><td style="text-align: left"><code>b -&gt;toCell()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.size() </code></td><td style="text-align: left"><code>size_right (*0 1*)</code></td><td style="text-align: left"><code>c-&gt;size()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.bits() </code></td><td style="text-align: left"><code> bits_right (*0 0*)</code></td><td style="text-align: left"><code>c -&gt;bits() </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.refs() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.remBits() </code></td><td style="text-align: left"><code>builder_remBits_right (*0 1*) </code></td><td style="text-align: left"><code> c -&gt;remBits()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.remRefs() </code></td><td style="text-align: left"><code> builder_remRefs_right (*0 1*)</code></td><td style="text-align: left"><code>c -&gt;remRefs()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.remBitsAndRefs() </code></td><td style="text-align: left"><code>builder_remBitsAndRefs_right (*0 1*) </code></td><td style="text-align: left"><code> c -&gt;remBitsAndRefs()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.depth() </code></td><td style="text-align: left"><code>depth_right (*builder_depth*) (*0 1*)</code></td><td style="text-align: left"><code> x -&gt;depth()</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.store() </code></td><td style="text-align: left"><code>builder_store_left' c (URTuple x .. (URTuple y z) ..) (*arg is one tuple*) (*1 1*)</code></td><td style="text-align: left"><code>c -&gt; store ( x , .. , y , z )</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.storeOnes() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.storeZeroes() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.storeSigned() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.storeUnsigned() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.storeRef() </code></td><td style="text-align: left"><code>builder_storeRef_left (*1 1*)</code></td><td style="text-align: left"><code>x -&gt;storeRef ( y )</code></td></tr>
+<tr><td style="text-align: left"><code>&lt;TvmBuilder&gt;.storeTons() </code></td><td style="text-align: left"><code> </code></td><td style="text-align: left"><code> </code></td></tr>
+<tr><td style="text-align: left"><code>selfdestruct</code></td><td style="text-align: left"><code>suicide_left</code></td><td style="text-align: left"><code>selfdestruct ( x )</code></td></tr>
+<tr><td style="text-align: left"><code>now</code></td><td style="text-align: left"><code>tvm_now (*0 0*)</code></td><td style="text-align: left"><code>now</code></td></tr>
+<tr><td style="text-align: left"><code>address(this)</code></td><td style="text-align: left"><code>tvm_address</code></td><td style="text-align: left"><code>address(this)</code></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="./theme/highlight.js"></script>
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

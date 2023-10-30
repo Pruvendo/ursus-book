@@ -1,0 +1,703 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>How to write Ursus functions - Ursus language documentation</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././theme/highlight.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item expanded "><a href="../install/index.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../install/opam.html"><strong aria-hidden="true">1.1.</strong> opam package manager</a></li><li class="chapter-item expanded "><a href="../install/coq.html"><strong aria-hidden="true">1.2.</strong> Install Coq</a></li><li class="chapter-item expanded "><a href="../install/pruvendo.html"><strong aria-hidden="true">1.3.</strong> Install Pruvendo libraries</a></li><li class="chapter-item expanded "><a href="../install/docker.html"><strong aria-hidden="true">1.4.</strong> Install via Docker image</a></li></ol></li><li class="chapter-item expanded "><a href="../quick/index.html"><strong aria-hidden="true">2.</strong> Quick start</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../quick/simple.html"><strong aria-hidden="true">2.1.</strong> Write simple contract</a></li><li class="chapter-item expanded "><a href="../quick/compile_ursus.html"><strong aria-hidden="true">2.2.</strong> Compile and extract solidity sources</a></li><li class="chapter-item expanded "><a href="../quick/compile_sol.html"><strong aria-hidden="true">2.3.</strong> Compile extracted contract and deploy</a></li></ol></li><li class="chapter-item expanded "><a href="../eDSL/index.html"><strong aria-hidden="true">3.</strong> Coq embedded DSL</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../eDSL/custom_grammar.html"><strong aria-hidden="true">3.1.</strong> Coq custom grammar</a></li><li class="chapter-item expanded "><a href="../eDSL/ursus_embedding.html"><strong aria-hidden="true">3.2.</strong> Ursus embedding</a></li><li class="chapter-item expanded "><a href="../eDSL/notations.html"><strong aria-hidden="true">3.3.</strong> Notational mechanism</a></li></ol></li><li class="chapter-item expanded "><a href="../ulang/index.html"><strong aria-hidden="true">4.</strong> Ursus as a language</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ulang/file_interface.html"><strong aria-hidden="true">4.1.</strong> Interface structure</a></li><li class="chapter-item expanded "><a href="../ulang/contract_structure.html"><strong aria-hidden="true">4.2.</strong> Contract structure</a></li><li class="chapter-item expanded "><a href="../ulang/primitives.html"><strong aria-hidden="true">4.3.</strong> Types, primitives, and literals</a></li><li class="chapter-item expanded "><a href="../ulang/structures.html"><strong aria-hidden="true">4.4.</strong> Complex Structures</a></li><li class="chapter-item expanded "><a href="../ulang/writing_function.html" class="active"><strong aria-hidden="true">4.5.</strong> How to write Ursus functions</a></li><li class="chapter-item expanded "><a href="../ulang/messages.html"><strong aria-hidden="true">4.6.</strong> Interfaces and messages</a></li><li class="chapter-item expanded "><a href="../ulang/local.html"><strong aria-hidden="true">4.7.</strong> Local state and variables</a></li><li class="chapter-item expanded "><a href="../ulang/multi.html"><strong aria-hidden="true">4.8.</strong> Multi-contract system</a></li><li class="chapter-item expanded "><a href="../ulang/inheritance.html"><strong aria-hidden="true">4.9.</strong> Contract inheritance</a></li></ol></li><li class="chapter-item expanded "><a href="../stdlib/index.html"><strong aria-hidden="true">5.</strong> Ursus standard library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../stdlib/functions.html"><strong aria-hidden="true">5.1.</strong> Standard functions</a></li><li class="chapter-item expanded "><a href="../stdlib/operators.html"><strong aria-hidden="true">5.2.</strong> Basic operators</a></li><li class="chapter-item expanded "><a href="../stdlib/TVM.html"><strong aria-hidden="true">5.3.</strong> TVM functions</a></li></ol></li><li class="chapter-item expanded "><a href="../verification/index.html"><strong aria-hidden="true">6.</strong> Ursus verification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../verification/principles.html"><strong aria-hidden="true">6.1.</strong> Common principles</a></li><li class="chapter-item expanded "><a href="../verification/stdlib.html"><strong aria-hidden="true">6.2.</strong> StdLib verification</a></li><li class="chapter-item expanded "><a href="../verification/qc.html"><strong aria-hidden="true">6.3.</strong> QuickChick</a></li></ol></li><li class="chapter-item expanded "><a href="../programming/index.html"><strong aria-hidden="true">7.</strong> Ursus programming style</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../programming/repl.html"><strong aria-hidden="true">7.1.</strong> REPL</a></li><li class="chapter-item expanded "><a href="../programming/context.html"><strong aria-hidden="true">7.2.</strong> Goal and context</a></li><li class="chapter-item expanded "><a href="../programming/tactics.html"><strong aria-hidden="true">7.3.</strong> Tactics and tacticals</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../programming/control.html"><strong aria-hidden="true">7.3.1.</strong> Ursus control sub-languange</a></li></ol></li><li class="chapter-item expanded "><a href="../programming/holes.html"><strong aria-hidden="true">7.4.</strong> Holes</a></li><li class="chapter-item expanded "><a href="../programming/prepost.html"><strong aria-hidden="true">7.5.</strong> Default prefix and postfix operations</a></li></ol></li><li class="chapter-item expanded "><a href="../long/index.html"><strong aria-hidden="true">8.</strong> Long start</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../long/design.html"><strong aria-hidden="true">8.1.</strong> Designing contract</a></li><li class="chapter-item expanded "><a href="../long/impl.html"><strong aria-hidden="true">8.2.</strong> Implementation</a></li><li class="chapter-item expanded "><a href="../long/deploy.html"><strong aria-hidden="true">8.3.</strong> Extracting, compiling and deploy</a></li><li class="chapter-item expanded "><a href="../long/spec.html"><strong aria-hidden="true">8.4.</strong> Specification</a></li><li class="chapter-item expanded "><a href="../long/ts4.html"><strong aria-hidden="true">8.5.</strong> TS4 integration</a></li><li class="chapter-item expanded "><a href="../long/qc.html"><strong aria-hidden="true">8.6.</strong> Quickchicks</a></li><li class="chapter-item expanded "><a href="../long/execs.html"><strong aria-hidden="true">8.7.</strong> Evals and execs</a></li><li class="chapter-item expanded "><a href="../long/direct_proofs.html"><strong aria-hidden="true">8.8.</strong> Direct proofs</a></li><li class="chapter-item expanded "><a href="../long/scenarios.html"><strong aria-hidden="true">8.9.</strong> Scenarios</a></li><li class="chapter-item expanded "><a href="../long/multi.html"><strong aria-hidden="true">8.10.</strong> Multi-contract verification</a></li></ol></li><li class="chapter-item expanded "><a href="../translation/index.html"><strong aria-hidden="true">9.</strong> Translation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../translation/sol-ursus.html"><strong aria-hidden="true">9.1.</strong> sol-&gt;ursus translation</a></li><li class="chapter-item expanded "><a href="../translation/cpp-ursus.html"><strong aria-hidden="true">9.2.</strong> cpp-&gt;ursus translation</a></li><li class="chapter-item expanded "><a href="../translation/ursus-sol.html"><strong aria-hidden="true">9.3.</strong> ursus-&gt;sol translation</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced/index.html"><strong aria-hidden="true">10.</strong> Advanced topics</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced/ledger.html"><strong aria-hidden="true">10.1.</strong> Ledger and Superledger</a></li><li class="chapter-item expanded "><a href="../advanced/spec.html"><strong aria-hidden="true">10.2.</strong> Specification</a></li><li class="chapter-item expanded "><a href="../advanced/proof_kinds.html"><strong aria-hidden="true">10.3.</strong> Proof kinds</a></li><li class="chapter-item expanded "><a href="../advanced/generator.html"><strong aria-hidden="true">10.4.</strong> Evals and execs generator</a></li><li class="chapter-item expanded "><a href="../advanced/elpi.html"><strong aria-hidden="true">10.5.</strong> Elpi automation</a></li></ol></li><li class="chapter-item expanded "><a href="../uncategorized.html"><strong aria-hidden="true">11.</strong> More and uncategorized</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ursus language documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!-- 
+Function operators 
+
+Each line must start with a character '**::**' or character '**:**' . 
+
+If the character is '**::**' then no reverse translation is performed. If the character is '**:**' the 
+reverse translation will be performed.
+
+Followed by the symbol '**//**'.
+
+Exception to this - see below.
+
+Unlike other programming languages, in Ursus any constructs can be replaced with a "*hole*" that can be filled in later. In some cases (which are discussed below), these "*holes*" need to be forced to be typed.
+
+The method of using "*holes*" allows you to decompose the most complex structures into components, which can greatly simplify the programming process.
+
+1. Creating a new variable
+   
+There are six kinds of operators for creating new variables:
+
+- ::// new 'varname : vartype @ "varname" ; _ | .
+- ?::// new 'varname : vartype ; _ | .
+- :// new 'varname : vartype @ "varname" ; _ | .
+- ?:// new 'varname : vartype ; _ | .
+- ::// new 'varname : vartype @ "varname" := ... ; _ | .
+- ?::// new 'varname : vartype := ... ; _ | .
+- :// new 'varname : vartype @ "varname" := ... ; _ | .
+- ?:// new 'varname : vartype := ... ; _ | .
+- ::// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") ; _ |.
+- ?::// new ('var1name : var1type , .. , 'varNname : varNtype) ; _ |.
+- ::// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") := ... ; _ |.
+- ?::// new ('var1name : var1type , .. , 'varNname : varNtype) := ... ; _ |.
+- :// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") ; _ |.
+- ?:// new ('var1name : var1type , .. , 'varNname : varNtype) ; _ |.
+- :// new ('var1name : var1type , .. , 'varNname : varNtype) @ ("var1name" , .. , "varNname") := ... ; _ |.
+- ?:// new ('var1name : var1type , .. , 'varNname : varNtype) := ... ; _ |.
+
+where '::', '?::' - no reverse broadcast
+
+      ':', '?:' - reverse translation
+
+      '//' - Ursus interpreter
+
+      ';' - binding
+
+      '_' - "hole", i.e. there must be a continuation after the operator 'new' 
+
+      ... - an expression that returns the value(s) assigned to the new variable(s)
+
+
+For examples:
+
+*::// new 'sender : (  uint256 ) @ "sender"  := msg->pubkey() ; _ | .*
+
+*?://  new ( 'unlocked : uint128 , 'unlockedPeriod : uint32 ) ; _ |.*
+
+To read the value of an argument in the function body, use the sign '#':
+
+*:// a := #b .* - here b is argument of function
+
+To read the value of a local variable in the function body, use the sign '!':
+
+*:// a := !b .* - here b is local variable, a is local variable too
+
+2. Assignment
+   
+   - Regular assignment operator ':=' : left expression ':=' right expression '.'
+   - For record members ... - TODO
+
+For examples:
+
+*:://valueL := (β #{0})  .*
+
+*://needCleanup := (!updateId <= !marker) .*
+
+
+1. Numeric constants
+   
+   To use unnamed (numerical) constants in the program text, special characters are used:
+
+   For '*require_*' operator: **%** ...
+
+   For all other cases: *(β #{ ... })*
+
+   For examples:
+
+   *://valueL := (β #{0})  .*
+
+   *://require_(m_custodians->exists(msg->pubkey()), %100) .*
+
+
+2. Arithmetic operators
+
+    '**+**', '**-**', '*', '**/**', '**++**', '**--**', '**&**', '**|**', '<<' '>>'
+   
+    For examples:
+
+    *:// i ++ .*
+
+    *:://return_ (#mask - (!onee << (!eight * #index ))) |.*
+
+3. Comparison Operators
+   
+   '>', '<', '>=', '<=', '=='
+
+    For examples:
+
+    *!i < MAX_CLEANUP_TXNS*
+
+    *:*://needCleanup := (!trId <= !marker)  |.*
+
+4. Logical operators
+   
+    '**||**', '**&&**'
+
+    For example:
+
+    *(!{i} < !{len}) && (!{ownerCount} < MAX_CUSTODIAN_COUNT)*
+
+5. Combined assignment
+   
+    '**+=**', '**-=**', '*=', '**/=**', '**&=**', '**|=**'
+
+    For example:
+
+    *::// maskL |= (!{onee} << #custodianIndex ) .* 
+
+6. Function call
+7. Conditional operator
+   
+   Two kinds of conditional statement:
+
+   'if' (condition) 'then' { statement } .
+
+   'if' (condition) 'then' { statement1 } 'else' { statement2 } .
+
+   It is convenient to use "*holes*" for the conditional operator.
+
+   For example:
+
+   *::// if ( m_updateRequests->empty() ) then { {_:UExpression _ true} } .*  
+   *:://exit_ {} |.*
+  
+    The construction '*{_:UExpression _ true}*' means that a "*hole*" is specified and its type is specified - coinciding with the type of the expression that is written later. In this case, this is *exit {} |.*
+
+    The vertical line '**|**' indicates that the decoding of the "*hole*" is completed. 
+
+8.  Loop operators
+   
+There are two kinds of loop statements: '**while**' and '**for**'.
+
+An unindexed loop looks like this:
+
+'while' condition 'do' statement.
+
+The cycle *for* looks like this:
+
+'for' condition do ststement .
+
+For example:
+
+*://while ((!{needCleanup} && (!{i} < MAX_CLEANUP_TXNS))) do { {_:UExpression _ true} }  |.*
+
+*::// for ( 'pubkey : #{claimers} ) do { {_:UExpression _ false} } .*
+
+9.  Record initialization
+    
+    The following construction is used to initialize records:
+
+    '[$'
+
+            statement1 '⇒' {Member1OfRecord};
+
+            ...
+
+            statement2 '⇒' {Member2OfRecord}
+
+    '$]'
+
+    The order in which the members are listed is arbitrary. If some members are not listed, they will be initialized by default.
+
+    For example:
+<i>
+      ::// new 'tmp : MultisigWallet_ι_UpdateRequestLRecord @ "tmp" :=
+
+                 [$
+
+                  !updateId ⇒ {MultisigWallet_ι_UpdateRequest_ι_id};
+
+                  !index ⇒ {MultisigWallet_ι_UpdateRequest_ι_index};
+
+                  (β #{0}) ⇒ {MultisigWallet_ι_UpdateRequest_ι_signs};
+
+                  (β #{0}) ⇒ {MultisigWallet_ι_UpdateRequest_ι_confirmationsMask};
+
+                  !sender ⇒ {MultisigWallet_ι_UpdateRequest_ι_creator};
+
+                  codeHash ⇒ {MultisigWallet_ι_UpdateRequest_ι_codeHash};
+
+                  #owners ⇒ {MultisigWallet_ι_UpdateRequest_ι_custodians};
+
+                  #reqConfirms ⇒ {MultisigWallet_ι_UpdateRequest_ι_reqConfirms}
+
+                 $] ; _|.
+</i>
+
+    Here a local variable 'tmp' of type 'MultisigWallet_ι_UpdateRequestLRecord' is created and an initialized record is assigned to it.
+
+10. Message
+
+
+
+
+11. Library Functions -->
+<h2 id="function-declaration"><a class="header" href="#function-declaration">Function declaration</a></h2>
+<p>Every function mostly is declared via using <em>proof mode</em> in Coq and command <code>Ursus</code>. Let's see how to declare function.</p>
+<pre><code class="language-coq">#[attribute1, attribute2..., returns=returnName]
+Ursus Definition functionName (arg1:type1) ... (argN:typeN): UExpression returnType ErrorMark.
+</code></pre>
+<p>Where:</p>
+<ol>
+<li><code>Ursus</code> is already mentioned command which inputs <code>Definition</code>.</li>
+<li><code>functionName</code> is name of declaring function.</li>
+<li><code>(arg1:type1) ... (argN:typeN)</code> are arguments, where <code>argI</code> and <code>typeI</code> are argument name and argument type of ith argument.</li>
+<li>returnName and returnType are &quot;<em>variable name</em>&quot; and <em>type of returning term/object</em> respectively.</li>
+<li><code>attributeI</code> is attribute with the same semanthic as solidity has. Moreover, not only the attributes of solidity functions are available here. Also here is attribute <code>no_body</code>, which means following statement: term of type <code>UExpression...</code> doesn't exist. So, as mentioned in <a href="src/quick/simple.html">QuickStart</a> here is 2 goals in proof mode in declaring Ursus function, but with attribute <code>no_body</code> only one goal (<em>IReturnExpression</em>) needs to be declared (&quot;<em>solve</em>&quot;).</li>
+<li>Finally, <code>ErrorMark</code> is actually either <em>true</em> or <em>false</em> term, which expresses if it contains calling require, revert and others &quot;<em>bad</em>&quot; functions here.</li>
+</ol>
+<p>After swithing to <em>proof mode</em> two goals are here: <code>UExpression returnType ErrorMark</code> and <code>IReturnExpression</code>.</p>
+<h3 id="conception-of-ulvalue-and-urvalue"><a class="header" href="#conception-of-ulvalue-and-urvalue">Conception of ULValue and URValue</a></h3>
+<p><code>ULValue</code> and <code>URValue</code> types of terms that are used in describing function bodies: function callings, assignment and so on. Simply, we can consider <code>ULValue</code> as &quot;<em>reference type</em>&quot; or things that can be assigned a value. We can consider <code>URValue</code> as usual type or  things that can't be assigned a value. <code>ULValue</code> can automatically cast to <code>URValue</code> via <a href="https://coq.inria.fr/refman/addendum/implicit-coercions.html">Coq coercion mechanism</a>. In Ursus we can't use literal itself, we need to wrap it into <code>URValue</code>, so for this goal we can use brackets <code>{...}</code>. For example, &quot;str&quot; of Coq type <code>string</code> now is → <code>{&quot;string&quot;}</code> of type <code>URValue string false</code>. <code>ULValue</code> has type <code>Type -&gt; Type</code> and <code>URValue</code> has type <code>Type -&gt; bool -&gt; Type</code>. Term of type <code>bool</code> has similar semanthic as <code>UExpression...</code> has.</p>
+<p>Example is <a href="#ulvalue-urvalue">below</a>.</p>
+<h3 id="create-term-with-hole-approach"><a class="header" href="#create-term-with-hole-approach">Create term with <em>hole</em> approach</a></h3>
+<p>Let's look at basic scenario of describing function (without loops and if statements)</p>
+<p>Basic syntax of function body can be introduced via next <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form">BNF</a>:</p>
+<p><code>UExpression ::=  // simpleUExpression // | // (UExpression ; UExpression) //</code></p>
+<p>i.e function body can be expressed this way:</p>
+<pre><code class="language-coq">// simpleUExpression ;
+(simpleUExpression ;
+(simpleUExpression ;
+simpleUExpression)) //
+</code></pre>
+<p>And main idea is using standart tactic <code>refine</code>, so the description will take the following form:</p>
+<pre><code class="language-coq">refine // simpleUExpression ; _ // .
+refine // simpleUExpression ; _ // .
+refine // simpleUExpression ; _ // .
+refine // simpleUExpression // .
+</code></pre>
+<p>Where:</p>
+<ol>
+<li>'<code>_</code>' symbol means, that rest of term is needed to construct.</li>
+<li><code>// ... //</code> &quot;brackets&quot; means only some special construction might be here</li>
+</ol>
+<p>Firstly, consider next <code>simpleUExpression</code>:</p>
+<ol>
+<li>
+<p>declaring &quot;variable&quot; <code>new 'name : typeName @ &quot;name&quot; := value</code></p>
+<p>Where:</p>
+<ol>
+<li><code>name</code> is variable name (notice! <code>name</code> and &quot;<code>name</code>&quot; must be the same)</li>
+<li><code>typeName</code> is type of this variable</li>
+<li><code>value</code> is term of type <code>typeName</code></li>
+</ol>
+</li>
+<li>
+<p>function <code>a + b</code>, which has usual semanthic, (<code>a</code> and <code>b</code> are num with the same type, for example <code>uint</code>)</p>
+</li>
+<li>
+<p>assignment <code>variable := term</code></p>
+<p>Where:</p>
+<ol>
+<li>variable is &quot;variable&quot;, which was declared before asignment</li>
+<li>term is variable or function</li>
+</ol>
+</li>
+</ol>
+<p>For example, consider our first <em>Ursus</em> function:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+refine // new 'x  : uint @ &quot;x&quot;  := {1} ; _  //.
+refine // y := y + x ; _  //.
+refine // _result := y // .
+return.
+Defined.
+Sync.
+</code></pre>
+<p>it will be prettier to rewrite in such way via using goal separator <code>{...}</code>:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+{ 
+   refine // new 'x  : uint @ &quot;x&quot;  := {1} ; _  //.
+   refine // y := y + x ; _  //.
+   refine // _result := y // .
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<p>Nice!
+Consider custom tactic <code>::</code>, it works like <code>refine</code>, but here is some features to reduce code. Now we can declare variable with the same semantic, but with new syntax <code>var name : typeName := value</code>
+And consider new way of declaring statements via using next notations:</p>
+<ol>
+<li><code>'//' e ';' _ '//'</code> → <code>'//' e </code></li>
+<li><code>'//' e '//'</code> → <code>'//' e '|'</code></li>
+</ol>
+<p>Where <code>'e'</code> is term of <code>UExpression...</code> type.</p>
+<p>And our code become look like this:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+{ 
+   ::// var 'x  : uint := {1} .
+   ::// y := y + x .
+   ::// _result := y |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<p>Why should we still use construction <code>new ...</code>, there is one reason <code>var ...</code> doesn't allow to write code in one &quot;piece&quot;:</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+refine // new 'x  : uint @ &quot;x&quot;  := {1} ; y := y + x ; _result := y  //.
+return.
+Defined.
+Sync.
+</code></pre>
+<h4 id="how-we-can-use-ursus-function-below"><a class="header" href="#how-we-can-use-ursus-function-below">How we can use Ursus function below?</a></h4>
+<p>Let's consider use case of <code>addOne</code> function.
+For example:
+<code>::// var new_y: uint := addOne(y);_|.</code></p>
+<p>Where <code>y</code> is <code>URValue uint ...</code> or <code>ULValue uint</code>, which was casted to <code>URValue uint false</code>.</p>
+<h3 id="ulvalue-urvalue"><a class="header" href="#ulvalue-urvalue">ULValue-URValue</a></h3>
+<p>In example above, consider type of each term are used here (or what would say coq proof mode):</p>
+<ol>
+<li><code>y: ULValue uint</code></li>
+<li><code>x: ULValue uint</code></li>
+<li><code>{1}: URValue uint false</code></li>
+<li><code>_result: ULValue uint</code> (coq get this type from <code>UExpression uint false</code> return type)</li>
+</ol>
+<h3 id="basic-construction"><a class="header" href="#basic-construction">Basic construction</a></h3>
+<p>Let's look to full simpleUExpression list:</p>
+<ol>
+<li>
+<p>assignment <code>// a := b </code>, where <code>a</code> and <code>b</code> have the same type, but <code>a</code> is <code>ULValue</code> and <code>b</code> is <code>URValue</code>:</p>
+<ol>
+<li><code>a</code> is variable or field of contract or structure</li>
+<li><code>b</code> is variable or result of function or field of contract or structure</li>
+<li>Operations with assignment. Here is list of available operations with assignment with standart semantic:
+<code>x += y</code>, <code>x -= y</code>, <code>x &amp;= y</code>, <code>x |= y</code>, <code>x /= y</code>, <code>x *= y</code>, <code>++ x</code>, <code>x ++</code>, <code>x --</code>, <code>-- x</code>, </li>
+</ol>
+<p>Where: <code>x</code> is <code>ULValue</code> and <code>y</code> is <code>URValue</code></p>
+</li>
+<li>
+<p>declaring new varibale <code>// new 'x : ty @ b := r ; _ |</code> (deprecated), </p>
+<p>Where:</p>
+<ol>
+<li><code>x</code> is name of variable (important! to use symbol &quot;<code>'</code>&quot;)</li>
+<li><code>ty</code> is type of variable <code>r</code></li>
+<li><code>r</code> is value with type <code>URValue...</code></li>
+<li><code>_</code> is rest of <code>UExpression</code> which needs to construct
+Notice, This way of declaring variable allows to create UExpression without <code>refine</code> or <code>::</code> tactic.
+After this statement, <code>x</code> will have type <code>ULValue ty</code>.</li>
+</ol>
+</li>
+<li>
+<p>declaring variables as tuple <code>// new ( x1 : ty1 , x2 : ty2 ) @ ( xb1 , xb2 ) := r ; _ |&quot;</code> </p>
+<p>Where:</p>
+<ol>
+<li><code>x1</code> and <code>x2</code> are name of variable</li>
+<li><code>ty1</code> is <code>ty2</code> are type of variable</li>
+<li><code>xb1</code> , <code>xb2</code> are strings of name <code>x1</code> and <code>x2</code> respectively</li>
+<li><code>r</code> is value with type <code>ty1 ** ty2</code></li>
+</ol>
+</li>
+<li>
+<p>declaring variable (works only with <code>::</code>) as tuple <code>// var ( x1 : ty1 , x2 : ty2 ) := r ; _ |</code> </p>
+<p>Where:</p>
+<ol>
+<li><code>x1</code> and <code>x2</code> are name of variable</li>
+<li><code>ty1</code> is <code>ty2</code> are type of variable</li>
+<li><code>r</code> is value with type <code>ty1 ** ty2</code></li>
+</ol>
+</li>
+<li>
+<p>declaring variable (works only with <code>::</code>) as tuple <code>// var x1 : ty1 , x2 : ty2  ; _ |</code>
+(the same as previous bullet point, but value us default for each type)</p>
+</li>
+</ol>
+<p>After these (<strong>point 3,4,5</strong>) statement, <code>x1</code> and <code>x2</code> will have type <code>ULValue ty1</code> and <code>ULValue ty2</code> respectively. </p>
+<ol start="6">
+<li>
+<p>calling Ursus function <code>// function (arg1,...,argN)</code>, </p>
+<p>Where </p>
+<ol>
+<li><code>function</code> is Ursus function or Ursus Defintion, which was declared above.</li>
+<li>arguments <code>arg1,...,argN</code>, where
+<ol>
+<li><code>argI</code> is result of some function or variable (has type <code>URValue...</code>)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="complex-construction"><a class="header" href="#complex-construction">Complex construction</a></h3>
+<p>Consider contruction, which has &quot;body&quot;, i.e. consist of another UExpression. We have already worked with it via using <code>// _ ; _ //</code>.</p>
+<ol>
+<li>
+<p>First will be if-statement <code>if x then { y } else { z }</code></p>
+<ol>
+<li><code>x</code> is term with type boolean (<code>URValue boolean mark</code>). <code>mark</code> is false or true.</li>
+<li><code>y</code> and <code>z</code> have type the same as type of term, whose part is this if-statement;</li>
+</ol>
+<p>For example consider, our old function</p>
+<pre><code class="language-coq">#[pure, returns=_result]
+Ursus Definition addOne (y : uint) : UExpression uint false.
+{ 
+   ::// var 'x  : uint := {1} .
+   ::// if (x &lt; y) then { -&gt;\&gt; } else { -&gt;\&gt; }.
+   {
+      ::// y := y + x |.
+   }
+   {
+      ::// y := x + y |.
+   }
+   ::// _result := y |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<p>Let's consider line <code>::// if (x &lt; y) then { -&gt;\&gt; } else { -&gt;\&gt; }.</code> before interpreting this line we have one goal <code>UExpression ...</code>, after that we give to this goal expression <code>if x &lt; y then { -&gt;\&gt; } else { -&gt;\&gt; }</code> and for defining this expression we need to give 2 part of if-statement: true-body and false-body. Notation <code>-&gt;\&gt;</code> means <code>{ _ : UExpression ...}</code> (placeholer basicaly, which means that we need define this term below). So after interpretting this constructions we have three goals: true-body, false-body, rest of function. And in the example these &quot;bodies&quot; are:
+3. true-body is <code>::// y := y + x |.</code>
+4. false-body is <code>::// y := x + y |.</code>
+5. rest of function is <code>::// _result := y |.</code></p>
+</li>
+<li>
+<p>Consider <code>if x then { y }</code>  if-statement. It is the same as the previous point, but here we don't need to define false-body (false-body is void actually here).</p>
+</li>
+<li>
+<p>Consider <code>while b do { f } </code> while-statement with usual semanthic from imperative language, </p>
+<p>Where </p>
+<ol>
+<li><code>b</code> is term with type boolean (<code>URValue boolean mark</code>). <code>mark</code> is false or true.</li>
+<li><code>f</code> is <code>UExpression</code> (let's call it <em>while-body</em>)</li>
+</ol>
+</li>
+<li>
+<p>Consider <code>doWhile b { f }</code> do-while-statement or do-repeat-statement with usual semanthic from imperative language, 
+Where </p>
+<ol>
+<li><code>b</code> is term with type boolean (<code>URValue boolean mark</code>). <code>mark</code> is false or true.</li>
+<li><code>f</code> is <code>UExpression</code> (let's call it <em>do-while-body</em>)</li>
+</ol>
+</li>
+<li>
+<p>Consider <code>for (var x : ty := r , b , after ) do { f }</code> for-statement is syntax sugar of this expression: <code>// var x : ty := r ; while ( b ) do { f ; after }</code></p>
+<ol>
+<li>So, we can do something with <code>x</code> in body <code>f</code></li>
+</ol>
+</li>
+<li>
+<p>Consider <code>for ( [ k , v ] in m ) do { f }</code> for-each-expression, which has next semanthic in case of type <code>m</code>:</p>
+<ol>
+<li>Let <code>m</code> of type <code>mapping keyType valueType</code>, so on body expression variable <code>k</code> and <code>v</code> are aviable in <code>f</code> body, </li>
+</ol>
+<p>Where <code>k</code> and <code>v</code> are <code>key</code> and <code>value</code> type, respectively. It iterates for each key and value of this mapping
+2. Let <code>m</code> of type <code>A[]</code>, </p>
+<p>Where <code>k</code> and <code>v</code> are <code>uint</code> and <code>A</code> type, respectively. It iterates for each index and value of array <code>A[]</code>
+3. So, we can do something with <code>k</code> and <code>v</code>, they have types <code>ULValue key</code> and <code>ULValue value</code> respectively in body <code>f</code>.</p>
+</li>
+<li>
+<p>Consider <code>for ( [ k , v ] in m ; cond ) do { f }</code> for-each-expression with condition has the same semantic as the previus one, but iteration can break if conidtion <code>cond</code> isn't satisfied.</p>
+<ol>
+<li>So, we can do something with <code>k</code> and <code>v</code>, they have types <code>ULValue key</code> and <code>ULValue value</code> respectively in body <code>f</code>.</li>
+</ol>
+</li>
+<li>
+<p>Consider <code>for ( v in m ) do { f }</code> yet another version of for-each-expression, which has next semanthic in case of type <code>m</code>:</p>
+</li>
+<li>
+<p>Let <code>m</code> of type <code>mapping keyType valueType</code>, so on body expression variable <code>v</code> is aviable in <code>f</code> body, </p>
+</li>
+</ol>
+<p>Where <code>v</code> has <code>value</code> type. It iterates for each value of this mapping
+2. Let <code>m</code> of type <code>A[]</code>, </p>
+<pre><code>Where ```v``` has ```A``` type. It iterates for each value of array ```A[]```
+</code></pre>
+<ol start="3">
+<li>So, we can do something with <code>v</code>, it has type <code>ULValue value</code> respectively in body <code>f</code>.</li>
+<li>Consider <code>for ( v in m ; cond ) do { f }</code> for-each-expression with condition has the same semantic as the previus one, but iteration can break if conidtion <code>cond</code> isn't satisfied.
+<ol>
+<li>So, we can do something with <code>v</code>, it has type <code>ULValue value</code> respectively in body <code>f</code>.</li>
+</ol>
+</li>
+</ol>
+<h2 id="how-to-model-modifiers"><a class="header" href="#how-to-model-modifiers">How to model modifiers?</a></h2>
+<p>Ursus can model modifiers as simple void function (let's call it as <code>modifier_example</code>), i.e. term with the next type: <code>type1 -&gt; ... -&gt; typeN -&gt; UExpression PhantomType false</code> or <code>type1 -&gt; ...-&gt; typeN -&gt; UExpression PhantomType true</code>.
+And modifier invocation will use like this in Ursus function:</p>
+<pre><code class="language-coq">Ursus Definition some_function:UExpression PhantomType false.
+::// modifier_example() ;_|.
+{
+    ...
+}
+return.
+Defined.
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ulang/structures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../ulang/messages.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ulang/structures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../ulang/messages.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src=".././theme/highlight.js"></script>
+
+
+    </body>
+</html>
