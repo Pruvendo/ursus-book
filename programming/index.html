@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ursus programming style - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="ursus-programming-style"><a class="header" href="#ursus-programming-style">Ursus Programming Style</a></h1>
+<p>Ursus is not just a language—it's a <strong>proof-driven development environment</strong> built on Coq. Understanding how to work effectively in this environment is essential for productive contract development.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Programming in Ursus combines:</p>
+<ol>
+<li><strong>Interactive Development</strong> - Using Coq's REPL for immediate feedback</li>
+<li><strong>Proof Mode</strong> - Leveraging Coq's goal-directed programming</li>
+<li><strong>Tactical Programming</strong> - Using tactics to construct code</li>
+<li><strong>Holes and Refinement</strong> - Incremental program construction</li>
+</ol>
+<p>This approach enables:</p>
+<ul>
+<li><strong>Type-driven development</strong> - Let types guide implementation</li>
+<li><strong>Incremental verification</strong> - Prove properties as you code</li>
+<li><strong>Interactive debugging</strong> - Inspect goals and context at any point</li>
+<li><strong>Automated code generation</strong> - Use tactics to generate boilerplate</li>
+</ul>
+<h2 id="the-ursus-workflow"><a class="header" href="#the-ursus-workflow">The Ursus Workflow</a></h2>
+<pre><code>1. Write function signature
+   ↓
+2. Enter proof mode (see goals)
+   ↓
+3. Use tactics to refine goals
+   ↓
+4. Fill holes incrementally
+   ↓
+5. Complete definition
+   ↓
+6. Sync with code generator
+</code></pre>
+<h2 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h2>
+<h3 id="repl-read-eval-print-loop"><a class="header" href="#repl-read-eval-print-loop">REPL (Read-Eval-Print Loop)</a></h3>
+<p>Coq provides an interactive environment where you can:</p>
+<ul>
+<li>Load contract files</li>
+<li>Execute commands</li>
+<li>Inspect definitions</li>
+<li>Test functions</li>
+<li>Prove properties</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="repl.html">REPL</a></p>
+<h3 id="goals-and-context"><a class="header" href="#goals-and-context">Goals and Context</a></h3>
+<p>When writing Ursus functions, you work in <strong>proof mode</strong>:</p>
+<ul>
+<li><strong>Goal</strong> - What you need to construct</li>
+<li><strong>Context</strong> - Available variables and hypotheses</li>
+<li><strong>Tactics</strong> - Commands to transform goals</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="context.html">Goal and Context</a></p>
+<h3 id="tactics-and-tacticals"><a class="header" href="#tactics-and-tacticals">Tactics and Tacticals</a></h3>
+<p>Tactics are commands that construct code:</p>
+<ul>
+<li><code>refine</code> - Provide partial term with holes</li>
+<li><code>::</code> - Ursus-specific statement tactic</li>
+<li><code>apply</code> - Apply a function or lemma</li>
+<li><code>simpl</code> - Simplify expressions</li>
+<li><code>auto</code> - Automated proof search</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="tactics.html">Tactics and Tacticals</a></p>
+<h3 id="holes"><a class="header" href="#holes">Holes</a></h3>
+<p>Holes (<code>_</code>) are placeholders for code to be filled later:</p>
+<ul>
+<li>Type-checked placeholders</li>
+<li>Enable incremental development</li>
+<li>Show what needs to be constructed</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="holes.html">Holes</a></p>
+<h2 id="example-interactive-development"><a class="header" href="#example-interactive-development">Example: Interactive Development</a></h2>
+<p>Let's see how to develop a function interactively:</p>
+<h3 id="1-start-with-signature"><a class="header" href="#1-start-with-signature">1. Start with Signature</a></h3>
+<pre><code class="language-coq">Ursus Definition transfer (to: address) (amount: uint256):
+  UExpression boolean false.
+</code></pre>
+<h3 id="2-enter-proof-mode"><a class="header" href="#2-enter-proof-mode">2. Enter Proof Mode</a></h3>
+<p>Coq shows the goal:</p>
+<pre><code>1 subgoal
+______________________________________(1/1)
+UExpression boolean false
+</code></pre>
+<h3 id="3-use-tactics-to-build-code"><a class="header" href="#3-use-tactics-to-build-code">3. Use Tactics to Build Code</a></h3>
+<pre><code class="language-coq">{
+    refine // balances[[msg-&gt;sender]] := balances[[msg-&gt;sender]] - amount ; _ //.
+}
+</code></pre>
+<p><strong>New goal:</strong></p>
+<pre><code>1 subgoal
+______________________________________(1/1)
+UExpression boolean false
+</code></pre>
+<h3 id="4-continue-refining"><a class="header" href="#4-continue-refining">4. Continue Refining</a></h3>
+<pre><code class="language-coq">{
+    refine // balances[[msg-&gt;sender]] := balances[[msg-&gt;sender]] - amount ; _ //.
+    refine // balances[[to]] := balances[[to]] + amount ; _ //.
+    refine // @true //.
+}
+</code></pre>
+<h3 id="5-complete-definition"><a class="header" href="#5-complete-definition">5. Complete Definition</a></h3>
+<pre><code class="language-coq">return.
+Defined.
+Sync.
+</code></pre>
+<h2 id="modern-ursus-style"><a class="header" href="#modern-ursus-style">Modern Ursus Style</a></h2>
+<p>The <code>::</code> tactic provides cleaner syntax:</p>
+<p><strong>Old style (verbose):</strong></p>
+<pre><code class="language-coq">refine // new 'x : uint256 @ "x" := {1} ; _ //.
+refine // y := y + x ; _ //.
+refine // _result := y //.
+</code></pre>
+<p><strong>New style (concise):</strong></p>
+<pre><code class="language-coq">{
+    ::// var 'x : uint256 := {1} .
+    ::// y := y + x .
+    ::// _result := y |.
+}
+</code></pre>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>More readable</li>
+<li>Less boilerplate</li>
+<li>Clearer intent</li>
+<li>Easier to maintain</li>
+</ul>
+<h2 id="development-patterns"><a class="header" href="#development-patterns">Development Patterns</a></h2>
+<h3 id="pattern-1-top-down-development"><a class="header" href="#pattern-1-top-down-development">Pattern 1: Top-Down Development</a></h3>
+<p>Start with high-level structure, fill details later:</p>
+<pre><code class="language-coq">Ursus Definition complexFunction (x: uint256): UExpression uint256 false.
+{
+    ::// if x &gt; {100} then { -&gt;&gt; } else { -&gt;&gt; } | .
+    {
+        (* TODO: Fill then branch *)
+        ::// skip_ |.
+    }
+    {
+        (* TODO: Fill else branch *)
+        ::// skip_ |.
+    }
+}
+return {0}.
+Defined.
+</code></pre>
+<h3 id="pattern-2-bottom-up-development"><a class="header" href="#pattern-2-bottom-up-development">Pattern 2: Bottom-Up Development</a></h3>
+<p>Build helper functions first:</p>
+<pre><code class="language-coq">(* Helper function *)
+Ursus Definition calculateFee (amount: uint256): UExpression uint256 false.
+{
+    ::// var 'fee : uint256 := amount * {3} / {100} |.
+}
+return fee.
+Defined.
+
+(* Main function using helper *)
+Ursus Definition processPayment (amount: uint256): UExpression uint256 false.
+{
+    ::// var 'fee : uint256 := calculateFee(amount) .
+    ::// var 'total : uint256 := amount + fee |.
+}
+return total.
+Defined.
+</code></pre>
+<h3 id="pattern-3-test-driven-development"><a class="header" href="#pattern-3-test-driven-development">Pattern 3: Test-Driven Development</a></h3>
+<p>Write tests first, then implement:</p>
+<pre><code class="language-coq">(* Test specification *)
+Theorem transfer_reduces_sender_balance:
+  forall sender to amount s s',
+    exec_transfer sender to amount s = Some s' -&gt;
+    balance s' sender = balance s sender - amount.
+Proof.
+  (* Proof guides implementation *)
+Admitted.
+
+(* Implementation *)
+Ursus Definition transfer (to: address) (amount: uint256):
+  UExpression boolean false.
+{
+    (* Implementation satisfies theorem *)
+}
+return.
+Defined.
+</code></pre>
+<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
+<h3 id="1-use-descriptive-names"><a class="header" href="#1-use-descriptive-names">1. Use Descriptive Names</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">::// var 'totalFee : uint256 := calculateFee(amount) .
+::// var 'recipientBalance : uint256 := balances[[recipient]] .
+</code></pre>
+<p><strong>Bad:</strong></p>
+<pre><code class="language-coq">::// var 'x : uint256 := calculateFee(amount) .
+::// var 'b : uint256 := balances[[recipient]] .
+</code></pre>
+<h3 id="2-keep-functions-small"><a class="header" href="#2-keep-functions-small">2. Keep Functions Small</a></h3>
+<p>Break complex logic into smaller functions:</p>
+<pre><code class="language-coq">(* Good: Small, focused functions *)
+Ursus Definition validateAmount (amount: uint256): UExpression boolean false.
+Ursus Definition updateBalance (addr: address) (amount: uint256): UExpression unit false.
+Ursus Definition transfer (to: address) (amount: uint256): UExpression boolean false.
+
+(* Bad: One giant function *)
+Ursus Definition doEverything (...): UExpression ... .
+</code></pre>
+<h3 id="3-use-type-annotations"><a class="header" href="#3-use-type-annotations">3. Use Type Annotations</a></h3>
+<p>Help Coq infer types correctly:</p>
+<pre><code class="language-coq">::// var 'balance : uint256 := balances[[addr]] .  (* Explicit type *)
+</code></pre>
+<h3 id="4-leverage-proof-mode"><a class="header" href="#4-leverage-proof-mode">4. Leverage Proof Mode</a></h3>
+<p>Use Coq's proof mode to explore:</p>
+<pre><code class="language-coq">{
+    (* Check current goal *)
+    Show.
+
+    (* Simplify to see what's needed *)
+    simpl.
+
+    (* Continue development *)
+    ::// ...
+}
+</code></pre>
+<h2 id="debugging-techniques"><a class="header" href="#debugging-techniques">Debugging Techniques</a></h2>
+<h3 id="inspect-goals"><a class="header" href="#inspect-goals">Inspect Goals</a></h3>
+<pre><code class="language-coq">{
+    ::// var 'x : uint256 := {42} .
+    Show.  (* See current goal and context *)
+    ::// ...
+}
+</code></pre>
+<h3 id="simplify-expressions"><a class="header" href="#simplify-expressions">Simplify Expressions</a></h3>
+<pre><code class="language-coq">{
+    simpl.  (* Reduce complex expressions *)
+    ::// ...
+}
+</code></pre>
+<h3 id="check-types"><a class="header" href="#check-types">Check Types</a></h3>
+<pre><code class="language-coq">Check balances[[addr]].
+(* ULValue uint256 *)
+
+Check {42}.
+(* URValue uint256 false *)
+</code></pre>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li><a href="repl.html">REPL</a> - Interactive development environment</li>
+<li><a href="context.html">Goal and Context</a> - Understanding proof mode</li>
+<li><a href="tactics.html">Tactics</a> - Building code with tactics</li>
+<li><a href="holes.html">Holes</a> - Incremental program construction</li>
+</ul>
+<h2 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h2>
+<ul>
+<li><a href="https://coq.inria.fr/refman/proof-engine/tactics.html">Coq Reference Manual - Tactics</a></li>
+<li><a href="https://softwarefoundations.cis.upenn.edu/lf-current/Tactics.html">Software Foundations - Tactics</a></li>
+<li><a href="http://adam.chlipala.net/cpdt/">CPDT - Proof Engineering</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ulang/inheritance.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../programming/repl.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ulang/inheritance.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../programming/repl.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

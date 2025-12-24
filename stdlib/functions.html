@@ -1,0 +1,670 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Standart functions - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="standard-functions"><a class="header" href="#standard-functions">Standard Functions</a></h1>
+<p>The Ursus Standard Library provides a comprehensive set of functions for working with various data types. This guide covers all available standard functions organized by category.</p>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ol>
+<li><a href="#mapping-functions">Mapping Functions</a></li>
+<li><a href="#optional-functions">Optional Functions</a></li>
+<li><a href="#array-functions">Array Functions</a></li>
+<li><a href="#string-functions">String Functions</a></li>
+<li><a href="#math-functions">Math Functions</a></li>
+<li><a href="#crypto-functions">Crypto Functions</a></li>
+<li><a href="#type-conversion">Type Conversion</a></li>
+</ol>
+<h2 id="mapping-functions"><a class="header" href="#mapping-functions">Mapping Functions</a></h2>
+<p>Mappings are key-value data structures similar to hash maps or dictionaries.</p>
+<p><strong>Type notation:</strong></p>
+<pre><code class="language-coq">m : URValue (mapping keyType valueType)
+k : URValue keyType
+v : URValue valueType
+</code></pre>
+<h3 id="basic-operations"><a class="header" href="#basic-operations">Basic Operations</a></h3>
+<hr />
+<p><code>fetch</code> returns value of key <code>k</code> in mapping <code>m</code>.</p>
+<pre><code class="language-coq">\\ m-&gt;fetch(k) \\ : URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var val: optional uint := uint_to_uint_dict-&gt;fetch({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>exists</code> returns whether key <code>k</code> exists in the mapping.</p>
+<pre><code class="language-coq">\\ m-&gt;exists(k) \\: URValue boolean
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var val: boolean := uint_to_uint_dict-&gt;exists({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>set</code> sets the value associated with key and returns update mapping</p>
+<pre><code class="language-coq">\\ m-&gt;set(k, v) \\: URValue (mapping keyType valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var new_map: mapping uint uint := old_map-&gt;set({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>delete</code> deletes the value associated with key and returns update mapping</p>
+<pre><code class="language-coq">\\ m-&gt;delete(k) \\: URValue (mapping keyType valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var new_map: mapping uint uint := old_map-&gt;delete({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>min</code> returns mininum in the list of keys (<code>&lt;</code> must be defined for <code>keyType</code>)</p>
+<pre><code class="language-coq">\\ m-&gt;min() \\: URValue (optional keyType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var minimum: optional uint := uint_to_uint_dict-&gt;min() ;_|.
+</code></pre>
+<hr />
+<p><code>max</code> returns maximum in the list of keys (<code>&lt;</code> must be defined for <code>keyType</code>)</p>
+<pre><code class="language-coq">\\ m-&gt;max() \\: URValue (optional keyType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var maximum: optional uint := uint_to_uint_dict-&gt;max() ;_|.
+</code></pre>
+<hr />
+<p><code>next</code> returns next or greater of key <code>k</code> in keys order and associated value in pair</p>
+<pre><code class="language-coq">\\ m-&gt;next(k) \\: URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var next_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;next({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>prev</code> returns previous or lesser of key <code>k</code> in keys order and associated value in pair</p>
+<pre><code class="language-coq">\\ m-&gt;prev(k) \\ : URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var prev_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;prev({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>nextOrEq</code> computes the maximal key in the mapping that is lexicographically less than or equal to key and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">\\ m-&gt;nextOrEq(k) \\ : URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var prev_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;nextOrEq({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>prevOrEq</code> computes the minimal key in the mapping that is lexicographically greater than or equal to key and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">\\ m-&gt;prevOrEq(k) \\ : URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var prev_one: optional (keyType ** valueType) := uint_to_uint_dict-&gt;prevOrEq({3}) ;_|.
+</code></pre>
+<!-- ```m->nextOrEq(k)``` and ```m->prevOrEq(k)``` return term of type ```optional (keyType ** valueType)```, which means maximal and minimal key of lex order with the associated value, respectively -->
+<hr />
+<p><code>replace</code> sets the value <code>v</code> associated with key <code>k</code> only if key exists in the mapping and returns the success flag.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;replace(k, v) \\: URValue boolean
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag: boolean := uint_to_uint_dict-&gt;replace({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>getReplace</code> sets the value associated with key, but only if key exists in the mapping. On success, returns an optional with the old value associated with the key. Otherwise, returns an empty optional.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;getReplace(k, v) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var old_value: optional valueType := uint_to_uint_dict-&gt;getReplace({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>erase</code> removes assotiated value for key <code>k</code></p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;erase(k) //: UExpression ?R ?b
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;erase({3}) .
+</code></pre>
+<hr />
+<p>If mapping is not empty, then this <code>delMin</code> computes the minimal key of the mapping, deletes that key and the associated value from the mapping and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;delMin() //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;delMin() \\: URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;delMin() .
+::// var old_value: optional valueType := uint_to_uint_dict-&gt;delMin() ;_|.
+</code></pre>
+<hr />
+<p>If mapping is not empty, then this <code>delMax</code> computes the maximal key of the mapping, deletes that key and the associated value from the mapping and returns an optional value containing that key and the associated value. Returns an empty optional if there is no such key.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;delMax() //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;delMax() \\: URValue (optional (keyType ** valueType))
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;delMax() .
+::// var old_value: optional valueType := uint_to_uint_dict-&gt;delMax() ;_|.
+</code></pre>
+<hr />
+<p><code>getSet</code> sets the value associated with key, but also returns an optional with the previous value associated with the key, if any. Otherwise, returns an empty optional.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;getSet(k, v) //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;getSet(k, v) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;getSet(k, v) .
+::// var old_value: optional valueType := uint_to_uint_dict-&gt;getSet({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>add</code> sets the value associated with key and returns whether key <code>k</code> was in the mapping before.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;add(k, v) //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;add(k, v) \\: URValue boolean
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;add(k, v) .
+::// var flag: boolean := uint_to_uint_dict-&gt;add({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>getAdd</code> sets the value associated with key and returns previous associated value (if it doesn't exist then returns None).</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;getAdd(k, v) //: UExpression ?R ?b
+</code></pre>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;getAdd(k, v) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;getAdd(k, v) .
+::// var flag: optional valueType  := uint_to_uint_dict-&gt;getAdd({3}, {3}) ;_|.
+</code></pre>
+<hr />
+<p><code>set_at</code> sets the associated value <code>v</code> with key <code>k</code>.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;set_at(k, v) //: UExpression ?R ?b
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;set_at(k, v) .
+</code></pre>
+<hr />
+<p><code>extract</code> sets the value associated with key and returns previous associated value (if it doesn't exist then returns None).</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;extract(k) \\: URValue (optional valueType)
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var old_value: optional valueType  := uint_to_uint_dict-&gt;extract({3}) ;_|.
+</code></pre>
+<hr />
+<p><code>insert</code> sets the value associated with key.</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+// m-&gt;insert((k, v)) //: UExpression ?R ?b
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// uint_to_uint_dict-&gt;insert(({3}, {3})) .
+</code></pre>
+<hr />
+<p><code>at</code> returns the value associated with key (if it doesn't exist then throw error).</p>
+<pre><code class="language-coq">m: ULValue (mapping keyType valueType)
+\\ m-&gt;at(k) \\: URValue valueType true
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var old_value: valueType  := uint_to_uint_dict-&gt;at({3}) ;_|.
+</code></pre>
+<p><code>at</code> <strong>is a true-function</strong></p>
+<hr />
+<h4 id="string-operations"><a class="header" href="#string-operations">String operations</a></h4>
+<p>Consider terms with name and type such as:</p>
+<pre><code class="language-coq">\\ x \\: URValue string _
+\\ y \\: URValue string _
+</code></pre>
+<hr />
+<p><code>is_prefix</code> returns whether <code>x</code> prefix of <code>y</code>.</p>
+<pre><code class="language-coq">\\ x is_prefix y \\: URValue boolean _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag: boolean := ({"abs"} is_prefix {"absc"}) ;_|.
+</code></pre>
+<hr />
+<p><code>substr</code> returns substring of string <code>x</code> from n-th to m-th position (m &gt; n)</p>
+<pre><code class="language-coq">n: URValue uint _
+m: URValue uint _
+\\ x-&gt;substr(n, m) \\: URValue string _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var sub: boolean := {"abs"}-&gt;substr({2},{4}) ;_|.
+</code></pre>
+<hr />
+<p><code>find</code> does something</p>
+<pre><code class="language-coq">x: URValue string _
+y: URValue uint _
+\\ x-&gt;find(y) \\: URValue (optional uint) _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var num: optional uint := {"abs"}-&gt;find({"abs"}) ;_|.
+</code></pre>
+<hr />
+<p><code>appendString</code>, <code>appendBytes</code> returns concatenation of strings <code>x</code> and <code>y</code>.</p>
+<pre><code class="language-coq">\\ x-&gt;appendString(y) \\: URValue string _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var xy: string := {"x"}-&gt;appendString({"y"}) ;_|.
+</code></pre>
+<h4 id="optional-operations"><a class="header" href="#optional-operations">Optional operations</a></h4>
+<p>Consider terms with name and type such as:</p>
+<pre><code class="language-coq">\\ v \\: URValue valueType _
+\\ x \\: URValue (optional valueType) _
+</code></pre>
+<hr />
+<p><code>hasValue</code> returns whether <code>x</code> has value</p>
+<pre><code class="language-coq">\\ x-&gt;hasValue() \\ : URValue boolean _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag: boolean := x-&gt;hasValue()  ;_|.
+</code></pre>
+<hr />
+<p><code>set</code>, <code>some</code> wrapped value in optional <code>v</code></p>
+<pre><code class="language-coq">\\ v-&gt;set() \\: URValue (optional valueType) _
+\\ some(v) \\: URValue (optional valueType) _
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var flag1: optional boolean := some(@false)  ;_|.
+::// var flag2: optional boolean := (@false)-&gt;set()  ;_|.
+</code></pre>
+<hr />
+<h2><code>reset</code> put none in optional <code>v</code>
+\ x-&gt;reset() \: URValue (optional valueType) _</h2>
+<p><code>get</code> returns value from optional, or if it doesn't exist then throw error.</p>
+<pre><code class="language-coq">\\ x-&gt;get() \\: URValue valueType true
+</code></pre>
+<p>Piece of example:</p>
+<pre><code class="language-coq">::// var value: valueType := x-&gt;get() ;_|.
+</code></pre>
+<h2><code>get</code> <strong>is a true-function</strong>
+<code>get_default</code> is 'false' version of <code>get</code> function</h2>
+<ol>
+<li><code>x-&gt;reset()</code> put <code>Null/None/xMaybeNone</code> into <code>x</code></li>
+<li><code>x-&gt;set(a)</code> put value <code>a</code> into <code>x</code></li>
+</ol>
+<h4 id="function-length"><a class="header" href="#function-length">Function length</a></h4>
+<ol>
+<li><code>x-&gt;length</code> returns term of type <code>uint</code>, which simply means lenght of term <code>x</code></li>
+</ol>
+<h4 id="function-empty"><a class="header" href="#function-empty">Function empty</a></h4>
+<ol>
+<li><code>x-&gt;empty()</code> returns term of type <code>boolean</code>, which means is <code>x</code> empty</li>
+</ol>
+<h4 id="operations-with-queue"><a class="header" href="#operations-with-queue">Operations with queue</a></h4>
+<ol>
+<li><code>x-&gt;queue_pop()</code></li>
+<li><code>x-&gt;begin()</code></li>
+<li><code>x-&gt;end()</code></li>
+<li><code>x-&gt;queue_push()</code></li>
+<li><code>x-&gt;front_with_idx_opt()</code>
+" x '-&gt;' 'front_with_idx' '()'" := (queue_begin_right x)
+" x '-&gt;' 'back_with_idx' '()'  " :=  (queue_end_right x)</li>
+</ol>
+<h4 id="operations-with-bytes"><a class="header" href="#operations-with-bytes">Operations with bytes</a></h4>
+<ol>
+<li><code>bytes_app x y</code></li>
+<li><code>x-&gt;bytes_get(n)</code></li>
+</ol>
+<h4 id="operations-with-vector"><a class="header" href="#operations-with-vector">Operations with vector</a></h4>
+<ol>
+<li>function <code>x-&gt;push(y)</code> which adds to the end of vector <code>x</code> element <code>y</code></li>
+<li>function <code>x-&gt;pop()</code> which removes last element of vector <code>x</code> and returns it</li>
+</ol>
+<h4 id="unpack"><a class="header" href="#unpack">Unpack</a></h4>
+<ol>
+<li><code>x-&gt;unpack()</code></li>
+</ol>
+<h4 id="casting-functions"><a class="header" href="#casting-functions">Casting functions</a></h4>
+<p>Here is list of available casting operations for nums:</p>
+<ol>
+<li><code>int(num)</code></li>
+<li><code>uint8!(num)</code></li>
+<li><code>uint8(num)</code></li>
+<li><code>uint16!(num)</code></li>
+<li><code>uint16'(num)</code></li>
+<li><code>uint32!(num)</code></li>
+<li><code>uint32(num)</code></li>
+<li><code>uint64!(num)</code></li>
+<li><code>uint64(num)</code></li>
+<li><code>varUint16!(num)</code></li>
+<li><code>uint128!(num)</code></li>
+<li><code>uint128(num)</code></li>
+<li><code>uint256!(num)</code></li>
+<li><code>uint256(num)</code></li>
+</ol>
+<p><strong>Casting rules:</strong></p>
+<ol>
+<li><code>uintN(num)</code> - Safe cast from <code>uintM</code> to <code>uintN</code> where M ≤ N</li>
+<li><code>uintN!(num)</code> - Unsafe cast to <code>uintN</code> (may truncate, <strong>true-function</strong>)</li>
+</ol>
+<h2 id="math-functions"><a class="header" href="#math-functions">Math Functions</a></h2>
+<h3 id="basic-math"><a class="header" href="#basic-math">Basic Math</a></h3>
+<p><strong>min/max:</strong></p>
+<pre><code class="language-coq">\\ min(x, y) \\     (* Minimum of two values *)
+\\ max(x, y) \\     (* Maximum of two values *)
+\\ math-&gt;min(x, y) \\
+\\ math-&gt;max(x, y) \\
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var minimum : uint256 := min(balance, limit) ;_|.
+::// var maximum : uint256 := max({100}, {200}) ;_|.
+</code></pre>
+<p><strong>Absolute value:</strong></p>
+<pre><code class="language-coq">\\ math-&gt;abs(x) \\  (* Returns same type as x *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var absolute : int256 := math-&gt;abs({-42}) ;_|.
+</code></pre>
+<h3 id="advanced-math"><a class="header" href="#advanced-math">Advanced Math</a></h3>
+<p><strong>muldiv - Multiply and divide:</strong></p>
+<pre><code class="language-coq">\\ math-&gt;muldiv(x, y, z) \\  (* (x * y) / z *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var result : uint256 := math-&gt;muldiv(price, amount, {100}) ;_|.
+</code></pre>
+<p><strong>muldivmod - Multiply, divide and modulo:</strong></p>
+<pre><code class="language-coq">\\ math-&gt;muldivmod(x, y, z) \\  (* Returns [(x * y) / z, (x * y) % z] *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var result : (uint256 ** uint256) := math-&gt;muldivmod(a, b, c) ;_|.
+</code></pre>
+<h3 id="checked-arithmetic"><a class="header" href="#checked-arithmetic">Checked Arithmetic</a></h3>
+<p>Safe arithmetic operations that return <code>optional</code> on overflow:</p>
+<p><strong>Checked addition:</strong></p>
+<pre><code class="language-coq">\\ checked_add(x, y) \\  (* Returns Some(x+y) or None on overflow *)
+</code></pre>
+<p><strong>Checked subtraction:</strong></p>
+<pre><code class="language-coq">\\ checked_sub(x, y) \\  (* Returns Some(x-y) or None on underflow *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var safe_sum : optional uint256 := checked_add(balance, amount) ;_|.
+::// if safe_sum-&gt;hasValue() then { -&gt;&gt; } else { -&gt;&gt; } |.
+{
+    ::// balance := safe_sum-&gt;get() |.
+}
+{
+    ::// revert("Overflow") |.
+}
+</code></pre>
+<h2 id="array-functions"><a class="header" href="#array-functions">Array Functions</a></h2>
+<p><strong>push - Add element to end:</strong></p>
+<pre><code class="language-coq">// array-&gt;push(element) //
+</code></pre>
+<p><strong>pop - Remove and return last element:</strong></p>
+<pre><code class="language-coq">\\ array-&gt;pop() \\  (* Returns removed element *)
+</code></pre>
+<p><strong>length - Get array length:</strong></p>
+<pre><code class="language-coq">\\ array-&gt;length \\
+</code></pre>
+<p><strong>empty - Check if empty:</strong></p>
+<pre><code class="language-coq">\\ array-&gt;empty() \\
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// items-&gt;push({42}) .
+::// var last : uint256 := items-&gt;pop() ;_|.
+::// var count : uint256 := items-&gt;length ;_|.
+::// var is_empty : boolean := items-&gt;empty() ;_|.
+</code></pre>
+<h2 id="queue-functions"><a class="header" href="#queue-functions">Queue Functions</a></h2>
+<p><strong>push - Add to queue:</strong></p>
+<pre><code class="language-coq">// queue-&gt;queue_push(element) //
+</code></pre>
+<p><strong>pop - Remove from queue:</strong></p>
+<pre><code class="language-coq">\\ queue-&gt;queue_pop() \\
+</code></pre>
+<p><strong>begin/end - Get first/last:</strong></p>
+<pre><code class="language-coq">\\ queue-&gt;begin() \\
+\\ queue-&gt;end() \\
+</code></pre>
+<p><strong>front_with_idx - Get front with index:</strong></p>
+<pre><code class="language-coq">\\ queue-&gt;front_with_idx() \\
+\\ queue-&gt;front_with_idx_opt() \\
+</code></pre>
+<p><strong>back_with_idx - Get back with index:</strong></p>
+<pre><code class="language-coq">\\ queue-&gt;back_with_idx() \\
+</code></pre>
+<h2 id="bytes-functions"><a class="header" href="#bytes-functions">Bytes Functions</a></h2>
+<p><strong>Concatenation:</strong></p>
+<pre><code class="language-coq">\\ bytes_app(x, y) \\
+</code></pre>
+<p><strong>Get byte at index:</strong></p>
+<pre><code class="language-coq">\\ bytes-&gt;bytes_get(n) \\
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var combined : bytes := bytes_app(data1, data2) ;_|.
+::// var byte_val : uint8 := data-&gt;bytes_get({5}) ;_|.
+</code></pre>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="primitives.html">Primitives</a> - Basic types</li>
+<li><a href="operators.html">Operators</a> - Arithmetic and logical operators</li>
+<li><a href="TVM.html">TVM Functions</a> - Platform-specific functions</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../stdlib/primitives.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../stdlib/operators.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../stdlib/primitives.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../stdlib/operators.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

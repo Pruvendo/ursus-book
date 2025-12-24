@@ -1,0 +1,652 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Designing contract - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="designing-the-contract-multisignature-wallet"><a class="header" href="#designing-the-contract-multisignature-wallet">Designing the Contract: Multisignature Wallet</a></h1>
+<p>This chapter walks through the design of a real-world smart contract: a <strong>Multisignature Wallet</strong> for TON blockchain. We'll analyze the original Solidity implementation and understand its architecture before implementing it in Ursus.</p>
+<h2 id="what-is-a-multisignature-wallet"><a class="header" href="#what-is-a-multisignature-wallet">What is a Multisignature Wallet?</a></h2>
+<p>A multisignature (multisig) wallet is a smart contract that requires multiple parties to approve a transaction before it can be executed. This provides enhanced security compared to single-signature wallets.</p>
+<h3 id="key-concepts"><a class="header" href="#key-concepts">Key Concepts</a></h3>
+<p><strong>Custodians</strong>: Authorized parties who can propose and approve transactions. Each custodian has a unique public key.</p>
+<p><strong>Confirmations</strong>: Number of custodian approvals required to execute a transaction. Configurable (e.g., 2-of-3, 3-of-5).</p>
+<p><strong>Transactions</strong>: Proposed transfers that wait for confirmations before execution.</p>
+<p><strong>Expiration</strong>: Transactions have a lifetime (1 hour) after which they are automatically removed.</p>
+<h2 id="requirements-analysis"><a class="header" href="#requirements-analysis">Requirements Analysis</a></h2>
+<h3 id="functional-requirements"><a class="header" href="#functional-requirements">Functional Requirements</a></h3>
+<ol>
+<li>
+<p><strong>Multi-party Authorization</strong></p>
+<ul>
+<li>Support up to 32 custodians</li>
+<li>Configurable confirmation threshold (M-of-N)</li>
+<li>Each custodian can propose transactions</li>
+<li>Each custodian can confirm pending transactions</li>
+</ul>
+</li>
+<li>
+<p><strong>Transaction Management</strong></p>
+<ul>
+<li>Create new transactions</li>
+<li>Confirm pending transactions</li>
+<li>Automatic execution when threshold reached</li>
+<li>Automatic cleanup of expired transactions</li>
+</ul>
+</li>
+<li>
+<p><strong>Security Features</strong></p>
+<ul>
+<li>Prevent double-confirmation by same custodian</li>
+<li>Limit pending transactions per custodian (max 5)</li>
+<li>Minimum transfer value check</li>
+<li>Public key verification</li>
+</ul>
+</li>
+<li>
+<p><strong>Special Features</strong></p>
+<ul>
+<li>Support for ECC tokens (TON-specific)</li>
+<li>Direct send for single-custodian wallets</li>
+<li>Configurable message flags</li>
+<li>Payload support for complex messages</li>
+</ul>
+</li>
+</ol>
+<h3 id="security-requirements"><a class="header" href="#security-requirements">Security Requirements</a></h3>
+<ol>
+<li>
+<p><strong>Access Control</strong></p>
+<ul>
+<li>Only custodians can propose transactions</li>
+<li>Only custodians can confirm transactions</li>
+<li>Constructor requires deployer's public key</li>
+</ul>
+</li>
+<li>
+<p><strong>State Integrity</strong></p>
+<ul>
+<li>Prevent replay attacks (unique transaction IDs)</li>
+<li>Prevent race conditions (atomic confirmations)</li>
+<li>Prevent resource exhaustion (limits on pending transactions)</li>
+</ul>
+</li>
+<li>
+<p><strong>Error Handling</strong></p>
+<ul>
+<li>Clear error codes for all failure cases</li>
+<li>Require statements for all preconditions</li>
+<li>Safe arithmetic (no overflows)</li>
+</ul>
+</li>
+</ol>
+<h3 id="performance-requirements"><a class="header" href="#performance-requirements">Performance Requirements</a></h3>
+<ol>
+<li>
+<p><strong>Gas Optimization</strong></p>
+<ul>
+<li>Efficient storage layout</li>
+<li>Batch cleanup of expired transactions</li>
+<li>Inline helper functions</li>
+<li>Minimal storage writes</li>
+</ul>
+</li>
+<li>
+<p><strong>Scalability</strong></p>
+<ul>
+<li>Support up to 32 custodians</li>
+<li>Handle up to 5 pending transactions per custodian</li>
+<li>Configurable cleanup batch size</li>
+</ul>
+</li>
+</ol>
+<h2 id="architecture-design"><a class="header" href="#architecture-design">Architecture Design</a></h2>
+<h3 id="contract-structure"><a class="header" href="#contract-structure">Contract Structure</a></h3>
+<pre><code>MultisigWallet
+├── State Variables
+│   ├── m_ownerKey              (deployer's public key)
+│   ├── m_custodians            (mapping: pubkey → index)
+│   ├── m_custodianCount        (total custodians)
+│   ├── m_defaultRequiredConfirmations (M in M-of-N)
+│   ├── m_transactions          (mapping: id → Transaction)
+│   ├── m_requestsMask          (pending tx count per custodian)
+│   ├── _min_value              (minimum transfer amount)
+│   └── _max_cleanup_txns       (cleanup batch size)
+│
+├── Public Functions
+│   ├── constructor             (initialize custodians)
+│   ├── submitTransaction       (create new transaction)
+│   ├── confirmTransaction      (approve pending transaction)
+│   ├── sendTransaction         (direct send for 1 custodian)
+│   ├── acceptTransfer          (receive incoming funds)
+│   ├── setMinValue             (configure minimum)
+│   └── setMaxCleanupTxns       (configure cleanup)
+│
+└── Internal Functions
+    ├── _initialize             (setup custodians)
+    ├── _findCustodian          (verify custodian)
+    ├── _confirmTransaction     (process confirmation)
+    ├── _removeExpiredTransactions (cleanup)
+    ├── _generateId             (create unique ID)
+    ├── _getExpirationBound     (calculate expiration)
+    ├── _getSendFlags           (determine message flags)
+    └── Bit manipulation helpers
+</code></pre>
+<h3 id="data-structures"><a class="header" href="#data-structures">Data Structures</a></h3>
+<h4 id="transaction-record"><a class="header" href="#transaction-record">Transaction Record</a></h4>
+<pre><code class="language-solidity">struct Transaction {
+    uint64 id;                  // Unique identifier
+    uint32 confirmationsMask;   // Bitfield of confirmations
+    uint8 signsRequired;        // Threshold (M in M-of-N)
+    uint8 signsReceived;        // Current confirmations
+    uint256 creator;            // Proposer's public key
+    uint8 index;                // Proposer's custodian index
+    address dest;               // Destination address
+    uint128 value;              // Transfer amount
+    mapping(uint32 =&gt; varuint32) cc;  // ECC tokens
+    uint16 sendFlags;           // Message flags
+    TvmCell payload;            // Message body
+    bool bounce;                // Bounce flag
+}
+</code></pre>
+<p><strong>Design Rationale</strong>:</p>
+<ul>
+<li><code>id</code>: Combines timestamp and logical time for uniqueness</li>
+<li><code>confirmationsMask</code>: Efficient storage using bitfield (32 bits for 32 custodians)</li>
+<li><code>signsRequired/signsReceived</code>: Track progress toward threshold</li>
+<li><code>creator/index</code>: Track who proposed the transaction</li>
+<li><code>dest/value/payload</code>: Standard transfer parameters</li>
+<li><code>cc</code>: TON-specific ECC token support</li>
+<li><code>sendFlags/bounce</code>: Message delivery options</li>
+</ul>
+<h4 id="contract-state"><a class="header" href="#contract-state">Contract State</a></h4>
+<pre><code class="language-solidity">uint256 m_ownerKey;                     // Deployer's key
+uint256 m_requestsMask;                 // Pending tx count (8 bits per custodian)
+mapping(uint64 =&gt; Transaction) m_transactions;  // Active transactions
+mapping(uint256 =&gt; uint8) m_custodians; // Custodian registry
+uint8 m_custodianCount;                 // Total custodians
+uint8 m_defaultRequiredConfirmations;   // Default threshold
+uint128 _min_value;                     // Minimum transfer
+uint _max_cleanup_txns;                 // Cleanup batch size
+</code></pre>
+<p><strong>Design Rationale</strong>:</p>
+<ul>
+<li><code>m_requestsMask</code>: Compact storage - 8 bits per custodian in single uint256</li>
+<li><code>m_transactions</code>: Mapping for O(1) access by ID</li>
+<li><code>m_custodians</code>: Mapping for O(1) custodian lookup</li>
+<li>Separate count and threshold for flexibility</li>
+</ul>
+<h3 id="constants"><a class="header" href="#constants">Constants</a></h3>
+<pre><code class="language-solidity">uint8 constant MAX_QUEUED_REQUESTS = 5;      // Per-custodian limit
+uint64 constant EXPIRATION_TIME = 3601;      // 1 hour + 1 second
+uint8 constant MAX_CUSTODIAN_COUNT = 32;     // Maximum custodians
+uint8 constant FLAG_PAY_FWD_FEE_FROM_BALANCE = 1;
+uint8 constant FLAG_SEND_ALL_REMAINING = 128;
+</code></pre>
+<p><strong>Design Rationale</strong>:</p>
+<ul>
+<li><code>MAX_QUEUED_REQUESTS</code>: Prevent spam from single custodian</li>
+<li><code>EXPIRATION_TIME</code>: Balance between usability and cleanup</li>
+<li><code>MAX_CUSTODIAN_COUNT</code>: Limited by confirmationsMask (32 bits)</li>
+<li>Flags: TON-specific message delivery options</li>
+</ul>
+<h2 id="state-machine-design"><a class="header" href="#state-machine-design">State Machine Design</a></h2>
+<h3 id="transaction-lifecycle"><a class="header" href="#transaction-lifecycle">Transaction Lifecycle</a></h3>
+<pre><code>[Created] ──────────────────────────────────────────────┐
+    │                                                    │
+    │ submitTransaction()                               │
+    ↓                                                    │
+[Pending] ←──────────────────────────────┐              │
+    │                                    │              │
+    │ confirmTransaction()               │              │
+    ↓                                    │              │
+[Confirmed] (signsReceived++)            │              │
+    │                                    │              │
+    │ signsReceived &lt; signsRequired      │              │
+    ├────────────────────────────────────┘              │
+    │                                                    │
+    │ signsReceived &gt;= signsRequired                    │
+    ↓                                                    │
+[Executed] ──&gt; Transfer sent                            │
+    │                                                    │
+    ↓                                                    │
+[Deleted]                                               │
+                                                         │
+    ↑                                                    │
+    │ Time &gt; EXPIRATION_TIME                            │
+    └────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="state-transitions"><a class="header" href="#state-transitions">State Transitions</a></h3>
+<ol>
+<li>
+<p><strong>Submit</strong>: Custodian creates new transaction</p>
+<ul>
+<li>Preconditions: Valid custodian, value &gt;= min_value, pending count &lt; max</li>
+<li>Effects: Create transaction, increment request mask</li>
+<li>Special case: If M=1, execute immediately</li>
+</ul>
+</li>
+<li>
+<p><strong>Confirm</strong>: Custodian approves pending transaction</p>
+<ul>
+<li>Preconditions: Transaction exists, not expired, not already confirmed by this custodian</li>
+<li>Effects: Set confirmation bit, increment signsReceived</li>
+<li>Special case: If threshold reached, execute and delete</li>
+</ul>
+</li>
+<li>
+<p><strong>Execute</strong>: Transaction reaches threshold</p>
+<ul>
+<li>Preconditions: signsReceived &gt;= signsRequired</li>
+<li>Effects: Send transfer, decrement request mask, delete transaction</li>
+</ul>
+</li>
+<li>
+<p><strong>Expire</strong>: Transaction exceeds lifetime</p>
+<ul>
+<li>Preconditions: Current time - creation time &gt; EXPIRATION_TIME</li>
+<li>Effects: Delete transaction, decrement request mask</li>
+</ul>
+</li>
+</ol>
+<h2 id="workflow-examples"><a class="header" href="#workflow-examples">Workflow Examples</a></h2>
+<h3 id="example-1-2-of-3-multisig"><a class="header" href="#example-1-2-of-3-multisig">Example 1: 2-of-3 Multisig</a></h3>
+<p><strong>Setup</strong>: 3 custodians (Alice, Bob, Carol), threshold = 2</p>
+<p><strong>Scenario</strong>: Alice wants to send 100 tokens to Dave</p>
+<ol>
+<li>
+<p><strong>Alice calls submitTransaction(Dave, 100, ...)</strong></p>
+<ul>
+<li>Transaction created with ID = 12345</li>
+<li>confirmationsMask = 0b001 (Alice's bit set)</li>
+<li>signsReceived = 1</li>
+<li>Transaction stored in m_transactions[12345]</li>
+</ul>
+</li>
+<li>
+<p><strong>Bob calls confirmTransaction(12345)</strong></p>
+<ul>
+<li>confirmationsMask = 0b011 (Alice + Bob)</li>
+<li>signsReceived = 2</li>
+<li>Threshold reached (2 &gt;= 2)</li>
+<li>Transfer executed to Dave</li>
+<li>Transaction deleted</li>
+</ul>
+</li>
+<li>
+<p><strong>Carol's confirmation not needed</strong> (threshold already reached)</p>
+</li>
+</ol>
+<h3 id="example-2-single-custodian-fast-path"><a class="header" href="#example-2-single-custodian-fast-path">Example 2: Single Custodian (Fast Path)</a></h3>
+<p><strong>Setup</strong>: 1 custodian (Alice), threshold = 1</p>
+<p><strong>Scenario</strong>: Alice wants to send 100 tokens to Dave</p>
+<ol>
+<li><strong>Alice calls submitTransaction(Dave, 100, ...)</strong>
+<ul>
+<li>Detects m_defaultRequiredConfirmations == 1</li>
+<li>Executes transfer immediately</li>
+<li>Returns transactionId = 0 (no transaction stored)</li>
+<li>No confirmation needed</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-3-transaction-expiration"><a class="header" href="#example-3-transaction-expiration">Example 3: Transaction Expiration</a></h3>
+<p><strong>Setup</strong>: 3 custodians, threshold = 2</p>
+<p><strong>Scenario</strong>: Transaction expires before reaching threshold</p>
+<ol>
+<li>
+<p><strong>Alice submits transaction at time T</strong></p>
+<ul>
+<li>Transaction ID = (T &lt;&lt; 32) | logicaltime</li>
+<li>Stored in m_transactions</li>
+</ul>
+</li>
+<li>
+<p><strong>Time passes: T + 3601 seconds</strong></p>
+<ul>
+<li>Transaction now expired</li>
+</ul>
+</li>
+<li>
+<p><strong>Bob calls confirmTransaction() or submitTransaction()</strong></p>
+<ul>
+<li>_removeExpiredTransactions() called</li>
+<li>Expired transaction detected and deleted</li>
+<li>Bob's operation proceeds normally</li>
+</ul>
+</li>
+</ol>
+<h2 id="security-considerations"><a class="header" href="#security-considerations">Security Considerations</a></h2>
+<h3 id="attack-vectors-and-mitigations"><a class="header" href="#attack-vectors-and-mitigations">Attack Vectors and Mitigations</a></h3>
+<ol>
+<li>
+<p><strong>Replay Attacks</strong></p>
+<ul>
+<li>Risk: Reuse old transaction signatures</li>
+<li>Mitigation: Unique IDs based on timestamp + logical time</li>
+</ul>
+</li>
+<li>
+<p><strong>Double Confirmation</strong></p>
+<ul>
+<li>Risk: Custodian confirms twice</li>
+<li>Mitigation: Check confirmationsMask before setting bit</li>
+</ul>
+</li>
+<li>
+<p><strong>Resource Exhaustion</strong></p>
+<ul>
+<li>Risk: Spam with many pending transactions</li>
+<li>Mitigation: MAX_QUEUED_REQUESTS limit per custodian</li>
+</ul>
+</li>
+<li>
+<p><strong>Unauthorized Access</strong></p>
+<ul>
+<li>Risk: Non-custodian creates transactions</li>
+<li>Mitigation: _findCustodian() requires valid public key</li>
+</ul>
+</li>
+<li>
+<p><strong>Integer Overflow</strong></p>
+<ul>
+<li>Risk: Arithmetic overflow in calculations</li>
+<li>Mitigation: <code>pragma ignoreIntOverflow</code> + safe operations</li>
+</ul>
+</li>
+</ol>
+<h3 id="error-codes"><a class="header" href="#error-codes">Error Codes</a></h3>
+<pre><code class="language-solidity">100 - Message sender is not a custodian
+101 - Zero owner (invalid public key)
+102 - Transaction does not exist
+103 - Already confirmed by this custodian
+107 - Input value too low (&lt; _min_value)
+108 - Wallet should have only one custodian (for sendTransaction)
+110 - Too many custodians (&gt; MAX_CUSTODIAN_COUNT)
+113 - Too many requests for one custodian (&gt; MAX_QUEUED_REQUESTS)
+117 - Invalid number of custodians (0 or &gt; MAX)
+123 - Need at least 1 required confirmation
+</code></pre>
+<h2 id="design-decisions-and-trade-offs"><a class="header" href="#design-decisions-and-trade-offs">Design Decisions and Trade-offs</a></h2>
+<h3 id="1-bitfield-vs-array-for-confirmations"><a class="header" href="#1-bitfield-vs-array-for-confirmations">1. Bitfield vs Array for Confirmations</a></h3>
+<p><strong>Decision</strong>: Use uint32 bitfield for confirmationsMask</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ Compact storage (32 bits vs 32 bytes)</li>
+<li>✅ O(1) check and set operations</li>
+<li>✅ Atomic updates</li>
+<li>❌ Limited to 32 custodians</li>
+<li>❌ Requires bit manipulation</li>
+</ul>
+<p><strong>Alternative</strong>: Array of confirmed custodian indices</p>
+<ul>
+<li>✅ Unlimited custodians</li>
+<li>❌ Higher gas costs</li>
+<li>❌ More complex logic</li>
+</ul>
+<h3 id="2-automatic-cleanup-vs-manual-cleanup"><a class="header" href="#2-automatic-cleanup-vs-manual-cleanup">2. Automatic Cleanup vs Manual Cleanup</a></h3>
+<p><strong>Decision</strong>: Automatic cleanup on submit/confirm</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ No expired transactions accumulate</li>
+<li>✅ No separate cleanup transaction needed</li>
+<li>❌ Adds gas cost to submit/confirm</li>
+<li>❌ Unpredictable gas usage</li>
+</ul>
+<p><strong>Mitigation</strong>: Configurable _max_cleanup_txns to limit gas</p>
+<h3 id="3-immediate-execution-vs-always-queue"><a class="header" href="#3-immediate-execution-vs-always-queue">3. Immediate Execution vs Always Queue</a></h3>
+<p><strong>Decision</strong>: Immediate execution for M=1 case</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ Lower gas for single-custodian wallets</li>
+<li>✅ Simpler UX (no confirmation step)</li>
+<li>❌ Different code paths</li>
+<li>❌ More complex testing</li>
+</ul>
+<h3 id="4-request-mask-encoding"><a class="header" href="#4-request-mask-encoding">4. Request Mask Encoding</a></h3>
+<p><strong>Decision</strong>: 8 bits per custodian in single uint256</p>
+<p><strong>Rationale</strong>:</p>
+<ul>
+<li>✅ Compact storage (32 custodians in 256 bits)</li>
+<li>✅ Single storage slot</li>
+<li>❌ Complex bit manipulation</li>
+<li>❌ Limited to 255 pending per custodian</li>
+</ul>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<p>Now that we understand the contract design, we can:</p>
+<ol>
+<li><strong><a href="spec.html">Specification</a></strong> - Write formal specifications for contract behavior</li>
+<li><strong><a href="direct_proofs.html">Direct Proofs</a></strong> - Prove correctness properties</li>
+<li><strong>Implementation</strong> - Implement in Ursus (when code generation is updated)</li>
+</ol>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="../ulang/contract_structure.html">Contract Structure</a> - Ursus contract syntax</li>
+<li><a href="../ulang/structures.html">Types and Structures</a> - Defining records</li>
+<li><a href="../ulang/functions.html">Functions</a> - Function syntax</li>
+<li><a href="../verification/principles.html">Verification Principles</a> - Verification approach</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../long/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../long/impl.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../long/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../long/impl.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

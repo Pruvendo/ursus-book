@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>More and uncategorized - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="additional-resources"><a class="header" href="#additional-resources">Additional Resources</a></h1>
+<p>This section contains supplementary information and resources for Ursus development.</p>
+<h2 id="faq"><a class="header" href="#faq">FAQ</a></h2>
+<h3 id="general-questions"><a class="header" href="#general-questions">General Questions</a></h3>
+<p><strong>Q: What is Ursus?</strong></p>
+<p>A: Ursus is a Coq embedded DSL for writing and verifying smart contracts. See <a href="intro.html">Introduction</a>.</p>
+<p><strong>Q: Do I need to know Coq?</strong></p>
+<p>A: Basic Coq knowledge helps, but you can start with <a href="quick/readme.html">Quick Start</a> and learn as you go.</p>
+<p><strong>Q: Which blockchains does Ursus support?</strong></p>
+<p>A: Ursus can extract to Solidity (EVM), C++ (TON), and Rust. See <a href="quick/compile_ursus.html">Compilation</a>.</p>
+<h3 id="installation"><a class="header" href="#installation">Installation</a></h3>
+<p><strong>Q: Which Coq version should I use?</strong></p>
+<p>A: Coq 8.16.1 is recommended. See <a href="install/coq.html">Installation</a>.</p>
+<p><strong>Q: Can I use Docker?</strong></p>
+<p>A: Yes, Docker images are available. See <a href="install/pruvendo.html">Installation</a>.</p>
+<p><strong>Q: Installation fails with "Cannot find library"</strong></p>
+<p>A: Check your <code>_CoqProject</code> paths. See <a href="quick/compile_ursus.html#troubleshooting">Troubleshooting</a>.</p>
+<h3 id="development"><a class="header" href="#development">Development</a></h3>
+<p><strong>Q: How do I debug my contract?</strong></p>
+<p>A: Use Coq's proof mode to inspect goals and context. See <a href="programming/readme.html">Programming Style</a>.</p>
+<p><strong>Q: Can I test my contract before deployment?</strong></p>
+<p>A: Yes, use QuickChick for property-based testing. See <a href="verification/qc.html">QuickChick</a>.</p>
+<p><strong>Q: How do I prove my contract is correct?</strong></p>
+<p>A: Write specifications and prove them in Coq. See <a href="verification/readme.html">Verification</a>.</p>
+<h3 id="extraction"><a class="header" href="#extraction">Extraction</a></h3>
+<p><strong>Q: How do I generate Solidity code?</strong></p>
+<p>A: Set <code>#[translation = on]</code> and <code>#[language = solidity]</code>. See <a href="quick/compile_ursus.html">Compilation</a>.</p>
+<p><strong>Q: Can I customize the generated code?</strong></p>
+<p>A: Limited customization is available through attributes. See <a href="ulang/attributes.html">Attributes</a>.</p>
+<p><strong>Q: The generated code doesn't compile</strong></p>
+<p>A: Check Solidity version compatibility and dependencies. See <a href="quick/compile_sol.html">Compiling Solidity</a>.</p>
+<h2 id="glossary"><a class="header" href="#glossary">Glossary</a></h2>
+<p><strong>eDSL</strong> - Embedded Domain-Specific Language. A language implemented within another language (Coq).</p>
+<p><strong>Coq</strong> - A proof assistant for formal verification.</p>
+<p><strong>Gallina</strong> - Coq's specification language.</p>
+<p><strong>Tactic</strong> - A command that constructs proofs or programs in Coq.</p>
+<p><strong>UExpression</strong> - Ursus expression type, representing computations.</p>
+<p><strong>URValue</strong> - Ursus right-value (readable value).</p>
+<p><strong>ULValue</strong> - Ursus left-value (assignable location).</p>
+<p><strong>Monadic</strong> - Programming style using monads to handle state and effects.</p>
+<p><strong>Extraction</strong> - Process of generating executable code from Coq definitions.</p>
+<p><strong>QuickChick</strong> - Property-based testing framework for Coq.</p>
+<p><strong>TVM</strong> - TON Virtual Machine.</p>
+<p><strong>EVM</strong> - Ethereum Virtual Machine.</p>
+<h2 id="common-patterns"><a class="header" href="#common-patterns">Common Patterns</a></h2>
+<h3 id="initialization-pattern"><a class="header" href="#initialization-pattern">Initialization Pattern</a></h3>
+<pre><code class="language-coq">Ursus Definition init (initialSupply: uint256): UExpression PhantomType false.
+{
+    ::// totalSupply := initialSupply .
+    ::// balances[[msg-&gt;sender]] := initialSupply |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="validation-pattern"><a class="header" href="#validation-pattern">Validation Pattern</a></h3>
+<pre><code class="language-coq">Ursus Definition require (condition: boolean) (message: string): UExpression unit false.
+{
+    ::// if !condition then { revert_(message) } |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="access-control-pattern"><a class="header" href="#access-control-pattern">Access Control Pattern</a></h3>
+<pre><code class="language-coq">Ursus Definition onlyOwner: UExpression unit false.
+{
+    ::// require(msg-&gt;sender == owner, "Not owner") |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="safe-math-pattern"><a class="header" href="#safe-math-pattern">Safe Math Pattern</a></h3>
+<pre><code class="language-coq">Ursus Definition safeAdd (a b: uint256): UExpression uint256 false.
+{
+    ::// var 'result : uint256 := a + b .
+    ::// require(result &gt;= a, "Overflow") |.
+}
+return result.
+Defined.
+</code></pre>
+<h2 id="code-style-guide"><a class="header" href="#code-style-guide">Code Style Guide</a></h2>
+<h3 id="naming-conventions"><a class="header" href="#naming-conventions">Naming Conventions</a></h3>
+<ul>
+<li><strong>Contracts</strong>: PascalCase (<code>ERC20</code>, <code>TokenSale</code>)</li>
+<li><strong>Functions</strong>: camelCase (<code>transfer</code>, <code>balanceOf</code>)</li>
+<li><strong>Variables</strong>: camelCase (<code>totalSupply</code>, <code>senderBalance</code>)</li>
+<li><strong>Constants</strong>: UPPER_CASE (<code>MAX_SUPPLY</code>, <code>DECIMALS</code>)</li>
+</ul>
+<h3 id="formatting"><a class="header" href="#formatting">Formatting</a></h3>
+<pre><code class="language-coq">(* Good: Clear structure *)
+Ursus Definition transfer (to: address) (amount: uint256):
+  UExpression boolean false.
+{
+    ::// var 'senderBalance : uint256 := balances[[msg-&gt;sender]] .
+    ::// require(senderBalance &gt;= amount, "Insufficient balance") .
+    ::// balances[[msg-&gt;sender]] := senderBalance - amount .
+    ::// balances[[to]] := balances[[to]] + amount |.
+}
+return @true.
+Defined.
+</code></pre>
+<h3 id="comments"><a class="header" href="#comments">Comments</a></h3>
+<pre><code class="language-coq">(* Contract-level documentation *)
+Contract ERC20 ;
+
+(* Function documentation *)
+(* @dev Transfers tokens to recipient
+   @param to Recipient address
+   @param amount Amount to transfer
+   @return Success boolean *)
+Ursus Definition transfer (to: address) (amount: uint256):
+  UExpression boolean false.
+</code></pre>
+<h2 id="performance-tips"><a class="header" href="#performance-tips">Performance Tips</a></h2>
+<h3 id="minimize-state-access"><a class="header" href="#minimize-state-access">Minimize State Access</a></h3>
+<pre><code class="language-coq">(* Good: Read once *)
+::// var 'balance : uint256 := balances[[addr]] .
+::// balance := balance + {1} .
+::// balances[[addr]] := balance |.
+
+(* Bad: Multiple reads *)
+::// balances[[addr]] := balances[[addr]] + {1} |.
+</code></pre>
+<h3 id="use-local-variables"><a class="header" href="#use-local-variables">Use Local Variables</a></h3>
+<pre><code class="language-coq">(* Good: Cache in local variable *)
+::// var 'sender : address := msg-&gt;sender .
+::// balances[[sender]] := balances[[sender]] - amount |.
+
+(* Bad: Repeated access *)
+::// balances[[msg-&gt;sender]] := balances[[msg-&gt;sender]] - amount |.
+</code></pre>
+<h2 id="external-resources"><a class="header" href="#external-resources">External Resources</a></h2>
+<h3 id="official-documentation"><a class="header" href="#official-documentation">Official Documentation</a></h3>
+<ul>
+<li><a href="https://coq.inria.fr/refman/">Coq Reference Manual</a></li>
+<li><a href="https://coq.inria.fr/stdlib/">Coq Standard Library</a></li>
+<li><a href="https://www.labri.fr/perso/casteran/CoqArt/">Coq'Art Book</a></li>
+</ul>
+<h3 id="learning-resources"><a class="header" href="#learning-resources">Learning Resources</a></h3>
+<ul>
+<li><a href="https://softwarefoundations.cis.upenn.edu/">Software Foundations</a></li>
+<li><a href="http://adam.chlipala.net/cpdt/">Certified Programming with Dependent Types</a></li>
+<li><a href="https://ilyasergey.net/pnp/">Programs and Proofs</a></li>
+</ul>
+<h3 id="community"><a class="header" href="#community">Community</a></h3>
+<ul>
+<li><a href="https://coq.discourse.group/">Coq Discourse</a></li>
+<li><a href="https://coq.zulipchat.com/">Coq Zulip Chat</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/coq">Stack Overflow - Coq Tag</a></li>
+</ul>
+<h3 id="related-projects"><a class="header" href="#related-projects">Related Projects</a></h3>
+<ul>
+<li><strong>ursus-patterns</strong> - Example contracts and patterns</li>
+<li><strong>ursus-standard-library</strong> - Standard library implementation</li>
+<li><strong>pruvendo-ursus-tvm</strong> - TVM-specific functions library</li>
+</ul>
+<p>Contact Pruvendo for access to these repositories.</p>
+<h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
+<p>Ursus is under active development. For contributions or feedback, contact Pruvendo.</p>
+<h2 id="license"><a class="header" href="#license">License</a></h2>
+<p>Ursus libraries are proprietary. See <a href="install/pruvendo.html">Installation</a> for access information.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="advanced/elpi.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="advanced/elpi.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

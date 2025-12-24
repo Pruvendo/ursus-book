@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ursus as a language - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="ursus-as-a-language"><a class="header" href="#ursus-as-a-language">Ursus as a Language</a></h1>
+<p>Ursus is a full-featured programming language for smart contracts, embedded in Coq. This section covers the language features, syntax, and semantics.</p>
+<h2 id="language-overview"><a class="header" href="#language-overview">Language Overview</a></h2>
+<p>Ursus provides:</p>
+<ol>
+<li><strong>Type System</strong> - Rich type system with primitives, mappings, optionals, arrays</li>
+<li><strong>Contract Structure</strong> - Modular contract organization</li>
+<li><strong>Functions</strong> - Pure and stateful functions with verification support</li>
+<li><strong>State Management</strong> - Explicit state tracking and manipulation</li>
+<li><strong>Interfaces</strong> - Type-safe inter-contract communication</li>
+<li><strong>Inheritance</strong> - Code reuse through contract inheritance</li>
+<li><strong>Modifiers</strong> - Reusable function decorators</li>
+</ol>
+<h2 id="contract-anatomy"><a class="header" href="#contract-anatomy">Contract Anatomy</a></h2>
+<p>A complete Ursus contract consists of:</p>
+<pre><code class="language-coq">(* 1. Imports *)
+Require Import UrsusEnvironment.Solidity.current.Environment.
+Require Import UrsusEnvironment.Solidity.current.LocalGenerator.
+
+(* 2. Module *)
+Module MyContract.
+
+(* 3. Contract Header *)
+#[translation = on]
+#[language = solidity]
+Contract MyContract ;
+Sends To IExternal ;
+Inherits BaseContract ;
+
+(* 4. Types *)
+Types
+  Record User := {
+      user_id: uint256;
+      balance: uint256
+  };
+Constants
+  Definition MAX_SUPPLY : uint256 := {1000000};
+
+(* 5. Contract State *)
+Record Contract := {
+    totalSupply: uint256;
+    users: mapping address User
+}.
+
+(* 6. Setup *)
+SetUrsusOptions.
+UseLocal Definition _ := [uint256; address; ...].
+
+(* 7. Functions *)
+Ursus Definition myFunction (arg: uint256): UExpression uint256 false.
+{
+    ::// ...
+}
+return.
+Defined.
+Sync.
+
+(* 8. Finalization *)
+EndContract Implements.
+End MyContract.
+</code></pre>
+<h2 id="core-concepts"><a class="header" href="#core-concepts">Core Concepts</a></h2>
+<h3 id="types"><a class="header" href="#types">Types</a></h3>
+<p>Ursus supports:</p>
+<ul>
+<li><strong>Primitives</strong> - <code>uint8</code>, <code>uint256</code>, <code>int256</code>, <code>boolean</code>, <code>address</code></li>
+<li><strong>Mappings</strong> - <code>mapping K V</code> (hash maps)</li>
+<li><strong>Optionals</strong> - <code>optional T</code> (nullable values)</li>
+<li><strong>Arrays</strong> - <code>array T</code> (dynamic arrays)</li>
+<li><strong>Records</strong> - Custom struct types</li>
+<li><strong>Enums</strong> - Enumeration types</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="primitives.html">Types and Primitives</a></p>
+<h3 id="contract-structure"><a class="header" href="#contract-structure">Contract Structure</a></h3>
+<p>Contracts are organized into:</p>
+<ul>
+<li><strong>Header</strong> - Metadata and relationships</li>
+<li><strong>Types</strong> - Custom type definitions</li>
+<li><strong>Constants</strong> - Compile-time constants</li>
+<li><strong>State</strong> - Contract storage fields</li>
+<li><strong>Functions</strong> - Contract methods</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="contract_file_structure.html">Contract Structure</a></p>
+<h3 id="functions"><a class="header" href="#functions">Functions</a></h3>
+<p>Functions in Ursus:</p>
+<ul>
+<li>Have explicit signatures</li>
+<li>Track panic possibility</li>
+<li>Support modifiers</li>
+<li>Can be verified</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="functions.html">Functions</a>, <a href="writing_function.html">Writing Functions</a></p>
+<h3 id="state-management"><a class="header" href="#state-management">State Management</a></h3>
+<p>State is:</p>
+<ul>
+<li>Explicitly tracked in the type system</li>
+<li>Modified through monadic operations</li>
+<li>Verifiable through Coq proofs</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="local.html">Local State</a></p>
+<h3 id="interfaces"><a class="header" href="#interfaces">Interfaces</a></h3>
+<p>Interfaces enable:</p>
+<ul>
+<li>Type-safe message passing</li>
+<li>Contract composition</li>
+<li>Modular design</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="messages.html">Interfaces and Messages</a></p>
+<h2 id="language-features"><a class="header" href="#language-features">Language Features</a></h2>
+<h3 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern Matching</a></h3>
+<pre><code class="language-coq">::// match value with
+     | Some x =&gt; { -&gt;&gt; }
+     | None =&gt; { -&gt;&gt; }
+     end | .
+{
+    ::// result := x |.
+}
+{
+    ::// result := {0} |.
+}
+</code></pre>
+<h3 id="loops"><a class="header" href="#loops">Loops</a></h3>
+<p><strong>While loop:</strong></p>
+<pre><code class="language-coq">::// while counter &lt; {10} do { -&gt;&gt; } | .
+{
+    ::// counter := counter + {1} |.
+}
+</code></pre>
+<p><strong>For loop:</strong></p>
+<pre><code class="language-coq">::// for 'i in {0} to {10} do { -&gt;&gt; } | .
+{
+    ::// sum := sum + i |.
+}
+</code></pre>
+<h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
+<p><strong>Require:</strong></p>
+<pre><code class="language-coq">::// require_ (balance &gt;= amount) .
+</code></pre>
+<p><strong>Exit:</strong></p>
+<pre><code class="language-coq">::// if balance &lt; amount then { -/&gt; } | .
+{
+    ::// exit_ {1} |.
+}
+</code></pre>
+<h2 id="type-safety"><a class="header" href="#type-safety">Type Safety</a></h2>
+<p>Ursus enforces:</p>
+<ol>
+<li><strong>Type correctness</strong> - All operations type-checked</li>
+<li><strong>Panic tracking</strong> - Functions marked as panicking/non-panicking</li>
+<li><strong>State consistency</strong> - State changes tracked in types</li>
+<li><strong>Interface compliance</strong> - Message sends type-checked</li>
+</ol>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">(* This won't compile - type mismatch *)
+::// balance := "hello" .
+(* Error: Expected uint256, got string *)
+
+(* This won't compile - panic mismatch *)
+Ursus Definition safe: UExpression uint256 false.
+{
+    ::// result := may_panic_function() |.
+    (* Error: Cannot call panicking function in non-panicking context *)
+}
+</code></pre>
+<h2 id="comparison-with-other-languages"><a class="header" href="#comparison-with-other-languages">Comparison with Other Languages</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Ursus</th><th>Solidity</th><th>Rust</th></tr></thead><tbody>
+<tr><td>Type Safety</td><td>✅ Strong</td><td>⚠️ Medium</td><td>✅ Strong</td></tr>
+<tr><td>Verification</td><td>✅ Built-in</td><td>❌ External</td><td>⚠️ Limited</td></tr>
+<tr><td>Panic Tracking</td><td>✅ Type-level</td><td>❌ Runtime</td><td>⚠️ Result types</td></tr>
+<tr><td>State Tracking</td><td>✅ Explicit</td><td>❌ Implicit</td><td>⚠️ Ownership</td></tr>
+<tr><td>Proof Support</td><td>✅ Full Coq</td><td>❌ None</td><td>⚠️ Limited</td></tr>
+</tbody></table>
+</div>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li><a href="contract_file_structure.html">Contract File Structure</a> - Organize your contracts</li>
+<li><a href="primitives.html">Types and Primitives</a> - Type system details</li>
+<li><a href="functions.html">Functions</a> - Writing contract functions</li>
+<li><a href="writing_function.html">Writing Functions</a> - Detailed function guide</li>
+<li><a href="messages.html">Interfaces</a> - Inter-contract communication</li>
+<li><a href="inheritance.html">Inheritance</a> - Code reuse patterns</li>
+</ul>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<p>See complete examples in:</p>
+<ul>
+<li><a href="../quick/simple.html">Simple Contract</a> - ERC20 token</li>
+<li>ursus-patterns repository - Pattern library with comprehensive examples</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../eDSL/notations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ulang/contract_file_structure.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../eDSL/notations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ulang/contract_file_structure.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

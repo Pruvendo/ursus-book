@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ursus standard library - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="standard-library"><a class="header" href="#standard-library">Standard Library</a></h1>
+<p>The Ursus Standard Library provides essential types, functions, and operators for smart contract development. It includes primitives, data structures, and platform-specific functionality.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The standard library is organized into several modules:</p>
+<ol>
+<li><strong><a href="primitives.html">Primitives</a></strong> - Basic types (integers, booleans, addresses, strings)</li>
+<li><strong><a href="functions.html">Functions</a></strong> - Standard functions (math, crypto, conversions)</li>
+<li><strong><a href="operators.html">Operators</a></strong> - Arithmetic, logical, bitwise, comparison operators</li>
+<li><strong><a href="TVM.html">TVM Functions</a></strong> - TON Virtual Machine specific functions</li>
+</ol>
+<h2 id="library-structure"><a class="header" href="#library-structure">Library Structure</a></h2>
+<pre><code>ursus-standard-library/
+├── src/
+│   ├── Solidity/        # Solidity-compatible library
+│   ├── Rust/            # Rust-compatible library
+│   └── _Cpp/            # C++ (TON) compatible library
+</code></pre>
+<p>Each target language has its own standard library variant with platform-specific implementations.</p>
+<h2 id="importing-the-standard-library"><a class="header" href="#importing-the-standard-library">Importing the Standard Library</a></h2>
+<h3 id="basic-import"><a class="header" href="#basic-import">Basic Import</a></h3>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+Require Import UrsusEnvironment.Solidity.current.LocalGenerator.
+</code></pre>
+<h3 id="specific-modules"><a class="header" href="#specific-modules">Specific Modules</a></h3>
+<pre><code class="language-coq">Require Import Ursus.Stdlib.Primitives.
+Require Import Ursus.Stdlib.Functions.
+Require Import Ursus.Stdlib.Operators.
+</code></pre>
+<h3 id="tvm-specific"><a class="header" href="#tvm-specific">TVM-Specific</a></h3>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Cpp.current.Environment.
+Require Import Ursus.TVM.Functions.
+</code></pre>
+<h2 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h2>
+<h3 id="integer-types"><a class="header" href="#integer-types">Integer Types</a></h3>
+<p><strong>Unsigned integers:</strong></p>
+<ul>
+<li><code>uint8</code>, <code>uint16</code>, <code>uint32</code>, <code>uint64</code>, <code>uint128</code>, <code>uint256</code></li>
+</ul>
+<p><strong>Signed integers:</strong></p>
+<ul>
+<li><code>int8</code>, <code>int16</code>, <code>int32</code>, <code>int64</code>, <code>int128</code>, <code>int256</code></li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'balance : uint256 := {1000} .
+::// var 'delta : int256 := {-50} .
+</code></pre>
+<h3 id="boolean-type"><a class="header" href="#boolean-type">Boolean Type</a></h3>
+<pre><code class="language-coq">boolean  (* true or false *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'isActive : boolean := @true .
+::// var 'hasPermission : boolean := @false .
+</code></pre>
+<h3 id="address-type"><a class="header" href="#address-type">Address Type</a></h3>
+<pre><code class="language-coq">address  (* Blockchain address *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'owner : address := msg-&gt;sender .
+::// var 'recipient : address := {0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb} .
+</code></pre>
+<h3 id="string-type"><a class="header" href="#string-type">String Type</a></h3>
+<pre><code class="language-coq">string  (* UTF-8 string *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'name : string := "MyToken" .
+::// var 'symbol : string := "MTK" .
+</code></pre>
+<h2 id="complex-types"><a class="header" href="#complex-types">Complex Types</a></h2>
+<h3 id="mapping"><a class="header" href="#mapping">Mapping</a></h3>
+<p><strong>Syntax:</strong></p>
+<pre><code class="language-coq">mapping KeyType ValueType
+</code></pre>
+<p><strong>Examples:</strong></p>
+<pre><code class="language-coq">balances : mapping address uint256
+allowances : mapping address (mapping address uint256)
+</code></pre>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-coq">::// var 'balance : uint256 := balances[[addr]] .
+::// balances[[addr]] := {1000} .
+</code></pre>
+<h3 id="optional"><a class="header" href="#optional">Optional</a></h3>
+<p><strong>Syntax:</strong></p>
+<pre><code class="language-coq">optional T
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'maybeValue : optional uint256 := Some {42} .
+::// var 'nothing : optional uint256 := None .
+</code></pre>
+<h3 id="arrays"><a class="header" href="#arrays">Arrays</a></h3>
+<p><strong>Syntax:</strong></p>
+<pre><code class="language-coq">array T
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'items : array uint256 := [] .
+::// items := items ++ [{1}, {2}, {3}] .
+</code></pre>
+<h2 id="common-functions"><a class="header" href="#common-functions">Common Functions</a></h2>
+<h3 id="mathematical-functions"><a class="header" href="#mathematical-functions">Mathematical Functions</a></h3>
+<pre><code class="language-coq">min(a, b)      (* Minimum of two values *)
+max(a, b)      (* Maximum of two values *)
+abs(x)         (* Absolute value *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'smaller : uint256 := min(x, y) .
+::// var 'larger : uint256 := max(x, y) .
+</code></pre>
+<h3 id="cryptographic-functions"><a class="header" href="#cryptographic-functions">Cryptographic Functions</a></h3>
+<pre><code class="language-coq">keccak256(data)    (* Keccak-256 hash *)
+sha256(data)       (* SHA-256 hash *)
+ripemd160(data)    (* RIPEMD-160 hash *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'hash : uint256 := keccak256(data) .
+</code></pre>
+<h3 id="conversion-functions"><a class="header" href="#conversion-functions">Conversion Functions</a></h3>
+<pre><code class="language-coq">uint256(x)     (* Convert to uint256 *)
+int256(x)      (* Convert to int256 *)
+address(x)     (* Convert to address *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'addr : address := address(uint256Value) .
+</code></pre>
+<h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
+<h3 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h3>
+<pre><code class="language-coq">a + b          (* Addition *)
+a - b          (* Subtraction *)
+a * b          (* Multiplication *)
+a / b          (* Division *)
+a % b          (* Modulo *)
+</code></pre>
+<h3 id="comparison"><a class="header" href="#comparison">Comparison</a></h3>
+<pre><code class="language-coq">a == b         (* Equal *)
+a != b         (* Not equal *)
+a &lt; b          (* Less than *)
+a &gt; b          (* Greater than *)
+a &lt;= b         (* Less or equal *)
+a &gt;= b         (* Greater or equal *)
+</code></pre>
+<h3 id="logical"><a class="header" href="#logical">Logical</a></h3>
+<pre><code class="language-coq">a &amp;&amp; b         (* Logical AND *)
+a || b         (* Logical OR *)
+!a             (* Logical NOT *)
+</code></pre>
+<h3 id="bitwise"><a class="header" href="#bitwise">Bitwise</a></h3>
+<pre><code class="language-coq">a &amp; b          (* Bitwise AND *)
+a | b          (* Bitwise OR *)
+a ^ b          (* Bitwise XOR *)
+~a             (* Bitwise NOT *)
+a &lt;&lt; n         (* Left shift *)
+a &gt;&gt; n         (* Right shift *)
+</code></pre>
+<h2 id="message-context"><a class="header" href="#message-context">Message Context</a></h2>
+<p>Access transaction information:</p>
+<pre><code class="language-coq">msg-&gt;sender    (* Sender address *)
+msg-&gt;value     (* Sent value *)
+msg-&gt;data      (* Message data *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'caller : address := msg-&gt;sender .
+::// var 'payment : uint256 := msg-&gt;value .
+</code></pre>
+<h2 id="contract-context"><a class="header" href="#contract-context">Contract Context</a></h2>
+<p>Access contract information:</p>
+<pre><code class="language-coq">this-&gt;address  (* Contract address *)
+this-&gt;balance  (* Contract balance *)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">::// var 'contractAddr : address := this-&gt;address .
+::// var 'funds : uint256 := this-&gt;balance .
+</code></pre>
+<h2 id="platform-specific-libraries"><a class="header" href="#platform-specific-libraries">Platform-Specific Libraries</a></h2>
+<h3 id="solidity-standard-library"><a class="header" href="#solidity-standard-library">Solidity Standard Library</a></h3>
+<p>Located in <code>ursus-standard-library/src/Solidity/</code>:</p>
+<ul>
+<li>EVM-compatible types</li>
+<li>Solidity-style functions</li>
+<li>Gas-optimized operations</li>
+</ul>
+<h3 id="c-ton-standard-library"><a class="header" href="#c-ton-standard-library">C++ (TON) Standard Library</a></h3>
+<p>Located in <code>ursus-standard-library/src/_Cpp/</code>:</p>
+<ul>
+<li>TVM-compatible types</li>
+<li>TON-specific functions</li>
+<li>Cell operations</li>
+</ul>
+<h3 id="rust-standard-library"><a class="header" href="#rust-standard-library">Rust Standard Library</a></h3>
+<p>Located in <code>ursus-standard-library/src/Rust/</code>:</p>
+<ul>
+<li>Rust-compatible types</li>
+<li>Safe operations</li>
+<li>Modern syntax</li>
+</ul>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li><a href="primitives.html">Primitives</a> - Detailed primitive types</li>
+<li><a href="functions.html">Functions</a> - All standard functions</li>
+<li><a href="operators.html">Operators</a> - Complete operator reference</li>
+<li><a href="TVM.html">TVM Functions</a> - TON-specific functionality</li>
+</ul>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="../ulang/readme.html">Ursus Language</a> - Language reference</li>
+<li><a href="../ulang/writing_function.html">Writing Functions</a> - Function development</li>
+<li>ursus-patterns repository - Usage examples</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../programming/prepost.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../stdlib/primitives.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../programming/prepost.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../stdlib/primitives.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

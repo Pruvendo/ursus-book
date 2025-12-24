@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Multi-contract system - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="multi-contract-systems"><a class="header" href="#multi-contract-systems">Multi-Contract Systems</a></h1>
+<p>Ursus supports multi-contract systems where contracts can interact with each other through message passing. This is essential for building complex decentralized applications.</p>
+<h2 id="contract-interfaces"><a class="header" href="#contract-interfaces">Contract Interfaces</a></h2>
+<h3 id="declaring-interfaces"><a class="header" href="#declaring-interfaces">Declaring Interfaces</a></h3>
+<p>Contracts declare which interfaces they can send messages to using the <code>Sends To</code> clause:</p>
+<p><strong>Syntax:</strong></p>
+<pre><code class="language-coq">Contract MyContract ;
+Sends To Interface1 Interface2 Interface3 ;
+Inherits ;
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code class="language-coq">Contract ContractSolidity ;
+Sends To IContractTVM ;
+Inherits ;
+</code></pre>
+<h3 id="empty-sends-to"><a class="header" href="#empty-sends-to">Empty Sends To</a></h3>
+<p>If a contract doesn't send messages to other contracts:</p>
+<pre><code class="language-coq">Contract SimpleContract ;
+Sends To ;
+Inherits ;
+</code></pre>
+<h2 id="defining-interfaces"><a class="header" href="#defining-interfaces">Defining Interfaces</a></h2>
+<h3 id="interface-structure"><a class="header" href="#interface-structure">Interface Structure</a></h3>
+<p>Interfaces define the message protocol between contracts:</p>
+<pre><code class="language-coq">Contract IMyInterface ;
+Sends To ;
+Inherits ;
+
+#[no_body]
+Ursus Definition myFunction (arg: uint256): UExpression uint256 false.
+
+#[no_body]
+Ursus Definition anotherFunction (addr: address): UExpression boolean false.
+</code></pre>
+<h3 id="real-example-icontracttvm"><a class="header" href="#real-example-icontracttvm">Real Example: IContractTVM</a></h3>
+<p>From ursus-patterns:</p>
+<pre><code class="language-coq">Contract IContractTVM ;
+Sends To ;
+Inherits ;
+
+#[no_body]
+Ursus Definition someMethod (value: uint256): UExpression PhantomType false.
+</code></pre>
+<h2 id="sending-messages"><a class="header" href="#sending-messages">Sending Messages</a></h2>
+<h3 id="message-syntax"><a class="header" href="#message-syntax">Message Syntax</a></h3>
+<p>To send a message to another contract:</p>
+<pre><code class="language-coq">::// targetContract.method(args) |.
+</code></pre>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<pre><code class="language-coq">Ursus Definition callOtherContract (addr: address) (amount: uint256):
+  UExpression PhantomType false.
+{
+    ::// IContractTVM(addr).transfer(amount) |.
+}
+return.
+Defined.
+</code></pre>
+<h2 id="multi-contract-patterns"><a class="header" href="#multi-contract-patterns">Multi-Contract Patterns</a></h2>
+<h3 id="pattern-1-factory-pattern"><a class="header" href="#pattern-1-factory-pattern">Pattern 1: Factory Pattern</a></h3>
+<p><strong>Factory Contract:</strong></p>
+<pre><code class="language-coq">Contract TokenFactory ;
+Sends To IToken ;
+Inherits ;
+
+Record Contract := {
+    tokens: mapping uint256 address
+}.
+
+Ursus Definition createToken (id: uint256): UExpression address false.
+{
+    ::// var 'newToken : address := deployContract(TokenCode) .
+    ::// tokens[[id]] := newToken .
+    ::// _result := newToken |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="pattern-2-proxy-pattern"><a class="header" href="#pattern-2-proxy-pattern">Pattern 2: Proxy Pattern</a></h3>
+<p><strong>Proxy Contract:</strong></p>
+<pre><code class="language-coq">Contract Proxy ;
+Sends To IImplementation ;
+Inherits ;
+
+Record Contract := {
+    implementation: address
+}.
+
+Ursus Definition upgrade (newImpl: address): UExpression unit false.
+{
+    ::// implementation := newImpl |.
+}
+return.
+Defined.
+
+Ursus Definition delegateCall (data: bytes): UExpression bytes false.
+{
+    ::// _result := IImplementation(implementation).execute(data) |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="pattern-3-registry-pattern"><a class="header" href="#pattern-3-registry-pattern">Pattern 3: Registry Pattern</a></h3>
+<p><strong>Registry Contract:</strong></p>
+<pre><code class="language-coq">Contract Registry ;
+Sends To IService ;
+Inherits ;
+
+Record Contract := {
+    services: mapping string address
+}.
+
+Ursus Definition register (name: string) (addr: address): UExpression unit false.
+{
+    ::// services[[name]] := addr |.
+}
+return.
+Defined.
+
+Ursus Definition lookup (name: string): UExpression address false.
+{
+    ::// _result := services[[name]] |.
+}
+return.
+Defined.
+</code></pre>
+<h2 id="message-types"><a class="header" href="#message-types">Message Types</a></h2>
+<h3 id="synchronous-calls"><a class="header" href="#synchronous-calls">Synchronous Calls</a></h3>
+<p>Direct function calls (if supported by platform):</p>
+<pre><code class="language-coq">::// result := otherContract.getValue() |.
+</code></pre>
+<h3 id="asynchronous-messages"><a class="header" href="#asynchronous-messages">Asynchronous Messages</a></h3>
+<p>Send message without waiting for response:</p>
+<pre><code class="language-coq">::// otherContract.notify(data) |.
+</code></pre>
+<h3 id="value-transfer"><a class="header" href="#value-transfer">Value Transfer</a></h3>
+<p>Send tokens with message:</p>
+<pre><code class="language-coq">::// otherContract.deposit{value: amount}() |.
+</code></pre>
+<h2 id="interface-composition"><a class="header" href="#interface-composition">Interface Composition</a></h2>
+<h3 id="multiple-interfaces"><a class="header" href="#multiple-interfaces">Multiple Interfaces</a></h3>
+<p>A contract can implement multiple interfaces:</p>
+<pre><code class="language-coq">Contract MultiService ;
+Sends To ITokenReceiver INotifiable IUpgradeable ;
+Inherits ;
+</code></pre>
+<h3 id="interface-inheritance"><a class="header" href="#interface-inheritance">Interface Inheritance</a></h3>
+<p>Interfaces can inherit from other interfaces:</p>
+<pre><code class="language-coq">Contract IExtendedToken ;
+Sends To ;
+Inherits IToken ;
+
+#[no_body]
+Ursus Definition mint (to: address) (amount: uint256): UExpression boolean false.
+</code></pre>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="contract_structure.html">Contract Structure</a> - Contract organization</li>
+<li><a href="contract_file_interfaces.html">Interfaces</a> - Interface definitions</li>
+<li><a href="inheritance.html">Inheritance</a> - Contract inheritance</li>
+<li>ursus-patterns repository - Multi-contract examples</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ulang/local.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ulang/inheritance.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ulang/local.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ulang/inheritance.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

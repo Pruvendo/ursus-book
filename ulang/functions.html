@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Functions and modifiers - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="functions-and-modifiers"><a class="header" href="#functions-and-modifiers">Functions and Modifiers</a></h1>
+<p>This guide explains how to define functions in Ursus contracts based on real examples from ursus-patterns.</p>
+<h2 id="function-structure"><a class="header" href="#function-structure">Function Structure</a></h2>
+<p>Every Ursus function follows this structure:</p>
+<pre><code class="language-coq">#[attributes]
+Ursus Definition functionName (arguments): UExpression ReturnType panicFlag.
+{
+    (* Function body *)
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<h2 id="components"><a class="header" href="#components">Components</a></h2>
+<h3 id="1-attributes"><a class="header" href="#1-attributes">1. Attributes</a></h3>
+<p>Function attributes are specified before the function definition.</p>
+<p><strong>Syntax:</strong></p>
+<pre><code class="language-coq">#[attribute1]
+#[attribute2, attribute3]
+</code></pre>
+<p><strong>Common attributes:</strong></p>
+<ul>
+<li><code>#[public]</code> - Public function</li>
+<li><code>#[external]</code> - External function</li>
+<li><code>#[internal]</code> - Internal function</li>
+<li><code>#[private]</code> - Private function</li>
+<li><code>#[view]</code> - Read-only function</li>
+<li><code>#[pure]</code> - Pure function (no state access)</li>
+<li><code>#[payable]</code> - Can receive value</li>
+<li><code>#[returns=name]</code> - Specify return variable name</li>
+<li><code>#[write=arg]</code> - Allow writing to argument</li>
+<li><code>#[no_body]</code> - Function without body (interface)</li>
+</ul>
+<p><strong>Example from ContractSimplyFuns.v:</strong></p>
+<pre><code class="language-coq">#[returns=_res]
+Ursus Definition fun05 : UExpression uint256 false.
+</code></pre>
+<p>See: <a href="attributes.html">Function Attributes</a></p>
+<h3 id="2-function-name"><a class="header" href="#2-function-name">2. Function Name</a></h3>
+<p>Function name must be a valid Coq identifier.</p>
+<p><strong>Rules:</strong></p>
+<ul>
+<li>Starts with letter or underscore</li>
+<li>Can contain letters, numbers, underscores</li>
+<li>No spaces</li>
+<li>Case-sensitive</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<pre><code class="language-coq">Ursus Definition transfer ...
+Ursus Definition balanceOf ...
+Ursus Definition _internal_helper ...
+Ursus Definition fun01 ...
+</code></pre>
+<h3 id="3-arguments"><a class="header" href="#3-arguments">3. Arguments</a></h3>
+<p>Arguments are specified in parentheses with type annotations.</p>
+<p><strong>No arguments:</strong></p>
+<pre><code class="language-coq">Ursus Definition fun01: UExpression PhantomType false.
+</code></pre>
+<p><strong>One argument:</strong></p>
+<pre><code class="language-coq">Ursus Definition fun02 (arg1_u256: uint256): UExpression uint256 false.
+</code></pre>
+<p><strong>Multiple arguments:</strong></p>
+<pre><code class="language-coq">Ursus Definition fun07 (arg1_u8: uint8) (arg2_str: string): UExpression string false.
+</code></pre>
+<p><strong>Argument syntax:</strong></p>
+<pre><code class="language-coq">(argumentName: argumentType)
+</code></pre>
+<p><strong>Argument names:</strong></p>
+<ul>
+<li>Follow same rules as function names</li>
+<li>Conventionally use descriptive names or type suffixes</li>
+</ul>
+<p><strong>Example from ContractSimplyFuns.v:</strong></p>
+<pre><code class="language-coq">Ursus Definition fun04 (arg1_u8 : uint8): UExpression uint256 false.
+</code></pre>
+<h3 id="4-return-type"><a class="header" href="#4-return-type">4. Return Type</a></h3>
+<p>Return type specifies what the function returns.</p>
+<p><strong>No return value:</strong></p>
+<pre><code class="language-coq">UExpression PhantomType panicFlag
+</code></pre>
+<p><strong>Specific return type:</strong></p>
+<pre><code class="language-coq">UExpression uint256 panicFlag
+UExpression address panicFlag
+UExpression boolean panicFlag
+</code></pre>
+<p><strong>Examples from ContractSimplyFuns.v:</strong></p>
+<p>No return:</p>
+<pre><code class="language-coq">Ursus Definition fun01: UExpression PhantomType false.
+</code></pre>
+<p>Returns uint256:</p>
+<pre><code class="language-coq">Ursus Definition fun02 (arg1_u256: uint256): UExpression uint256 false.
+</code></pre>
+<p>Returns string:</p>
+<pre><code class="language-coq">Ursus Definition fun07 (arg1_u8: uint8) (arg2_str: string): UExpression string false.
+</code></pre>
+<p>See: <a href="primitives.html">Types and Primitives</a></p>
+<h3 id="5-panic-flag"><a class="header" href="#5-panic-flag">5. Panic Flag</a></h3>
+<p>The panic flag indicates whether the function can fail (panic/revert).</p>
+<p><strong>Syntax:</strong></p>
+<pre><code class="language-coq">UExpression ReturnType true   (* Can panic *)
+UExpression ReturnType false  (* Cannot panic *)
+</code></pre>
+<p><strong>Use <code>true</code> when:</strong></p>
+<ul>
+<li>Function contains <code>require_()</code> statements</li>
+<li>Function calls other functions with <code>true</code> flag</li>
+<li>Function has early returns (e.g., return in if-statement)</li>
+</ul>
+<p><strong>Use <code>false</code> when:</strong></p>
+<ul>
+<li>Function always succeeds</li>
+<li>No require statements</li>
+<li>No early returns</li>
+<li>Only calls functions with <code>false</code> flag</li>
+</ul>
+<p><strong>Examples from ContractSimplyFuns.v:</strong></p>
+<p>With panic (has require):</p>
+<pre><code class="language-coq">Ursus Definition fun08 (arg1_u8: uint8) : UExpression PhantomType true.
+{
+    :://  require_((const02_u8 &gt;= state03_u8 + arg1_u8) &amp;&amp;
+                   (arg1_u8+const02_u8 &gt;= state03_u8), const01_err).
+    :://  require_(state04_bool == {false}) |.
+}
+return.
+Defined.
+</code></pre>
+<p>Without panic:</p>
+<pre><code class="language-coq">Ursus Definition fun05 : UExpression uint256 false.
+{
+    :://  _res := (const00_u256 + state02_u256) |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="6-function-body"><a class="header" href="#6-function-body">6. Function Body</a></h3>
+<p>Function body contains the implementation.</p>
+<p><strong>Empty body (interface):</strong></p>
+<pre><code class="language-coq">#[no_body]
+Ursus Definition fun01: UExpression PhantomType false.
+return.
+Defined.
+</code></pre>
+<p><strong>Body with code:</strong></p>
+<pre><code class="language-coq">Ursus Definition fun05 : UExpression uint256 false.
+{
+    :://  _res := (const00_u256 + state02_u256) |.
+}
+return.
+Defined.
+</code></pre>
+<p><strong>Body syntax:</strong></p>
+<ul>
+<li>Enclosed in <code>{ }</code> braces</li>
+<li>Statements start with <code>:://</code> or <code>::// </code></li>
+<li>Statements end with <code>.</code> or <code>|.</code></li>
+<li>Last statement ends with <code>|.</code></li>
+</ul>
+<p>See: <a href="function_operators.html">Function Operators</a></p>
+<h3 id="7-return-statement"><a class="header" href="#7-return-statement">7. Return Statement</a></h3>
+<p>Return statement specifies what to return.</p>
+<p><strong>No return value:</strong></p>
+<pre><code class="language-coq">return.
+</code></pre>
+<p><strong>Return argument:</strong></p>
+<pre><code class="language-coq">return arg1_u256.
+</code></pre>
+<p><strong>Return variable:</strong></p>
+<pre><code class="language-coq">return arg2_str.
+</code></pre>
+<p><strong>Return implicit result:</strong></p>
+<pre><code class="language-coq">return.  (* Uses _res or _result *)
+</code></pre>
+<p><strong>Examples from ContractSimplyFuns.v:</strong></p>
+<p>Return nothing:</p>
+<pre><code class="language-coq">Ursus Definition fun01: UExpression PhantomType false.
+return.
+Defined.
+</code></pre>
+<p>Return argument:</p>
+<pre><code class="language-coq">Ursus Definition fun02 (arg1_u256: uint256): UExpression uint256 false.
+return arg1_u256.
+Defined.
+</code></pre>
+<p>Return variable:</p>
+<pre><code class="language-coq">Ursus Definition fun07 (arg1_u8: uint8) (arg2_str: string): UExpression string false.
+{
+    ::// arg2_str := {"Hello world!"} |.
+}
+return arg2_str.
+Defined.
+</code></pre>
+<h3 id="8-defined-and-sync"><a class="header" href="#8-defined-and-sync">8. Defined and Sync</a></h3>
+<p>Every function must end with <code>Defined.</code> and <code>Sync.</code></p>
+<pre><code class="language-coq">Defined.
+Sync.
+</code></pre>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li><code>Defined.</code> - Finalizes the Coq definition</li>
+<li><code>Sync.</code> - Synchronizes with Ursus code generator</li>
+</ul>
+<h2 id="complete-examples"><a class="header" href="#complete-examples">Complete Examples</a></h2>
+<h3 id="example-1-simple-function"><a class="header" href="#example-1-simple-function">Example 1: Simple Function</a></h3>
+<p>From ContractSimplyFuns.v:</p>
+<pre><code class="language-coq">#[returns=_res]
+Ursus Definition fun05 : UExpression uint256 false.
+{
+    :://  _res := (const00_u256 + state02_u256) |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<h3 id="example-2-function-with-arguments"><a class="header" href="#example-2-function-with-arguments">Example 2: Function with Arguments</a></h3>
+<p>From ContractSimplyFuns.v:</p>
+<pre><code class="language-coq">#[returns=_res]
+Ursus Definition fun04 (arg1_u8 : uint8): UExpression uint256 false.
+{
+    :://  _res := uint256(arg1_u8) |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<h3 id="example-3-function-with-local-variables"><a class="header" href="#example-3-function-with-local-variables">Example 3: Function with Local Variables</a></h3>
+<p>From ContractSimplyFuns.v:</p>
+<pre><code class="language-coq">UseLocal Definition _ := [ uint64 ; Ind3 ].
+
+#[returns=_res]
+Ursus Definition fun06 (arg1_u64: uint64): UExpression uint256 false.
+{
+    ::// var00 ind1 : Ind3 ;_| .
+    ::// ind1 := #{ind31} .
+
+    ::// var00 y : uint256 := uint256(arg1_u64);_| .
+    ::// y := uint256(arg1_u64) &gt; {5%N} ? {6%N} : state02_u256.
+    ::// _res := y + fun05() * fun05() * fun04(state03_u8) |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<h3 id="example-4-function-with-writable-arguments"><a class="header" href="#example-4-function-with-writable-arguments">Example 4: Function with Writable Arguments</a></h3>
+<p>From ContractSimplyFuns.v:</p>
+<pre><code class="language-coq">UseLocal Definition _ := [ string ].
+
+#[write=arg1_u8, write=arg2_str]
+Ursus Definition fun07 (arg1_u8: uint8) (arg2_str: string): UExpression string false.
+{
+    ::// arg1_u8 += state03_u8.
+    ::// arg2_str := {"Hello world!"} |.
+}
+return arg2_str.
+Defined.
+Sync.
+</code></pre>
+<h3 id="example-5-function-with-require"><a class="header" href="#example-5-function-with-require">Example 5: Function with Require</a></h3>
+<p>From ContractSimplyFuns.v:</p>
+<pre><code class="language-coq">Ursus Definition fun08 (arg1_u8: uint8) : UExpression PhantomType true.
+{
+    :://  require_((const02_u8 &gt;= state03_u8 + arg1_u8) &amp;&amp;
+                   (arg1_u8+const02_u8 &gt;= state03_u8), const01_err).
+    :://  require_(state04_bool == {false}) |.
+}
+return.
+Defined.
+Sync.
+</code></pre>
+<h2 id="local-variables"><a class="header" href="#local-variables">Local Variables</a></h2>
+<p>To use local variables, declare their types with <code>UseLocal</code>:</p>
+<pre><code class="language-coq">UseLocal Definition _ := [ uint256 ].
+</code></pre>
+<p>Multiple types:</p>
+<pre><code class="language-coq">UseLocal Definition _ := [ uint64 ; Ind3 ; string ].
+</code></pre>
+<p>See: <a href="local.html">Local State and Variables</a></p>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="function_operators.html">Function Operators</a> - Operators in function body</li>
+<li><a href="attributes.html">Function Attributes</a> - Function attributes</li>
+<li><a href="local.html">Local Variables</a> - Local state</li>
+<li><a href="writing_function.html">Writing Functions</a> - Detailed function writing guide</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ulang/structures.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ulang/function_operators.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ulang/structures.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ulang/function_operators.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

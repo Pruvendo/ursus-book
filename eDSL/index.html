@@ -1,0 +1,400 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Coq embedded DSL - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="coq-embedded-dsl"><a class="header" href="#coq-embedded-dsl">Coq Embedded DSL</a></h1>
+<p>Ursus is implemented as an <strong>embedded domain-specific language (eDSL)</strong> within the Coq proof assistant. This design choice enables formal verification of smart contracts while maintaining a familiar programming syntax.</p>
+<h2 id="what-is-an-embedded-dsl"><a class="header" href="#what-is-an-embedded-dsl">What is an Embedded DSL?</a></h2>
+<p>An embedded DSL is a specialized language implemented within a host language (in this case, Coq). Unlike standalone languages that require their own parser and compiler, embedded DSLs leverage the host language's infrastructure while providing domain-specific abstractions.</p>
+<h3 id="benefits-of-embedding-in-coq"><a class="header" href="#benefits-of-embedding-in-coq">Benefits of Embedding in Coq</a></h3>
+<ol>
+<li><strong>Formal Verification</strong> - Prove mathematical properties about contracts</li>
+<li><strong>Type Safety</strong> - Leverage Coq's powerful type system</li>
+<li><strong>Proof Automation</strong> - Use Coq's tactics for automated reasoning</li>
+<li><strong>Extraction</strong> - Generate executable code in multiple target languages</li>
+<li><strong>Reusability</strong> - Share proofs and abstractions across contracts</li>
+</ol>
+<h2 id="ursus-architecture"><a class="header" href="#ursus-architecture">Ursus Architecture</a></h2>
+<pre><code>┌─────────────────────────────────────────┐
+│         Ursus Contract Code             │
+│    (Custom Coq syntax + notations)      │
+└──────────────┬──────────────────────────┘
+               │
+               ▼
+┌─────────────────────────────────────────┐
+│      Coq Custom Grammar Extension       │
+│   (Defines Ursus-specific syntax)       │
+└──────────────┬──────────────────────────┘
+               │
+               ▼
+┌─────────────────────────────────────────┐
+│         Ursus Embedding Layer           │
+│  (Maps syntax to Coq terms/types)       │
+└──────────────┬──────────────────────────┘
+               │
+               ▼
+┌─────────────────────────────────────────┐
+│      Coq Core (Gallina + Tactics)       │
+│   (Type checking, proof verification)   │
+└──────────────┬──────────────────────────┘
+               │
+               ├──────────────┬─────────────┐
+               ▼              ▼             ▼
+         Verification    Extraction    Simulation
+         (Proofs)        (Solidity)    (Testing)
+</code></pre>
+<h2 id="key-components"><a class="header" href="#key-components">Key Components</a></h2>
+<h3 id="1-custom-grammar"><a class="header" href="#1-custom-grammar">1. Custom Grammar</a></h3>
+<p>Ursus extends Coq's grammar to support smart contract syntax through three core inductive types:</p>
+<ul>
+<li><strong>URValue</strong> - Right values (expressions that produce values)</li>
+<li><strong>ULValue</strong> - Left values (assignable locations)</li>
+<li><strong>UExpression</strong> - Statements and control flow</li>
+</ul>
+<pre><code class="language-coq">Contract ERC20 ;
+Sends To IERC20 ;
+Inherits ;
+</code></pre>
+<p>This looks like a domain-specific language but is actually valid Coq code thanks to custom grammar rules.</p>
+<p><strong>Learn more:</strong></p>
+<ul>
+<li><a href="custom_grammar.html">Custom Grammar</a> - Contract-level syntax</li>
+<li><a href="grammar_core.html">URValue Grammar</a> - Right value constructors</li>
+<li><a href="grammar_lvalue.html">ULValue Grammar</a> - Left value constructors</li>
+<li><a href="grammar_expr.html">UExpression Grammar</a> - Statement constructors</li>
+</ul>
+<h3 id="2-embedding-layer"><a class="header" href="#2-embedding-layer">2. Embedding Layer</a></h3>
+<p>The embedding layer maps high-level contract constructs to Coq's type theory:</p>
+<ul>
+<li><strong>Contracts</strong> → Coq records</li>
+<li><strong>Functions</strong> → Coq definitions with monadic types</li>
+<li><strong>State</strong> → Coq record fields</li>
+<li><strong>Expressions</strong> → Typed Coq terms (URValue/ULValue/UExpression)</li>
+</ul>
+<p><strong>Learn more:</strong> <a href="ursus_embedding.html">Ursus Embedding</a></p>
+<h3 id="3-notational-mechanism"><a class="header" href="#3-notational-mechanism">3. Notational Mechanism</a></h3>
+<p>Notations make Ursus code readable and familiar to smart contract developers:</p>
+<pre><code class="language-coq">(* Ursus notation *)
+balance := balance + amount
+
+(* Underlying Coq term *)
+AssignExpression (ULState balance) (URIndex (URState balance) (URScalar amount))
+</code></pre>
+<p><strong>Learn more:</strong> <a href="notations.html">Notations</a></p>
+<h2 id="how-ursus-works"><a class="header" href="#how-ursus-works">How Ursus Works</a></h2>
+<h3 id="writing-a-contract"><a class="header" href="#writing-a-contract">Writing a Contract</a></h3>
+<p>When you write an Ursus contract:</p>
+<pre><code class="language-coq">#[translation = on]
+#[language = solidity]
+Contract Token ;
+Sends To ;
+Inherits ;
+
+Record Contract := {
+    totalSupply: uint256;
+    balances: mapping address uint256
+}.
+
+Ursus Definition transfer (to: address) (amount: uint256): UExpression boolean false.
+{
+    :// balances[msg-&gt;sender] := balances[msg-&gt;sender] - amount.
+    :// balances[to] := balances[to] + amount.
+    :// return true.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="what-happens-internally"><a class="header" href="#what-happens-internally">What Happens Internally</a></h3>
+<ol>
+<li><strong>Parsing</strong> - Coq parser processes custom syntax using grammar extensions</li>
+<li><strong>Elaboration</strong> - Ursus notations expand to Coq terms</li>
+<li><strong>Type Checking</strong> - Coq verifies type correctness</li>
+<li><strong>Embedding</strong> - Contract constructs map to formal semantics</li>
+<li><strong>Extraction</strong> - Code generator produces target language (Solidity/C++/Rust)</li>
+</ol>
+<h3 id="the-monadic-foundation"><a class="header" href="#the-monadic-foundation">The Monadic Foundation</a></h3>
+<p>Ursus uses a <strong>state monad</strong> to model contract execution:</p>
+<pre><code class="language-coq">UExpression (A: Type) (b: bool) :=
+  ContractState -&gt; (A * ContractState) + Error
+</code></pre>
+<p>This encoding:</p>
+<ul>
+<li>Tracks state changes explicitly</li>
+<li>Enables reasoning about side effects</li>
+<li>Supports formal verification</li>
+<li>Allows extraction to imperative code</li>
+</ul>
+<h2 id="verification-workflow"><a class="header" href="#verification-workflow">Verification Workflow</a></h2>
+<pre><code>1. Write Contract
+   ↓
+2. Define Properties (Specifications)
+   ↓
+3. Prove Properties (Using Coq tactics)
+   ↓
+4. Extract Verified Code
+   ↓
+5. Deploy to Blockchain
+</code></pre>
+<p><strong>Example property:</strong></p>
+<pre><code class="language-coq">Theorem transfer_preserves_total_supply:
+  forall (from to: address) (amount: uint256) (s s': ContractState),
+    exec_transfer from to amount s = Some s' -&gt;
+    total_supply s = total_supply s'.
+</code></pre>
+<h2 id="comparison-with-other-approaches"><a class="header" href="#comparison-with-other-approaches">Comparison with Other Approaches</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Approach</th><th>Ursus (eDSL)</th><th>Standalone DSL</th><th>Direct Solidity</th></tr></thead><tbody>
+<tr><td>Verification</td><td>✅ Full formal verification</td><td>⚠️ Limited</td><td>❌ External tools only</td></tr>
+<tr><td>Learning Curve</td><td>Medium (Coq knowledge)</td><td>Low</td><td>Low</td></tr>
+<tr><td>Expressiveness</td><td>✅ Full Coq power</td><td>⚠️ Limited</td><td>⚠️ Limited</td></tr>
+<tr><td>Tool Support</td><td>✅ Coq ecosystem</td><td>Custom tools</td><td>✅ Mature ecosystem</td></tr>
+<tr><td>Proof Reuse</td><td>✅ Yes</td><td>❌ No</td><td>❌ No</td></tr>
+<tr><td>Multi-target</td><td>✅ Solidity/C++/Rust</td><td>⚠️ Single target</td><td>❌ Solidity only</td></tr>
+</tbody></table>
+</div>
+<h2 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h2>
+<ol>
+<li><strong>Learn Coq Basics</strong> - Understand Coq's type system and tactics</li>
+<li><strong>Study Custom Grammar</strong> - See how Ursus extends Coq syntax</li>
+<li><strong>Understand Embedding</strong> - Learn how contracts map to Coq terms</li>
+<li><strong>Master Notations</strong> - Write idiomatic Ursus code</li>
+<li><strong>Practice Verification</strong> - Prove properties about your contracts</li>
+</ol>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li><a href="custom_grammar.html">Custom Grammar</a> - Ursus syntax extensions</li>
+<li><a href="ursus_embedding.html">Ursus Embedding</a> - Semantic foundations</li>
+<li><a href="notations.html">Notations</a> - Writing readable contracts</li>
+<li><a href="../quick/simple.html">Simple Example</a> - Complete contract walkthrough</li>
+</ul>
+<h2 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h2>
+<ul>
+<li><a href="https://coq.inria.fr/refman/">Coq Reference Manual</a></li>
+<li><a href="https://softwarefoundations.cis.upenn.edu/">Software Foundations</a></li>
+<li><a href="http://adam.chlipala.net/cpdt/">Certified Programming with Dependent Types</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../quick/compile_sol.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../eDSL/custom_grammar.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../quick/compile_sol.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../eDSL/custom_grammar.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

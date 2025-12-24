@@ -1,0 +1,533 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Goal and context - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="goal-and-context"><a class="header" href="#goal-and-context">Goal and Context</a></h1>
+<p>When developing Ursus contracts, you work in Coq's <strong>proof mode</strong>, where you construct code by transforming <strong>goals</strong> using <strong>tactics</strong>. Understanding goals and context is essential for effective development.</p>
+<h2 id="what-is-a-goal"><a class="header" href="#what-is-a-goal">What is a Goal?</a></h2>
+<p>A <strong>goal</strong> is what you need to construct. In Ursus, goals are typically:</p>
+<ul>
+<li><strong>Function bodies</strong> - <code>UExpression T b</code></li>
+<li><strong>Expressions</strong> - <code>URValue T b</code></li>
+<li><strong>Statements</strong> - <code>UExpression unit b</code></li>
+<li><strong>Proofs</strong> - <code>Prop</code> (for verification)</li>
+</ul>
+<h3 id="goal-display"><a class="header" href="#goal-display">Goal Display</a></h3>
+<p>When you enter proof mode, Coq shows:</p>
+<pre><code>n subgoals
+var1 : type1
+var2 : type2
+...
+______________________________________(1/n)
+GoalType
+</code></pre>
+<p><strong>Components:</strong></p>
+<ul>
+<li><strong>Context</strong> (above line) - Available variables and hypotheses</li>
+<li><strong>Separator</strong> - Horizontal line with goal number</li>
+<li><strong>Goal</strong> (below line) - What you need to construct</li>
+</ul>
+<h2 id="example-function-development"><a class="header" href="#example-function-development">Example: Function Development</a></h2>
+<h3 id="initial-goal"><a class="header" href="#initial-goal">Initial Goal</a></h3>
+<pre><code class="language-coq">Ursus Definition transfer (to: address) (amount: uint256):
+  UExpression boolean false.
+</code></pre>
+<p><strong>Coq shows:</strong></p>
+<pre><code>1 subgoal
+to : address
+amount : uint256
+______________________________________(1/1)
+UExpression boolean false
+</code></pre>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><strong>Context:</strong> You have <code>to</code> and <code>amount</code> available</li>
+<li><strong>Goal:</strong> You need to construct <code>UExpression boolean false</code></li>
+</ul>
+<h3 id="after-first-statement"><a class="header" href="#after-first-statement">After First Statement</a></h3>
+<pre><code class="language-coq">{
+    ::// var 'sender_balance : uint256 := balances[[msg-&gt;sender]] .
+</code></pre>
+<p><strong>Coq shows:</strong></p>
+<pre><code>1 subgoal
+to : address
+amount : uint256
+sender_balance : ULValue uint256
+______________________________________(1/1)
+UExpression boolean false
+</code></pre>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><strong>Context:</strong> Now includes <code>sender_balance</code></li>
+<li><strong>Goal:</strong> Still need to construct <code>UExpression boolean false</code></li>
+</ul>
+<h3 id="after-more-statements"><a class="header" href="#after-more-statements">After More Statements</a></h3>
+<pre><code class="language-coq">    ::// balances[[msg-&gt;sender]] := sender_balance - amount .
+    ::// balances[[to]] := balances[[to]] + amount .
+</code></pre>
+<p><strong>Coq shows:</strong></p>
+<pre><code>1 subgoal
+to : address
+amount : uint256
+sender_balance : ULValue uint256
+______________________________________(1/1)
+UExpression boolean false
+</code></pre>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><strong>Context:</strong> Unchanged (statements don't add variables)</li>
+<li><strong>Goal:</strong> Still need final return value</li>
+</ul>
+<h3 id="final-statement"><a class="header" href="#final-statement">Final Statement</a></h3>
+<pre><code class="language-coq">    ::// _result := @true |.
+}
+return.
+Defined.
+</code></pre>
+<p><strong>Goal satisfied!</strong></p>
+<h2 id="understanding-context"><a class="header" href="#understanding-context">Understanding Context</a></h2>
+<p>The <strong>context</strong> contains everything available for constructing the goal:</p>
+<h3 id="types-of-context-entries"><a class="header" href="#types-of-context-entries">Types of Context Entries</a></h3>
+<p><strong>1. Function parameters:</strong></p>
+<pre><code>to : address
+amount : uint256
+</code></pre>
+<p><strong>2. Local variables:</strong></p>
+<pre><code>sender_balance : ULValue uint256
+fee : ULValue uint256
+</code></pre>
+<p><strong>3. Hypotheses (in proofs):</strong></p>
+<pre><code>H1 : amount &gt; 0
+H2 : balance &gt;= amount
+</code></pre>
+<p><strong>4. Implicit arguments:</strong></p>
+<pre><code>T : Type
+b : bool
+</code></pre>
+<h3 id="using-context"><a class="header" href="#using-context">Using Context</a></h3>
+<p>You can use any variable from the context:</p>
+<pre><code class="language-coq">{
+    ::// var 'total : uint256 := amount + fee .  (* Uses amount and fee from context *)
+    ::// balances[[to]] := total .               (* Uses to and total from context *)
+}
+</code></pre>
+<h2 id="multiple-goals"><a class="header" href="#multiple-goals">Multiple Goals</a></h2>
+<p>Some tactics create multiple goals:</p>
+<h3 id="example-if-then-else"><a class="header" href="#example-if-then-else">Example: If-Then-Else</a></h3>
+<pre><code class="language-coq">{
+    ::// if amount &gt; {100} then { -&gt;&gt; } else { -&gt;&gt; } | .
+</code></pre>
+<p><strong>Coq shows:</strong></p>
+<pre><code>2 subgoals
+to : address
+amount : uint256
+______________________________________(1/2)
+UExpression unit false
+
+______________________________________(2/2)
+UExpression unit false
+</code></pre>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><strong>Goal 1:</strong> Then branch</li>
+<li><strong>Goal 2:</strong> Else branch</li>
+</ul>
+<h3 id="solving-multiple-goals"><a class="header" href="#solving-multiple-goals">Solving Multiple Goals</a></h3>
+<p><strong>Solve first goal (then branch):</strong></p>
+<pre><code class="language-coq">{
+    ::// balances[[to]] := balances[[to]] + amount |.
+}
+</code></pre>
+<p><strong>Coq shows:</strong></p>
+<pre><code>1 subgoal
+to : address
+amount : uint256
+______________________________________(1/1)
+UExpression unit false
+</code></pre>
+<p><strong>Solve second goal (else branch):</strong></p>
+<pre><code class="language-coq">{
+    ::// skip_ |.
+}
+</code></pre>
+<p><strong>All goals solved!</strong></p>
+<h2 id="goal-transformations"><a class="header" href="#goal-transformations">Goal Transformations</a></h2>
+<p>Tactics transform goals in various ways:</p>
+<h3 id="refinement"><a class="header" href="#refinement">Refinement</a></h3>
+<p><strong>Before:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<p><strong>After <code>refine // var 'x : uint256 := {42} ; _ //</code>:</strong></p>
+<pre><code>x : ULValue uint256
+______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<h3 id="simplification"><a class="header" href="#simplification">Simplification</a></h3>
+<p><strong>Before:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression (if true then uint256 else uint8) false
+</code></pre>
+<p><strong>After <code>simpl</code>:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<h3 id="unfolding"><a class="header" href="#unfolding">Unfolding</a></h3>
+<p><strong>Before:</strong></p>
+<pre><code>______________________________________(1/1)
+MyType
+</code></pre>
+<p><strong>After <code>unfold MyType</code>:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<h2 id="inspecting-goals-and-context"><a class="header" href="#inspecting-goals-and-context">Inspecting Goals and Context</a></h2>
+<h3 id="show-command"><a class="header" href="#show-command">Show Command</a></h3>
+<p>Display current goal:</p>
+<pre><code class="language-coq">{
+    ::// var 'x : uint256 := {42} .
+    Show.
+}
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>1 subgoal
+x : ULValue uint256
+______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<h3 id="show-proof"><a class="header" href="#show-proof">Show Proof</a></h3>
+<p>Display proof term constructed so far:</p>
+<pre><code class="language-coq">Show Proof.
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>(let x := {42} in ?Goal)
+</code></pre>
+<h3 id="check-in-context"><a class="header" href="#check-in-context">Check in Context</a></h3>
+<p>Check type of expression in current context:</p>
+<pre><code class="language-coq">{
+    ::// var 'x : uint256 := {42} .
+    Check (x + {1}).
+    (* URValue uint256 false *)
+}
+</code></pre>
+<h2 id="common-goal-patterns"><a class="header" href="#common-goal-patterns">Common Goal Patterns</a></h2>
+<h3 id="pattern-1-expression-goal"><a class="header" href="#pattern-1-expression-goal">Pattern 1: Expression Goal</a></h3>
+<pre><code>______________________________________(1/1)
+UExpression T b
+</code></pre>
+<p><strong>Solution:</strong> Construct expression of type <code>T</code> with panic flag <code>b</code></p>
+<h3 id="pattern-2-value-goal"><a class="header" href="#pattern-2-value-goal">Pattern 2: Value Goal</a></h3>
+<pre><code>______________________________________(1/1)
+URValue T b
+</code></pre>
+<p><strong>Solution:</strong> Provide value of type <code>T</code></p>
+<h3 id="pattern-3-unit-goal"><a class="header" href="#pattern-3-unit-goal">Pattern 3: Unit Goal</a></h3>
+<pre><code>______________________________________(1/1)
+UExpression unit false
+</code></pre>
+<p><strong>Solution:</strong> Execute statements (side effects only)</p>
+<h3 id="pattern-4-boolean-goal"><a class="header" href="#pattern-4-boolean-goal">Pattern 4: Boolean Goal</a></h3>
+<pre><code>______________________________________(1/1)
+UExpression boolean false
+</code></pre>
+<p><strong>Solution:</strong> Return boolean value</p>
+<h3 id="pattern-5-proof-goal"><a class="header" href="#pattern-5-proof-goal">Pattern 5: Proof Goal</a></h3>
+<pre><code>______________________________________(1/1)
+balance_after = balance_before + amount
+</code></pre>
+<p><strong>Solution:</strong> Prove the proposition</p>
+<h2 id="working-with-complex-goals"><a class="header" href="#working-with-complex-goals">Working with Complex Goals</a></h2>
+<h3 id="nested-structures"><a class="header" href="#nested-structures">Nested Structures</a></h3>
+<p><strong>Goal:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression (optional (mapping address uint256)) false
+</code></pre>
+<p><strong>Strategy:</strong></p>
+<ol>
+<li>Understand the type structure</li>
+<li>Build from inside out</li>
+<li>Use helper functions if needed</li>
+</ol>
+<h3 id="dependent-types"><a class="header" href="#dependent-types">Dependent Types</a></h3>
+<p><strong>Goal:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression (if b then uint256 else uint8) false
+</code></pre>
+<p><strong>Strategy:</strong></p>
+<ol>
+<li>Simplify the condition</li>
+<li>Case analysis on <code>b</code></li>
+<li>Solve each case</li>
+</ol>
+<h2 id="debugging-with-goals"><a class="header" href="#debugging-with-goals">Debugging with Goals</a></h2>
+<h3 id="problem-wrong-type"><a class="header" href="#problem-wrong-type">Problem: Wrong Type</a></h3>
+<p><strong>Goal:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<p><strong>Attempt:</strong></p>
+<pre><code class="language-coq">::// _result := "hello" |.
+</code></pre>
+<p><strong>Error:</strong></p>
+<pre><code>Error: The term "hello" has type "string"
+while it is expected to have type "URValue uint256 false"
+</code></pre>
+<p><strong>Solution:</strong> Check types match goal</p>
+<h3 id="problem-missing-variable"><a class="header" href="#problem-missing-variable">Problem: Missing Variable</a></h3>
+<p><strong>Goal:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<p><strong>Attempt:</strong></p>
+<pre><code class="language-coq">::// _result := undefined_var |.
+</code></pre>
+<p><strong>Error:</strong></p>
+<pre><code>Error: The reference undefined_var was not found
+</code></pre>
+<p><strong>Solution:</strong> Check context for available variables</p>
+<h3 id="problem-wrong-panic-flag"><a class="header" href="#problem-wrong-panic-flag">Problem: Wrong Panic Flag</a></h3>
+<p><strong>Goal:</strong></p>
+<pre><code>______________________________________(1/1)
+UExpression uint256 false
+</code></pre>
+<p><strong>Attempt:</strong></p>
+<pre><code class="language-coq">::// _result := may_panic_function() |.
+</code></pre>
+<p><strong>Error:</strong></p>
+<pre><code>Error: Cannot unify "UExpression uint256 true"
+with "UExpression uint256 false"
+</code></pre>
+<p><strong>Solution:</strong> Use non-panicking expression or change function signature</p>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="repl.html">REPL</a> - Interactive development</li>
+<li><a href="tactics.html">Tactics</a> - Transforming goals</li>
+<li><a href="holes.html">Holes</a> - Incremental construction</li>
+<li><a href="https://coq.inria.fr/refman/coq-tacindex.html">Coq Tactics Index</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../programming/repl.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../programming/tactics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../programming/repl.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../programming/tactics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

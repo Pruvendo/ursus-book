@@ -1,0 +1,551 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>cpp-&gt;ursus translation - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="c--ursus-translation"><a class="header" href="#c--ursus-translation">C++ → Ursus Translation</a></h1>
+<p>This guide explains how to translate TON C++ contracts to Ursus for formal verification.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>TON smart contracts are typically written in C++ and compiled to TVM bytecode. Translating them to Ursus enables:</p>
+<ul>
+<li>Formal verification of TON contracts</li>
+<li>Proving correctness properties</li>
+<li>Finding bugs through proof attempts</li>
+<li>Generating verified implementations</li>
+</ul>
+<h2 id="ton-c-vs-ursus"><a class="header" href="#ton-c-vs-ursus">TON C++ vs Ursus</a></h2>
+<h3 id="key-differences"><a class="header" href="#key-differences">Key Differences</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Aspect</th><th>TON C++</th><th>Ursus</th></tr></thead><tbody>
+<tr><td>Language</td><td>C++</td><td>Coq embedded DSL</td></tr>
+<tr><td>Verification</td><td>Manual testing</td><td>Formal proofs</td></tr>
+<tr><td>Type system</td><td>C++ types</td><td>Dependent types</td></tr>
+<tr><td>Execution</td><td>TVM</td><td>Extracted to TVM</td></tr>
+</tbody></table>
+</div>
+<h2 id="translation-process"><a class="header" href="#translation-process">Translation Process</a></h2>
+<h3 id="manual-translation-steps"><a class="header" href="#manual-translation-steps">Manual Translation Steps</a></h3>
+<ol>
+<li><strong>Analyze C++ contract</strong></li>
+<li><strong>Create Ursus contract structure</strong></li>
+<li><strong>Translate state variables</strong></li>
+<li><strong>Translate functions</strong></li>
+<li><strong>Add TVM-specific features</strong></li>
+<li><strong>Add verification</strong></li>
+</ol>
+<h2 id="example-translation"><a class="header" href="#example-translation">Example Translation</a></h2>
+<h3 id="original-ton-c"><a class="header" href="#original-ton-c">Original TON C++</a></h3>
+<pre><code class="language-cpp">#include &lt;tvm/contract.hpp&gt;
+#include &lt;tvm/smart_switcher.hpp&gt;
+
+class SimpleWallet {
+public:
+    uint128 balance_;
+    address owner_;
+
+    __always_inline
+    void constructor(address owner) {
+        owner_ = owner;
+        balance_ = 0;
+    }
+
+    __always_inline
+    uint128 getBalance() {
+        return balance_;
+    }
+
+    __always_inline
+    void transfer(address to, uint128 amount) {
+        require(balance_ &gt;= amount, 101);
+        balance_ -= amount;
+        // Send message to 'to'
+    }
+};
+</code></pre>
+<h3 id="translated-ursus"><a class="header" href="#translated-ursus">Translated Ursus</a></h3>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+Require Import Solidity.TVM.EverBase.
+
+#[translation = on]
+#[language = cpp]
+Contract SimpleWallet ;
+Sends To ;
+Inherits ;
+
+Record Contract := {
+    #[static] _persistent_contract_data: PersistentContractDataLRecord;
+    balance: uint128;
+    owner: address
+}.
+
+SetUrsusOptions.
+Local Open Scope usolidity_scope.
+
+Ursus Definition constructor (owner_arg: address):
+  UExpression unit false.
+{
+    ::// owner := owner_arg .
+    ::// balance := {0} |.
+}
+return.
+Defined.
+Sync.
+
+#[public, view]
+Ursus Definition getBalance: UExpression uint128 false.
+{
+    ::// _result := balance |.
+}
+return.
+Defined.
+Sync.
+
+#[public]
+Ursus Definition transfer (to: address) (amount: uint128):
+  UExpression unit true.
+{
+    ::// require_(balance &gt;= amount, {101}) .
+    ::// balance := balance - amount |.
+    (* Send message to 'to' *)
+}
+return.
+Defined.
+Sync.
+
+EndContract ImplementsAuto.
+</code></pre>
+<h2 id="translation-mappings"><a class="header" href="#translation-mappings">Translation Mappings</a></h2>
+<h3 id="types"><a class="header" href="#types">Types</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>TON C++</th><th>Ursus</th></tr></thead><tbody>
+<tr><td><code>uint8</code></td><td><code>uint8</code></td></tr>
+<tr><td><code>uint16</code></td><td><code>uint16</code></td></tr>
+<tr><td><code>uint32</code></td><td><code>uint32</code></td></tr>
+<tr><td><code>uint64</code></td><td><code>uint64</code></td></tr>
+<tr><td><code>uint128</code></td><td><code>uint128</code></td></tr>
+<tr><td><code>uint256</code></td><td><code>uint256</code></td></tr>
+<tr><td><code>int8</code></td><td><code>int8</code></td></tr>
+<tr><td><code>int256</code></td><td><code>int256</code></td></tr>
+<tr><td><code>address</code></td><td><code>address</code></td></tr>
+<tr><td><code>bool</code></td><td><code>boolean</code></td></tr>
+<tr><td><code>std::string</code></td><td><code>string</code></td></tr>
+<tr><td><code>cell</code></td><td><code>cell_</code></td></tr>
+<tr><td><code>slice</code></td><td><code>slice_</code></td></tr>
+<tr><td><code>builder</code></td><td><code>builder_</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="tvm-specific-types"><a class="header" href="#tvm-specific-types">TVM-Specific Types</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>TON C++</th><th>Ursus</th></tr></thead><tbody>
+<tr><td><code>cell</code></td><td><code>cell_</code></td></tr>
+<tr><td><code>slice</code></td><td><code>slice_</code></td></tr>
+<tr><td><code>builder</code></td><td><code>builder_</code></td></tr>
+<tr><td><code>dict&lt;K, V&gt;</code></td><td><code>mapping K V</code></td></tr>
+<tr><td><code>optional&lt;T&gt;</code></td><td><code>optional T</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="function-attributes"><a class="header" href="#function-attributes">Function Attributes</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>TON C++</th><th>Ursus</th></tr></thead><tbody>
+<tr><td><code>__always_inline</code></td><td><code>#[internal]</code></td></tr>
+<tr><td><code>public</code></td><td><code>#[public]</code></td></tr>
+<tr><td><code>external</code></td><td><code>#[external]</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>TON C++</th><th>Ursus</th></tr></thead><tbody>
+<tr><td><code>require(cond, code)</code></td><td><code>::// require_(cond, {code})</code></td></tr>
+<tr><td><code>if (cond) { ... }</code></td><td><code>::// if cond then { -&gt;&gt; } | .</code></td></tr>
+<tr><td><code>if (cond) { ... } else { ... }</code></td><td><code>::// if cond then { -&gt;&gt; } else { -&gt;&gt; } | .</code></td></tr>
+<tr><td><code>return value;</code></td><td><code>::// _result := value |.</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="tvm-specific-features"><a class="header" href="#tvm-specific-features">TVM-Specific Features</a></h2>
+<h3 id="persistent-contract-data"><a class="header" href="#persistent-contract-data">Persistent Contract Data</a></h3>
+<p>TON contracts require persistent contract data:</p>
+<pre><code class="language-coq">Record Contract := {
+    #[static] _persistent_contract_data: PersistentContractDataLRecord;
+    (* other fields *)
+}.
+</code></pre>
+<h3 id="message-handling"><a class="header" href="#message-handling">Message Handling</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">void onMessage(cell msg) {
+    // Handle message
+}
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">Ursus Definition onMessage (msg: cell_): UExpression unit false.
+{
+    (* Handle message *)
+}
+return.
+Defined.
+</code></pre>
+<h3 id="cell-operations"><a class="header" href="#cell-operations">Cell Operations</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">cell c = begin_cell()
+    .store_uint(value, 256)
+    .end_cell();
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">::// var 'c : cell_ := build_cell(store_uint({256}, value)) |.
+</code></pre>
+<h3 id="slice-operations"><a class="header" href="#slice-operations">Slice Operations</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">slice s = c.begin_parse();
+uint256 value = s.load_uint(256);
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">::// var 's : slice_ := begin_parse(c) .
+::// var 'value : uint256 := load_uint(s, {256}) |.
+</code></pre>
+<h2 id="complex-patterns"><a class="header" href="#complex-patterns">Complex Patterns</a></h2>
+<h3 id="dictionary-mapping"><a class="header" href="#dictionary-mapping">Dictionary (Mapping)</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">dict&lt;address, uint128&gt; balances;
+balances[addr] = 100;
+uint128 bal = balances[addr];
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">balances: mapping address uint128
+
+::// balances[[addr]] := {100} .
+::// var 'bal : uint128 := balances[[addr]] |.
+</code></pre>
+<h3 id="optional-values"><a class="header" href="#optional-values">Optional Values</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">optional&lt;uint256&gt; maybeValue;
+if (maybeValue.has_value()) {
+    uint256 val = maybeValue.value();
+}
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">maybeValue: optional uint256
+
+::// match maybeValue with
+     | Some val =&gt; { -&gt;&gt; }
+     | None =&gt; { -&gt;&gt; }
+     end |.
+{
+    (* Use val *)
+}
+{
+    (* Handle None *)
+}
+</code></pre>
+<h3 id="message-sending"><a class="header" href="#message-sending">Message Sending</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">tvm_sendmsg(to, value, msg_body);
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">::// send_message(to, value, msg_body) |.
+</code></pre>
+<h2 id="ton-specific-patterns"><a class="header" href="#ton-specific-patterns">TON-Specific Patterns</a></h2>
+<h3 id="constructor-with-replay-protection"><a class="header" href="#constructor-with-replay-protection">Constructor with Replay Protection</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">void constructor() {
+    require(!initialized_, 100);
+    initialized_ = true;
+    owner_ = msg.sender;
+}
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">Ursus Definition constructor: UExpression unit true.
+{
+    ::// require_(!initialized, {100}) .
+    ::// initialized := @true .
+    ::// owner := msg-&gt;sender |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="internal-message-handler"><a class="header" href="#internal-message-handler">Internal Message Handler</a></h3>
+<p><strong>C++:</strong></p>
+<pre><code class="language-cpp">void onInternalMessage(cell msg) {
+    slice s = msg.begin_parse();
+    uint32 op = s.load_uint(32);
+
+    if (op == 1) {
+        handleTransfer(s);
+    }
+}
+</code></pre>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">Ursus Definition onInternalMessage (msg: cell_): UExpression unit false.
+{
+    ::// var 's : slice_ := begin_parse(msg) .
+    ::// var 'op : uint32 := load_uint(s, {32}) .
+    ::// if op == {1} then { -&gt;&gt; } |.
+    {
+        ::// handleTransfer(s) |.
+    }
+}
+return.
+Defined.
+</code></pre>
+<h2 id="translation-challenges"><a class="header" href="#translation-challenges">Translation Challenges</a></h2>
+<h3 id="1-low-level-tvm-operations"><a class="header" href="#1-low-level-tvm-operations">1. Low-Level TVM Operations</a></h3>
+<p>Some TVM operations may not have direct Ursus equivalents and require custom implementation.</p>
+<h3 id="2-cell-serialization"><a class="header" href="#2-cell-serialization">2. Cell Serialization</a></h3>
+<p>Complex cell serialization logic needs careful translation.</p>
+<h3 id="3-gas-management"><a class="header" href="#3-gas-management">3. Gas Management</a></h3>
+<p>Gas calculations in C++ must be translated to Ursus gas model.</p>
+<h3 id="4-replay-protection"><a class="header" href="#4-replay-protection">4. Replay Protection</a></h3>
+<p>TON-specific replay protection patterns need proper translation.</p>
+<h2 id="verification-after-translation"><a class="header" href="#verification-after-translation">Verification After Translation</a></h2>
+<p>After translation, add specifications and proofs:</p>
+<pre><code class="language-coq">(* Specification *)
+Definition transfer_spec (from to: address) (amount: uint128)
+                         (s s': ContractState) : Prop :=
+  balance s' = balance s - amount.
+
+(* Proof *)
+Theorem transfer_correct:
+  forall from to amount s s',
+    exec_transfer from to amount s = Some s' -&gt;
+    transfer_spec from to amount s s'.
+Proof.
+  (* Proof steps *)
+Qed.
+</code></pre>
+<h2 id="tvm-library-support"><a class="header" href="#tvm-library-support">TVM Library Support</a></h2>
+<p>Ursus provides TVM-specific libraries:</p>
+<pre><code class="language-coq">Require Import Solidity.TVM.EverBase.
+Require Import Solidity.TVM.ContractTVM.
+</code></pre>
+<p>These libraries provide:</p>
+<ul>
+<li>TVM primitive operations</li>
+<li>Cell/slice/builder operations</li>
+<li>Message handling</li>
+<li>Gas management</li>
+</ul>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="readme.html">Translation Overview</a> - Translation system overview</li>
+<li><a href="../stdlib/TVM.html">TVM Functions</a> - TVM-specific functions</li>
+<li><a href="../ulang/contract_structure.html">Contract Structure</a> - Contract organization</li>
+<li><a href="../verification/readme.html">Verification</a> - Formal verification</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../translation/sol-ursus.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../translation/ursus-sol.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../translation/sol-ursus.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../translation/ursus-sol.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

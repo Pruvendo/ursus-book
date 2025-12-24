@@ -1,0 +1,536 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Interfaces and messages - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="interfaces-and-messages"><a class="header" href="#interfaces-and-messages">Interfaces and Messages</a></h1>
+<p>Interfaces enable type-safe inter-contract communication in Ursus. This section covers defining interfaces, declaring message recipients, and sending messages.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p><strong>Interfaces</strong> define the external API of a contract - the functions that other contracts can call.</p>
+<p><strong>Messages</strong> are the mechanism for calling functions on other contracts.</p>
+<p><strong>Key benefits:</strong></p>
+<ul>
+<li><strong>Type safety</strong> - Compile-time checking of message sends</li>
+<li><strong>Documentation</strong> - Explicit contract dependencies</li>
+<li><strong>Verification</strong> - Formal verification of inter-contract calls</li>
+<li><strong>Code generation</strong> - Automatic interface bindings</li>
+</ul>
+<h2 id="defining-interfaces"><a class="header" href="#defining-interfaces">Defining Interfaces</a></h2>
+<p>Interfaces are defined in separate files or at the beginning of contract files.</p>
+<h3 id="interface-file-structure"><a class="header" href="#interface-file-structure">Interface File Structure</a></h3>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+
+Interfaces.
+SetUrsusOptions.
+Unset Ursus Extraction.
+
+MakeInterface Class IInterfaceName :=
+{
+    method1 : type1 -&gt; type2 -&gt; UExpression returnType flag ;
+    method2 : type3 -&gt; UExpression returnType flag ;
+    ...
+}.
+
+EndInterfaces.
+</code></pre>
+<h3 id="interface-syntax"><a class="header" href="#interface-syntax">Interface Syntax</a></h3>
+<p><strong>Basic structure:</strong></p>
+<pre><code class="language-coq">MakeInterface Class IInterfaceName :=
+{
+    methodName : arg1Type -&gt; arg2Type -&gt; ... -&gt; UExpression returnType flag
+}.
+</code></pre>
+<p><strong>Components:</strong></p>
+<ul>
+<li><code>IInterfaceName</code> - Interface name (conventionally starts with <code>I</code>)</li>
+<li><code>methodName</code> - Function name</li>
+<li><code>argTypes</code> - Curried argument types</li>
+<li><code>returnType</code> - Return type</li>
+<li><code>flag</code> - Panic flag (<code>true</code> or <code>false</code>)</li>
+</ul>
+<h3 id="example-erc20-interface"><a class="header" href="#example-erc20-interface">Example: ERC20 Interface</a></h3>
+<pre><code class="language-coq">Interfaces.
+SetUrsusOptions.
+Unset Ursus Extraction.
+
+MakeInterface Class IERC20 :=
+{
+    #[view, public]
+    balanceOf : address -&gt; UExpression uint256 false ;
+
+    #[external]
+    transfer : address -&gt; uint256 -&gt; UExpression boolean true ;
+
+    #[external]
+    approve : address -&gt; uint256 -&gt; UExpression boolean true ;
+
+    #[external]
+    transferFrom : address -&gt; address -&gt; uint256 -&gt; UExpression boolean true
+}.
+
+EndInterfaces.
+</code></pre>
+<h3 id="method-attributes"><a class="header" href="#method-attributes">Method Attributes</a></h3>
+<p>Methods can have attributes:</p>
+<pre><code class="language-coq">#[view, public]         (* Read-only public method *)
+#[external]             (* External method *)
+#[override, external]   (* Override parent method *)
+#[external, payable]    (* Payable external method *)
+</code></pre>
+<h2 id="declaring-message-recipients"><a class="header" href="#declaring-message-recipients">Declaring Message Recipients</a></h2>
+<p>The <code>Sends To</code> declaration specifies which interfaces a contract can send messages to.</p>
+<h3 id="syntax"><a class="header" href="#syntax">Syntax</a></h3>
+<pre><code class="language-coq">Sends To Interface1 Interface2 Interface3 ;
+</code></pre>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<p><strong>Multiple interfaces:</strong></p>
+<pre><code class="language-coq">Sends To IERC20 ITokenReceiver IOwnable ;
+</code></pre>
+<p><strong>Single interface:</strong></p>
+<pre><code class="language-coq">Sends To IERC20 ;
+</code></pre>
+<p><strong>No external calls:</strong></p>
+<pre><code class="language-coq">Sends To ;
+</code></pre>
+<h3 id="purpose"><a class="header" href="#purpose">Purpose</a></h3>
+<p>The <code>Sends To</code> declaration:</p>
+<ol>
+<li><strong>Enables type checking</strong> - Only declared interfaces can be called</li>
+<li><strong>Documents dependencies</strong> - Makes external calls explicit</li>
+<li><strong>Supports verification</strong> - Enables formal verification of calls</li>
+<li><strong>Generates bindings</strong> - Creates interface code in target language</li>
+</ol>
+<h2 id="sending-messages"><a class="header" href="#sending-messages">Sending Messages</a></h2>
+<p>Messages are sent using the <code>send</code> notation.</p>
+<h3 id="syntax-1"><a class="header" href="#syntax-1">Syntax</a></h3>
+<pre><code class="language-coq">::// send Interface.Method(arg1, arg2, ...)
+         =&gt; target_address
+         with message_params .
+</code></pre>
+<h3 id="components"><a class="header" href="#components">Components</a></h3>
+<ul>
+<li><code>Interface.Method</code> - Interface and method name</li>
+<li><code>(arg1, arg2, ...)</code> - Method arguments</li>
+<li><code>target_address</code> - Recipient contract address</li>
+<li><code>message_params</code> - Message parameters (value, flags, etc.)</li>
+</ul>
+<h3 id="basic-example"><a class="header" href="#basic-example">Basic Example</a></h3>
+<pre><code class="language-coq">::// send IERC20.Transfer(from, to, amount)
+         =&gt; token_address
+         with {InternalMessageParamsLRecord} [$ {2} ⇒ {Message_ι_flag} $] .
+</code></pre>
+<h3 id="message-parameters"><a class="header" href="#message-parameters">Message Parameters</a></h3>
+<p>Message parameters control how the message is sent:</p>
+<pre><code class="language-coq">{InternalMessageParamsLRecord} [$
+    {value} ⇒ {Message_ι_value} ;
+    {flags} ⇒ {Message_ι_flag} ;
+    {bounce} ⇒ {Message_ι_bounce}
+$]
+</code></pre>
+<p><strong>Common parameters:</strong></p>
+<ul>
+<li><code>Message_ι_value</code> - Amount of tokens to send</li>
+<li><code>Message_ι_flag</code> - Message flags</li>
+<li><code>Message_ι_bounce</code> - Bounce on error</li>
+</ul>
+<h2 id="complete-example"><a class="header" href="#complete-example">Complete Example</a></h2>
+<h3 id="interface-definition-ierc20v"><a class="header" href="#interface-definition-ierc20v">Interface Definition (IERC20.v)</a></h3>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+
+Interfaces.
+SetUrsusOptions.
+Unset Ursus Extraction.
+
+MakeInterface Class IERC20 :=
+{
+    #[view, public]
+    balanceOf : address -&gt; UExpression uint256 false ;
+
+    #[external]
+    transfer : address -&gt; uint256 -&gt; UExpression boolean true ;
+
+    #[view, public]
+    totalSupply : UExpression uint256 false
+}.
+
+EndInterfaces.
+</code></pre>
+<h3 id="contract-using-interface"><a class="header" href="#contract-using-interface">Contract Using Interface</a></h3>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+Require Import UrsusEnvironment.Solidity.current.LocalGenerator.
+Require Import IERC20.
+
+Module TokenWrapper.
+
+#[translation = on]
+#[language = solidity]
+Contract TokenWrapper ;
+Sends To IERC20 ;
+Types ;
+Constants ;
+
+Record Contract := {
+    token: address;
+    total_wrapped: uint256
+}.
+
+SetUrsusOptions.
+UseLocal Definition _ := [uint256; address; boolean].
+
+#[external, returns=_result]
+Ursus Definition wrapTokens (amount: uint256): UExpression boolean true.
+{
+    ::// send IERC20.transfer(this-&gt;address, amount)
+             =&gt; token
+             with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] .
+
+    ::// total_wrapped := total_wrapped + amount .
+    ::// _result := @true |.
+}
+return.
+Defined.
+Sync.
+
+EndContract Implements.
+End TokenWrapper.
+</code></pre>
+<h2 id="advanced-patterns"><a class="header" href="#advanced-patterns">Advanced Patterns</a></h2>
+<h3 id="callback-interfaces"><a class="header" href="#callback-interfaces">Callback Interfaces</a></h3>
+<p>Define interfaces for callbacks:</p>
+<pre><code class="language-coq">MakeInterface Class ITokenReceiver :=
+{
+    #[external]
+    onTokenReceived : address -&gt; uint256 -&gt; UExpression PhantomType true
+}.
+</code></pre>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-coq">::// send ITokenReceiver.onTokenReceived(sender, amount)
+         =&gt; recipient
+         with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] .
+</code></pre>
+<h3 id="multiple-interface-calls"><a class="header" href="#multiple-interface-calls">Multiple Interface Calls</a></h3>
+<pre><code class="language-coq">Sends To IERC20 IOwnable ITokenReceiver ;
+
+Ursus Definition complexOperation: UExpression PhantomType true.
+{
+    ::// send IERC20.transfer(recipient, amount)
+             =&gt; token_address
+             with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] .
+
+    ::// send ITokenReceiver.onTokenReceived(msg-&gt;sender, amount)
+             =&gt; recipient
+             with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] .
+
+    ::// send IOwnable.transferOwnership(new_owner)
+             =&gt; ownable_contract
+             with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] |.
+}
+return.
+Defined.
+</code></pre>
+<h3 id="conditional-message-sending"><a class="header" href="#conditional-message-sending">Conditional Message Sending</a></h3>
+<pre><code class="language-coq">::// if should_notify then { -&gt;&gt; } | .
+{
+    ::// send ITokenReceiver.onTokenReceived(sender, amount)
+             =&gt; recipient
+             with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] |.
+}
+</code></pre>
+<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
+<h3 id="1-use-descriptive-interface-names"><a class="header" href="#1-use-descriptive-interface-names">1. Use Descriptive Interface Names</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">MakeInterface Class IERC20 := { ... }.
+MakeInterface Class ITokenVesting := { ... }.
+MakeInterface Class IOwnable := { ... }.
+</code></pre>
+<p><strong>Avoid:</strong></p>
+<pre><code class="language-coq">MakeInterface Class I1 := { ... }.
+MakeInterface Class MyInterface := { ... }.
+</code></pre>
+<h3 id="2-group-related-methods"><a class="header" href="#2-group-related-methods">2. Group Related Methods</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">MakeInterface Class IERC20 :=
+{
+    (* View methods *)
+    #[view, public]
+    balanceOf : address -&gt; UExpression uint256 false ;
+
+    #[view, public]
+    totalSupply : UExpression uint256 false ;
+
+    (* State-changing methods *)
+    #[external]
+    transfer : address -&gt; uint256 -&gt; UExpression boolean true ;
+
+    #[external]
+    approve : address -&gt; uint256 -&gt; UExpression boolean true
+}.
+</code></pre>
+<h3 id="3-document-panic-flags"><a class="header" href="#3-document-panic-flags">3. Document Panic Flags</a></h3>
+<pre><code class="language-coq">MakeInterface Class IToken :=
+{
+    (* Can panic: requires sufficient balance *)
+    transfer : address -&gt; uint256 -&gt; UExpression boolean true ;
+
+    (* Cannot panic: pure view function *)
+    #[view, public]
+    balanceOf : address -&gt; UExpression uint256 false
+}.
+</code></pre>
+<h3 id="4-declare-all-dependencies"><a class="header" href="#4-declare-all-dependencies">4. Declare All Dependencies</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">Sends To IERC20 IOwnable ITokenReceiver ;
+</code></pre>
+<p><strong>Avoid:</strong></p>
+<pre><code class="language-coq">Sends To ;
+(* Missing interfaces - will cause compilation errors *)
+</code></pre>
+<h2 id="common-patterns"><a class="header" href="#common-patterns">Common Patterns</a></h2>
+<h3 id="token-transfer"><a class="header" href="#token-transfer">Token Transfer</a></h3>
+<pre><code class="language-coq">::// send IERC20.transfer(recipient, amount)
+         =&gt; token_address
+         with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] .
+</code></pre>
+<h3 id="ownership-transfer"><a class="header" href="#ownership-transfer">Ownership Transfer</a></h3>
+<pre><code class="language-coq">::// send IOwnable.transferOwnership(new_owner)
+         =&gt; contract_address
+         with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] .
+</code></pre>
+<h3 id="callback-notification"><a class="header" href="#callback-notification">Callback Notification</a></h3>
+<pre><code class="language-coq">::// send ICallback.onComplete(result)
+         =&gt; callback_address
+         with {InternalMessageParamsLRecord} [$ {0} ⇒ {Message_ι_value} $] .
+</code></pre>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="contract_header.html">Contract Header</a> - Sends To declaration</li>
+<li><a href="contract_file_structure.html">Contract Structure</a> - Overall organization</li>
+<li><a href="file_interface.html">File Interface</a> - Interface file structure</li>
+<li><a href="functions.html">Functions</a> - Implementing interface methods</li>
+<li><a href="../eDSL/notations.html">Notations</a> - Message send notation details</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ulang/function_operators.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ulang/attributes.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ulang/function_operators.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ulang/attributes.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

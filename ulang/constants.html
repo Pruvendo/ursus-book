@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Global constants - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="constants"><a class="header" href="#constants">Constants</a></h1>
+<p>Constants in Ursus are compile-time values that don't change during contract execution. There are two types: global constants (outside contracts) and contract constants (inside contracts).</p>
+<h2 id="contract-constants"><a class="header" href="#contract-constants">Contract Constants</a></h2>
+<p>Contract constants are defined within the <code>Contract</code> declaration and are accessible to all contract functions.</p>
+<h3 id="syntax"><a class="header" href="#syntax">Syntax</a></h3>
+<pre><code class="language-coq">Constants
+  Definition CONSTANT_NAME : type := value
+  Definition ANOTHER_CONSTANT : type := value
+;
+</code></pre>
+<p><strong>Important:</strong> The semicolon (<code>;</code>) must appear <strong>after</strong> the last constant definition.</p>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<p><strong>Integer constants:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition MAX_SUPPLY : uint256 := {1000000}
+  Definition MIN_BALANCE : uint256 := {100}
+  Definition DECIMALS : uint8 := {18}
+;
+</code></pre>
+<p><strong>Error codes:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition ERR_ADDR_ZERO : uint16 := {104}
+  Definition ERR_LOW_AMOUNT : uint16 := {105}
+  Definition ERR_LOW_BALANCE : uint16 := {106}
+  Definition ERR_NOT_SELF : uint16 := {107}
+;
+</code></pre>
+<p><strong>Boolean constants:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition DEFAULT_ACTIVE : boolean := @true
+  Definition ALLOW_TRANSFERS : boolean := @false
+;
+</code></pre>
+<p><strong>Address constants:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition ZERO_ADDRESS : address := {0x0000000000000000000000000000000000000000}
+;
+</code></pre>
+<h3 id="using-constants"><a class="header" href="#using-constants">Using Constants</a></h3>
+<p>Constants can be used anywhere in contract functions:</p>
+<pre><code class="language-coq">Ursus Definition mint (amount: uint256): UExpression PhantomType true.
+{
+    ::// require_ (totalSupply + amount &lt;= MAX_SUPPLY) .
+    ::// totalSupply := totalSupply + amount |.
+}
+return.
+Defined.
+</code></pre>
+<h2 id="global-constants"><a class="header" href="#global-constants">Global Constants</a></h2>
+<p>Global constants are defined outside the contract, typically in separate modules or at the file level.</p>
+<h3 id="syntax-1"><a class="header" href="#syntax-1">Syntax</a></h3>
+<pre><code class="language-coq">Definition GLOBAL_CONSTANT : type := value.
+</code></pre>
+<h3 id="examples-1"><a class="header" href="#examples-1">Examples</a></h3>
+<p><strong>Module-level constants:</strong></p>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+
+Definition SECONDS_PER_DAY : uint256 := {86400}.
+Definition DAYS_PER_YEAR : uint256 := {365}.
+
+Module MyContract.
+  (* Contract definition *)
+End MyContract.
+</code></pre>
+<p><strong>Shared constants:</strong></p>
+<pre><code class="language-coq">(* Constants.v *)
+Definition MAX_UINT256 : uint256 := {115792089237316195423570985008687907853269984665640564039457584007913129639935}.
+Definition ZERO : uint256 := {0}.
+</code></pre>
+<h2 id="constant-expressions"><a class="header" href="#constant-expressions">Constant Expressions</a></h2>
+<p>Constants can be computed from other constants:</p>
+<pre><code class="language-coq">Constants
+  Definition BASE_FEE : uint256 := {100}
+  Definition FEE_MULTIPLIER : uint256 := {3}
+  Definition TOTAL_FEE : uint256 := {300}  (* BASE_FEE * FEE_MULTIPLIER *)
+;
+</code></pre>
+<p><strong>Note:</strong> Ursus doesn't evaluate constant expressions automatically. You must compute the value manually.</p>
+<h2 id="best-practices"><a class="header" href="#best-practices">Best Practices</a></h2>
+<h3 id="1-use-descriptive-names"><a class="header" href="#1-use-descriptive-names">1. Use Descriptive Names</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition MAX_SUPPLY : uint256 := {1000000}
+  Definition MIN_TRANSFER_AMOUNT : uint256 := {1}
+;
+</code></pre>
+<p><strong>Avoid:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition X : uint256 := {1000000}
+  Definition Y : uint256 := {1}
+;
+</code></pre>
+<h3 id="2-group-related-constants"><a class="header" href="#2-group-related-constants">2. Group Related Constants</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">Constants
+  (* Supply limits *)
+  Definition MAX_SUPPLY : uint256 := {1000000}
+  Definition MIN_SUPPLY : uint256 := {0}
+
+  (* Fee configuration *)
+  Definition BASE_FEE : uint256 := {100}
+  Definition MAX_FEE : uint256 := {1000}
+
+  (* Error codes *)
+  Definition ERR_INSUFFICIENT_BALANCE : uint16 := {100}
+  Definition ERR_INVALID_ADDRESS : uint16 := {101}
+;
+</code></pre>
+<h3 id="3-use-appropriate-types"><a class="header" href="#3-use-appropriate-types">3. Use Appropriate Types</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition DECIMALS : uint8 := {18}        (* Small number *)
+  Definition MAX_SUPPLY : uint256 := {1000000}  (* Large number *)
+;
+</code></pre>
+<p><strong>Avoid:</strong></p>
+<pre><code class="language-coq">Constants
+  Definition DECIMALS : uint256 := {18}      (* Wasteful *)
+;
+</code></pre>
+<h3 id="4-document-magic-numbers"><a class="header" href="#4-document-magic-numbers">4. Document Magic Numbers</a></h3>
+<p><strong>Good:</strong></p>
+<pre><code class="language-coq">Constants
+  (* 86400 seconds = 1 day *)
+  Definition SECONDS_PER_DAY : uint256 := {86400}
+
+  (* 10^18 for 18 decimal places *)
+  Definition DECIMALS_MULTIPLIER : uint256 := {1000000000000000000}
+;
+</code></pre>
+<h2 id="common-patterns"><a class="header" href="#common-patterns">Common Patterns</a></h2>
+<h3 id="error-codes"><a class="header" href="#error-codes">Error Codes</a></h3>
+<pre><code class="language-coq">Constants
+  Definition ERR_NOT_OWNER : uint16 := {100}
+  Definition ERR_PAUSED : uint16 := {101}
+  Definition ERR_INSUFFICIENT_BALANCE : uint16 := {102}
+  Definition ERR_INVALID_AMOUNT : uint16 := {103}
+;
+</code></pre>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-coq">::// require_ (msg-&gt;sender == owner) or_throw ERR_NOT_OWNER .
+</code></pre>
+<h3 id="configuration-values"><a class="header" href="#configuration-values">Configuration Values</a></h3>
+<pre><code class="language-coq">Constants
+  Definition LOCK_PERIOD : uint256 := {86400}  (* 1 day *)
+  Definition MIN_STAKE : uint256 := {1000}
+  Definition REWARD_RATE : uint256 := {5}  (* 5% *)
+;
+</code></pre>
+<h3 id="flags-and-masks"><a class="header" href="#flags-and-masks">Flags and Masks</a></h3>
+<pre><code class="language-coq">Constants
+  Definition FLAG_SEND_ALL : uint8 := {128}
+  Definition FLAG_IGNORE_ERRORS : uint8 := {2}
+  Definition FLAG_BOUNCE : uint8 := {64}
+;
+</code></pre>
+<h2 id="complete-example"><a class="header" href="#complete-example">Complete Example</a></h2>
+<pre><code class="language-coq">#[translation = on]
+#[language = solidity]
+Contract TokenSale ;
+Sends To IERC20 ;
+
+Types ;
+
+Constants
+  (* Token configuration *)
+  Definition TOKEN_PRICE : uint256 := {1000}
+  Definition MIN_PURCHASE : uint256 := {100}
+  Definition MAX_PURCHASE : uint256 := {10000}
+
+  (* Sale phases *)
+  Definition PHASE_PRESALE : uint8 := {0}
+  Definition PHASE_PUBLIC : uint8 := {1}
+  Definition PHASE_ENDED : uint8 := {2}
+
+  (* Error codes *)
+  Definition ERR_SALE_NOT_ACTIVE : uint16 := {100}
+  Definition ERR_AMOUNT_TOO_LOW : uint16 := {101}
+  Definition ERR_AMOUNT_TOO_HIGH : uint16 := {102}
+;
+
+Record Contract := {
+    token: address;
+    current_phase: uint8;
+    total_sold: uint256
+}.
+</code></pre>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="contract_file_structure.html">Contract Structure</a> - Overall contract organization</li>
+<li><a href="primitives.html">Types and Primitives</a> - Available types for constants</li>
+<li><a href="functions.html">Functions</a> - Using constants in functions</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ulang/primitives.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../ulang/structures.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ulang/primitives.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../ulang/structures.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

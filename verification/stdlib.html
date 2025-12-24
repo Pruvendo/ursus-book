@@ -1,0 +1,407 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>StdLib verification - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="standard-library-verification"><a class="header" href="#standard-library-verification">Standard Library Verification</a></h1>
+<p>The Ursus standard library provides verified implementations of common operations and data structures. This section documents the verification guarantees.</p>
+<h2 id="verified-components"><a class="header" href="#verified-components">Verified Components</a></h2>
+<h3 id="arithmetic-operations"><a class="header" href="#arithmetic-operations">Arithmetic Operations</a></h3>
+<p>All arithmetic operations are verified for correctness and safety.</p>
+<h4 id="addition"><a class="header" href="#addition">Addition</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem plus_correct:
+  forall (a b: uint256) (s: ContractState),
+    eval (a + b) s = (eval a s) + (eval b s).
+</code></pre>
+<p><strong>Overflow behavior:</strong></p>
+<pre><code class="language-coq">Theorem plus_overflow:
+  forall (a b: uint256),
+    a + b &lt; a -&gt; (* Overflow occurred *)
+    a + b = (a + b) mod 2^256.
+</code></pre>
+<h4 id="subtraction"><a class="header" href="#subtraction">Subtraction</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem minus_correct:
+  forall (a b: uint256) (s: ContractState),
+    eval a s &gt;= eval b s -&gt;
+    eval (a - b) s = (eval a s) - (eval b s).
+</code></pre>
+<p><strong>Underflow behavior:</strong></p>
+<pre><code class="language-coq">Theorem minus_underflow:
+  forall (a b: uint256),
+    a &lt; b -&gt; (* Underflow would occur *)
+    a - b = 0.  (* Saturating subtraction *)
+</code></pre>
+<h4 id="multiplication"><a class="header" href="#multiplication">Multiplication</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem mult_correct:
+  forall (a b: uint256) (s: ContractState),
+    eval (a * b) s = (eval a s) * (eval b s) mod 2^256.
+</code></pre>
+<h4 id="division"><a class="header" href="#division">Division</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem div_correct:
+  forall (a b: uint256) (s: ContractState),
+    eval b s &lt;&gt; 0 -&gt;
+    eval (a / b) s = (eval a s) / (eval b s).
+</code></pre>
+<p><strong>Division by zero:</strong></p>
+<pre><code class="language-coq">Theorem div_by_zero:
+  forall (a: uint256),
+    a / {0} = {0}.  (* Returns zero *)
+</code></pre>
+<h3 id="comparison-operations"><a class="header" href="#comparison-operations">Comparison Operations</a></h3>
+<h4 id="equality"><a class="header" href="#equality">Equality</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem eq_correct:
+  forall (a b: uint256) (s: ContractState),
+    eval (a == b) s = true &lt;-&gt; eval a s = eval b s.
+</code></pre>
+<h4 id="less-than"><a class="header" href="#less-than">Less Than</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem lt_correct:
+  forall (a b: uint256) (s: ContractState),
+    eval (a &lt; b) s = true &lt;-&gt; eval a s &lt; eval b s.
+</code></pre>
+<h3 id="logical-operations"><a class="header" href="#logical-operations">Logical Operations</a></h3>
+<h4 id="and"><a class="header" href="#and">AND</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem and_correct:
+  forall (a b: boolean) (s: ContractState),
+    eval (a &amp;&amp; b) s = (eval a s) &amp;&amp; (eval b s).
+</code></pre>
+<p><strong>Short-circuit:</strong></p>
+<pre><code class="language-coq">Theorem and_short_circuit:
+  forall (a b: boolean) (s: ContractState),
+    eval a s = false -&gt;
+    eval (a &amp;&amp; b) s = false.  (* b not evaluated *)
+</code></pre>
+<h4 id="or"><a class="header" href="#or">OR</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem or_correct:
+  forall (a b: boolean) (s: ContractState),
+    eval (a || b) s = (eval a s) || (eval b s).
+</code></pre>
+<p><strong>Short-circuit:</strong></p>
+<pre><code class="language-coq">Theorem or_short_circuit:
+  forall (a b: boolean) (s: ContractState),
+    eval a s = true -&gt;
+    eval (a || b) s = true.  (* b not evaluated *)
+</code></pre>
+<h3 id="mapping-operations"><a class="header" href="#mapping-operations">Mapping Operations</a></h3>
+<h4 id="fetch"><a class="header" href="#fetch">Fetch</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem fetch_correct:
+  forall (m: mapping K V) (k: K) (s: ContractState),
+    eval (m-&gt;fetch(k)) s = lookup (eval m s) (eval k s).
+</code></pre>
+<h4 id="insert"><a class="header" href="#insert">Insert</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem insert_correct:
+  forall (m: mapping K V) (k: K) (v: V) (s s': ContractState),
+    exec (m[[k]] := v) s = Some s' -&gt;
+    lookup (eval m s') k = Some (eval v s).
+</code></pre>
+<h4 id="delete"><a class="header" href="#delete">Delete</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem delete_correct:
+  forall (m: mapping K V) (k: K) (s s': ContractState),
+    exec (m-&gt;delete(k)) s = Some s' -&gt;
+    lookup (eval m s') k = None.
+</code></pre>
+<h3 id="optional-operations"><a class="header" href="#optional-operations">Optional Operations</a></h3>
+<h4 id="hasvalue"><a class="header" href="#hasvalue">HasValue</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem hasValue_correct:
+  forall (x: optional T) (s: ContractState),
+    eval (x-&gt;hasValue()) s = true &lt;-&gt;
+    exists v, eval x s = Some v.
+</code></pre>
+<h4 id="get"><a class="header" href="#get">Get</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem get_correct:
+  forall (x: optional T) (v: T) (s: ContractState),
+    eval x s = Some v -&gt;
+    eval (x-&gt;get()) s = v.
+</code></pre>
+<p><strong>Precondition:</strong></p>
+<pre><code class="language-coq">Theorem get_requires_value:
+  forall (x: optional T) (s: ContractState),
+    eval x s = None -&gt;
+    (* get() panics *)
+    exec (x-&gt;get()) s = Error.
+</code></pre>
+<h3 id="array-operations"><a class="header" href="#array-operations">Array Operations</a></h3>
+<h4 id="length"><a class="header" href="#length">Length</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem length_correct:
+  forall (arr: array T) (s: ContractState),
+    eval (arr-&gt;length()) s = length (eval arr s).
+</code></pre>
+<h4 id="push"><a class="header" href="#push">Push</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem push_correct:
+  forall (arr: array T) (v: T) (s s': ContractState),
+    exec (arr-&gt;push(v)) s = Some s' -&gt;
+    length (eval arr s') = length (eval arr s) + 1 /\
+    last (eval arr s') = Some (eval v s).
+</code></pre>
+<h4 id="pop"><a class="header" href="#pop">Pop</a></h4>
+<p><strong>Specification:</strong></p>
+<pre><code class="language-coq">Theorem pop_correct:
+  forall (arr: array T) (s s': ContractState),
+    length (eval arr s) &gt; 0 -&gt;
+    exec (arr-&gt;pop()) s = Some s' -&gt;
+    length (eval arr s') = length (eval arr s) - 1.
+</code></pre>
+<h2 id="using-verified-library"><a class="header" href="#using-verified-library">Using Verified Library</a></h2>
+<h3 id="import-verified-lemmas"><a class="header" href="#import-verified-lemmas">Import Verified Lemmas</a></h3>
+<pre><code class="language-coq">Require Import UrsusStdLib.Verified.Arithmetic.
+Require Import UrsusStdLib.Verified.Mappings.
+Require Import UrsusStdLib.Verified.Optionals.
+</code></pre>
+<h3 id="apply-in-proofs"><a class="header" href="#apply-in-proofs">Apply in Proofs</a></h3>
+<pre><code class="language-coq">Theorem my_function_correct:
+  forall x y s s',
+    exec_my_function x y s = Some s' -&gt;
+    result s' = x + y.
+Proof.
+  intros.
+  unfold exec_my_function in H.
+  rewrite plus_correct.  (* Use verified lemma *)
+  ...
+Qed.
+</code></pre>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="readme.html">Verification Overview</a> - Introduction to verification</li>
+<li><a href="principles.html">Verification Principles</a> - Core concepts</li>
+<li><a href="../stdlib/functions.html">Standard Functions</a> - Function reference</li>
+<li><a href="../stdlib/operators.html">Operators</a> - Operator reference</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../verification/principles.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../verification/qc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../verification/principles.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../verification/qc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

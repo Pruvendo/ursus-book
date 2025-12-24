@@ -1,0 +1,478 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ursus-&gt;sol translation - URSUS language Documentation</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">URSUS language Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="ursus--solidity-translation"><a class="header" href="#ursus--solidity-translation">Ursus → Solidity Translation</a></h1>
+<p>This guide explains how to translate Ursus contracts to Solidity code using the Ursus code generator.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The Ursus → Solidity translation process:</p>
+<ol>
+<li>Write contract in Ursus (Coq)</li>
+<li>Mark contract for translation with attributes</li>
+<li>Compile with <code>coqc</code></li>
+<li>Generated Solidity code is produced automatically</li>
+</ol>
+<h2 id="contract-attributes"><a class="header" href="#contract-attributes">Contract Attributes</a></h2>
+<h3 id="required-attributes"><a class="header" href="#required-attributes">Required Attributes</a></h3>
+<pre><code class="language-coq">#[translation = on]
+#[language = solidity]
+Contract MyContract ;
+</code></pre>
+<p><strong>Attributes:</strong></p>
+<ul>
+<li><code>#[translation = on]</code> - Enable code generation</li>
+<li><code>#[language = solidity]</code> - Target Solidity output</li>
+</ul>
+<h3 id="optional-attributes"><a class="header" href="#optional-attributes">Optional Attributes</a></h3>
+<pre><code class="language-coq">#[quickchick = off]
+#[Contract = MyContract]
+</code></pre>
+<ul>
+<li><code>#[quickchick = off]</code> - Disable QuickChick testing</li>
+<li><code>#[Contract = Name]</code> - Specify contract name</li>
+</ul>
+<h2 id="complete-example"><a class="header" href="#complete-example">Complete Example</a></h2>
+<h3 id="ursus-source"><a class="header" href="#ursus-source">Ursus Source</a></h3>
+<pre><code class="language-coq">Require Import UrsusEnvironment.Solidity.current.Environment.
+
+#[translation = on]
+#[quickchick = off]
+#[language = solidity]
+Contract SimpleToken ;
+Sends To ;
+Inherits ;
+
+Record Contract := {
+    totalSupply: uint256;
+    balances: mapping address uint256;
+    owner: address
+}.
+
+SetUrsusOptions.
+Local Open Scope usolidity_scope.
+
+#[public]
+Ursus Definition balanceOf (account: address): UExpression uint256 false.
+{
+    ::// _result := balances[[account]] |.
+}
+return.
+Defined.
+Sync.
+
+#[public]
+Ursus Definition transfer (to: address) (amount: uint256):
+  UExpression boolean false.
+{
+    ::// balances[[msg-&gt;sender]] := balances[[msg-&gt;sender]] - amount .
+    ::// balances[[to]] := balances[[to]] + amount .
+    ::// _result := @true |.
+}
+return.
+Defined.
+Sync.
+
+EndContract ImplementsAuto.
+</code></pre>
+<h3 id="generated-solidity"><a class="header" href="#generated-solidity">Generated Solidity</a></h3>
+<pre><code class="language-solidity">pragma solidity ^0.8.0;
+
+contract SimpleToken {
+    uint256 public totalSupply;
+    mapping(address =&gt; uint256) public balances;
+    address public owner;
+
+    function balanceOf(address account) public view returns (uint256) {
+        return balances[account];
+    }
+
+    function transfer(address to, uint256 amount) public returns (bool) {
+        balances[msg.sender] = balances[msg.sender] - amount;
+        balances[to] = balances[to] + amount;
+        return true;
+    }
+}
+</code></pre>
+<h2 id="translation-process"><a class="header" href="#translation-process">Translation Process</a></h2>
+<h3 id="step-1-prepare-contract"><a class="header" href="#step-1-prepare-contract">Step 1: Prepare Contract</a></h3>
+<p>Ensure contract has proper attributes:</p>
+<pre><code class="language-coq">#[translation = on]
+#[language = solidity]
+Contract MyContract ;
+</code></pre>
+<h3 id="step-2-compile"><a class="header" href="#step-2-compile">Step 2: Compile</a></h3>
+<pre><code class="language-bash">coqc -Q . MyProject MyContract.v
+</code></pre>
+<h3 id="step-3-locate-generated-code"><a class="header" href="#step-3-locate-generated-code">Step 3: Locate Generated Code</a></h3>
+<p>Generated Solidity files are typically placed in:</p>
+<ul>
+<li>Same directory as <code>.v</code> file</li>
+<li>Or in configured output directory</li>
+</ul>
+<p><strong>Expected files:</strong></p>
+<ul>
+<li><code>MyContract.sol</code> - Solidity source</li>
+<li><code>MyContract.abi.json</code> - Contract ABI (if enabled)</li>
+</ul>
+<h2 id="translation-mappings"><a class="header" href="#translation-mappings">Translation Mappings</a></h2>
+<h3 id="types"><a class="header" href="#types">Types</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Ursus Type</th><th>Solidity Type</th></tr></thead><tbody>
+<tr><td><code>uint8</code></td><td><code>uint8</code></td></tr>
+<tr><td><code>uint256</code></td><td><code>uint256</code></td></tr>
+<tr><td><code>int256</code></td><td><code>int256</code></td></tr>
+<tr><td><code>address</code></td><td><code>address</code></td></tr>
+<tr><td><code>boolean</code></td><td><code>bool</code></td></tr>
+<tr><td><code>string</code></td><td><code>string</code></td></tr>
+<tr><td><code>bytes</code></td><td><code>bytes</code></td></tr>
+<tr><td><code>bytes32</code></td><td><code>bytes32</code></td></tr>
+<tr><td><code>mapping K V</code></td><td><code>mapping(K =&gt; V)</code></td></tr>
+<tr><td><code>optional T</code></td><td>Custom implementation</td></tr>
+</tbody></table>
+</div>
+<h3 id="function-attributes"><a class="header" href="#function-attributes">Function Attributes</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Ursus Attribute</th><th>Solidity Modifier</th></tr></thead><tbody>
+<tr><td><code>#[public]</code></td><td><code>public</code></td></tr>
+<tr><td><code>#[external]</code></td><td><code>external</code></td></tr>
+<tr><td><code>#[internal]</code></td><td><code>internal</code></td></tr>
+<tr><td><code>#[private]</code></td><td><code>private</code></td></tr>
+<tr><td><code>#[view]</code></td><td><code>view</code></td></tr>
+<tr><td><code>#[pure]</code></td><td><code>pure</code></td></tr>
+<tr><td><code>#[payable]</code></td><td><code>payable</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Ursus Syntax</th><th>Solidity Syntax</th></tr></thead><tbody>
+<tr><td><code>a + b</code></td><td><code>a + b</code></td></tr>
+<tr><td><code>a - b</code></td><td><code>a - b</code></td></tr>
+<tr><td><code>a * b</code></td><td><code>a * b</code></td></tr>
+<tr><td><code>a / b</code></td><td><code>a / b</code></td></tr>
+<tr><td><code>a % b</code></td><td><code>a % b</code></td></tr>
+<tr><td><code>a == b</code></td><td><code>a == b</code></td></tr>
+<tr><td><code>a != b</code></td><td><code>a != b</code></td></tr>
+<tr><td><code>a &lt; b</code></td><td><code>a &lt; b</code></td></tr>
+<tr><td><code>a &gt; b</code></td><td><code>a &gt; b</code></td></tr>
+<tr><td><code>a &amp;&amp; b</code></td><td><code>a &amp;&amp; b</code></td></tr>
+<tr><td><code>a || b</code></td><td><code>a || b</code></td></tr>
+<tr><td><code>!a</code></td><td><code>!a</code></td></tr>
+</tbody></table>
+</div>
+<h3 id="state-access"><a class="header" href="#state-access">State Access</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Ursus Syntax</th><th>Solidity Syntax</th></tr></thead><tbody>
+<tr><td><code>balances[[addr]]</code></td><td><code>balances[addr]</code></td></tr>
+<tr><td><code>msg-&gt;sender</code></td><td><code>msg.sender</code></td></tr>
+<tr><td><code>msg-&gt;value</code></td><td><code>msg.value</code></td></tr>
+<tr><td><code>this-&gt;address</code></td><td><code>address(this)</code></td></tr>
+</tbody></table>
+</div>
+<h2 id="endcontract-modes"><a class="header" href="#endcontract-modes">EndContract Modes</a></h2>
+<h3 id="implementsauto"><a class="header" href="#implementsauto">ImplementsAuto</a></h3>
+<p>Automatically generates interface implementations:</p>
+<pre><code class="language-coq">EndContract ImplementsAuto.
+</code></pre>
+<p>Generates all required interface methods automatically.</p>
+<h3 id="implements"><a class="header" href="#implements">Implements</a></h3>
+<p>Manual interface implementation:</p>
+<pre><code class="language-coq">EndContract Implements.
+</code></pre>
+<p>You must implement all interface methods manually.</p>
+<h3 id="no-interfaces"><a class="header" href="#no-interfaces">No Interfaces</a></h3>
+<p>Simple contract without interfaces:</p>
+<pre><code class="language-coq">EndContract.
+</code></pre>
+<h2 id="advanced-features"><a class="header" href="#advanced-features">Advanced Features</a></h2>
+<h3 id="custom-types"><a class="header" href="#custom-types">Custom Types</a></h3>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">Types
+Record UserInfo := {
+    balance: uint256;
+    lastUpdate: uint256
+}
+;
+</code></pre>
+<p><strong>Generated Solidity:</strong></p>
+<pre><code class="language-solidity">struct UserInfo {
+    uint256 balance;
+    uint256 lastUpdate;
+}
+</code></pre>
+<h3 id="enumerations"><a class="header" href="#enumerations">Enumerations</a></h3>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">Types
+Inductive Status :=
+    | Active
+    | Paused
+    | Stopped
+;
+</code></pre>
+<p><strong>Generated Solidity:</strong></p>
+<pre><code class="language-solidity">enum Status {
+    Active,
+    Paused,
+    Stopped
+}
+</code></pre>
+<h3 id="events"><a class="header" href="#events">Events</a></h3>
+<p><strong>Ursus:</strong></p>
+<pre><code class="language-coq">::// emit Transfer(from, to, amount) |.
+</code></pre>
+<p><strong>Generated Solidity:</strong></p>
+<pre><code class="language-solidity">emit Transfer(from, to, amount);
+</code></pre>
+<h2 id="compilation-options"><a class="header" href="#compilation-options">Compilation Options</a></h2>
+<h3 id="using-dune"><a class="header" href="#using-dune">Using dune</a></h3>
+<p>If project uses dune build system:</p>
+<pre><code class="language-bash">dune build
+</code></pre>
+<h3 id="using-makefile"><a class="header" href="#using-makefile">Using Makefile</a></h3>
+<p>If project has Makefile:</p>
+<pre><code class="language-bash">make
+</code></pre>
+<h3 id="manual-compilation"><a class="header" href="#manual-compilation">Manual Compilation</a></h3>
+<pre><code class="language-bash">coqc -Q . MyProject \
+     -R ../ursus-standard-library/src Solidity \
+     MyContract.v
+</code></pre>
+<h2 id="verification-before-translation"><a class="header" href="#verification-before-translation">Verification Before Translation</a></h2>
+<p>Always verify contract before translation:</p>
+<pre><code class="language-bash"># Check compilation
+coqc MyContract.v
+
+# Run proofs
+coqc MyContractProofs.v
+
+# Run QuickChick tests (if enabled)
+coqc MyContractTests.v
+</code></pre>
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="../quick/compile_ursus.html">Compilation Guide</a> - Detailed compilation instructions</li>
+<li><a href="readme.html">Translation Overview</a> - Translation system overview</li>
+<li><a href="../ulang/contract_structure.html">Contract Structure</a> - Contract organization</li>
+<li><a href="../ulang/attributes.html">Attributes</a> - Function attributes</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../translation/cpp-ursus.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../advanced/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../translation/cpp-ursus.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../advanced/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
